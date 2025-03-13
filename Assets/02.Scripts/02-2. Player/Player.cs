@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public class Player : MonoBehaviour
 {
     // "응집도"는 높이고, "결합도"는 낮춰라
@@ -10,7 +11,7 @@ public class Player : MonoBehaviour
     private int _maxHealthPoint = 3;
     [SerializeField] 
     private int _currentHealthPoint;
-
+    private PlayMode _currentPlayMode;
     public int MaxHealthPoint
     {
         get { return _maxHealthPoint; }
@@ -28,6 +29,11 @@ public class Player : MonoBehaviour
             }
         }
     }
+    public PlayMode CurrentPlayMode
+    {
+        get { return _currentPlayMode; }
+        set { _currentPlayMode = value; }
+    }
 
     private void Awake()
     {
@@ -39,6 +45,7 @@ public class Player : MonoBehaviour
         Instance = this;
         // DontDestroyOnLoad(gameObject);
 
+        CurrentPlayMode = PlayMode.Manual;
         CurrentHealthPoint = MaxHealthPoint;
     }
     public void TakeDamage(int damage)
