@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     public int CurrentHealthPoint
     {
         get { return _currentHealthPoint; }
-        private set
+        set
         {
             _currentHealthPoint = Mathf.Clamp(value, 0, _maxHealthPoint);
             if (_currentHealthPoint == 0)
