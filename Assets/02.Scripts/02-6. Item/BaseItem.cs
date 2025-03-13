@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 
 public interface IItem
@@ -17,7 +18,9 @@ public abstract class BaseItem : MonoBehaviour
     public float CollisionTimeToApply { get => _collisionTimeToApply; }
 
     [SerializeField]
-    private float _minDistanceToAbsorb;
+    private float _minDistanceToAbsorb = 1f;
+    [SerializeField]
+    private float _absorbSpeed = 0.5f;
 
     private PlayerData _playerData;
     protected PlayerData PlayerData { get => _playerData; }
@@ -54,9 +57,12 @@ public abstract class BaseItem : MonoBehaviour
 
     private void AbsorbedByPlayer()
     {
-        if (_minDistanceToAbsorb <= Vector2.Distance(transform.position, Player.Instance.transform.position))
+        if (Vector2.Distance(transform.position, Player.Instance.transform.position) <= _minDistanceToAbsorb)
         {
-            // 플레이어에게 접근하는 로직
+            Vector3 direction = (Player.Instance.transform.position - transform.position).normalized;
+            transform.Translate(direction * _absorbSpeed * Time.deltaTime, Space.World);
+            // 두트윈이 맛이 갔어요
+            // transform.DOMove(Player.Instance.transform.position, 1f / _absorbSpeed).SetEase(Ease.Linear);
         }
     }
 }
