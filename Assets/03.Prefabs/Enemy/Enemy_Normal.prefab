@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -2994489336427408694}
   - component: {fileID: 2860592330399858626}
   - component: {fileID: 7305198379615925797}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Enemy_Normal
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ MonoBehaviour:
   _currentHealthPoint: 0
   _damage: 1
   _currentEnemyType: 0
-  _enemyTraceGO: {fileID: 5654929124324883478, guid: bca377a4ce821e74ea123019d7169c0e, type: 3}
+  _enemyZombieGO: {fileID: 0}
 --- !u!114 &7305198379615925797
 MonoBehaviour:
   m_ObjectHideFlags: 0

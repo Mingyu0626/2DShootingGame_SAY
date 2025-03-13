@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: -2994489336427408694}
   - component: {fileID: 2860592330399858626}
   - component: {fileID: -6748657573362094044}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Enemy_Split
   m_TagString: Enemy
   m_Icon: {fileID: 0}
