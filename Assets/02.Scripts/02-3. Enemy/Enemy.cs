@@ -50,9 +50,14 @@ public class Enemy : MonoBehaviour
         get { return _currentEnemyType; }
         set { _currentEnemyType = value; }
     }
+
+    [SerializeField]
+    private float _itemSpawnProbability = 0.3f;
+    private ItemData _itemData;
     private void Awake()
     {
         CurrentHealthPoint = MaxHealthPoint;
+        _itemData = GameObject.FindGameObjectWithTag("Item").GetComponent<ItemData>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -66,6 +71,10 @@ public class Enemy : MonoBehaviour
                 CurrentHealthPoint = 0;
             }
         }
+    }
+    private void OnDestroy()
+    {
+        
     }
     public void TakeDamage(int damage)
     {
@@ -97,9 +106,9 @@ public class Enemy : MonoBehaviour
                     break;
                 }
         }
+        SpawnRandomItem();
         Destroy(gameObject);
     }
-
     private void SplitEnemies()
     {
         foreach (Transform childSpawnPointTransform in transform)
@@ -107,6 +116,17 @@ public class Enemy : MonoBehaviour
             // Enemy_Split의 자식 GO로 spawnPoint 이외에 다른 GO가 추가된다면 개선이 필요하다.
             Instantiate(_enemyZombieGO, childSpawnPointTransform.position,
                 childSpawnPointTransform.rotation);
+        }
+    }
+    private void SpawnRandomItem()
+    {
+        float randomResult =  Random.Range(0.0f, 1.0f);
+        if (randomResult <= _itemSpawnProbability)
+        {
+            int itemListCount = _itemData.ItemList.Count;
+            int randomItemIndex = Random.Range(0, itemListCount);
+            Instantiate(_itemData.ItemList[randomItemIndex],
+                transform.position, transform.rotation);
         }
     }
 }
