@@ -55,7 +55,8 @@ public class Bullet : MonoBehaviour
 
     [Header("Type")]
     [Tooltip("ÃÑ¾ËÀÇ Å¸ÀÔ")]
-    [SerializeField] private BulletType _currentBulletType;
+    [SerializeField] 
+    BulletType _currentBulletType;
     public BulletType CurrentBulletType
     {
         get { return _currentBulletType; }
@@ -68,9 +69,12 @@ public class Bullet : MonoBehaviour
 
     [Header("Snake")]
     [Tooltip("ÃÑ¾Ë ±ËµµÀÇ ÁÖÆÄ¼ö")]
-    [SerializeField] private float _frequency;
+    [SerializeField] 
+    private float _frequency;
     [Tooltip("ÃÑ¾Ë ±ËµµÀÇ ÁøÆø")]
-    [SerializeField] private float _amplitude;
+    [SerializeField] 
+    private float _amplitude;
+
     public float Frequency
     {
         get { return _frequency; }
@@ -103,6 +107,8 @@ public class Bullet : MonoBehaviour
             }
             Destroy(gameObject);
         }
+
+
     }
     private void Move()
     {
