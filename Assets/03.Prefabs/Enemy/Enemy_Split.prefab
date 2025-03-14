@@ -145,8 +145,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2135585597343286014, guid: 5aa8b770bc43046bc8d993d0d5b7f4a5, type: 3}
-  m_Color: {r: 1, g: 0.68349403, b: 0.48584908, a: 1}
+  m_Sprite: {fileID: 8414478535512612329, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
+  m_Color: {r: 1, g: 0.10395099, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -186,7 +186,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -194,7 +194,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8828125, y: 1}
+    oldSize: {x: 0.24, y: 0.22}
     newSize: {x: 0.8828125, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -202,12 +202,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.43359375, y: 0.25}
-      - {x: -0.43359375, y: -0.25}
-      - {x: 0, y: -0.5}
-      - {x: 0.43359375, y: -0.25}
-      - {x: 0.43359375, y: 0.25}
-      - {x: 0, y: 0.5}
+    - - {x: -0.12, y: 0.11}
+      - {x: -0.12, y: -0.11}
+      - {x: 0.12, y: -0.11}
+      - {x: 0.12, y: 0.089999996}
+      - {x: 0.099999994, y: 0.11}
   m_UseDelaunayMesh: 0
 --- !u!50 &-2994489336427408694
 Rigidbody2D:
@@ -253,6 +252,7 @@ MonoBehaviour:
   _damage: 1
   _currentEnemyType: 1
   _enemyZombieGO: {fileID: 5654929124324883478, guid: 98eef69371c5bbc44b67329c2c18a07d, type: 3}
+  _itemSpawnProbability: 0.3
 --- !u!114 &-6748657573362094044
 MonoBehaviour:
   m_ObjectHideFlags: 0
