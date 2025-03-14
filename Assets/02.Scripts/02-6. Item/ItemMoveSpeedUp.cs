@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class FireSpeedUpItem : BaseItem
+public class ItemMoveSpeedUp : BaseItem
 {
     public override void ApplyItem()
     {
-        PlayerData.CoolTime -= Amount;
+        PlayerData.Speed += Amount;
         Destroy(gameObject);
     }
 }

@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class SpeedUpItem : BaseItem
+public class ItemHealthUp : BaseItem
 {
     public override void ApplyItem()
     {
-        PlayerData.Speed += Amount;
+        Player.Instance.CurrentHealthPoint += (int)Amount;
         Destroy(gameObject);
     }
 }

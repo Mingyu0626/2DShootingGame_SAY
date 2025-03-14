@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class HPUpItem : BaseItem
+public class ItemFireSpeedUp : BaseItem
 {
     public override void ApplyItem()
     {
-        Player.Instance.CurrentHealthPoint += (int)Amount;
+        PlayerData.CoolTime -= Amount;
         Destroy(gameObject);
     }
 }
