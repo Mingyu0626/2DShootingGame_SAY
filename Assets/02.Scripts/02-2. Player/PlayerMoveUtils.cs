@@ -51,7 +51,19 @@ public class PlayerMoveUtils : MonoBehaviour
     public void PlayAnimation(Vector2 direction)
     {
         // 상태 전이(transition)를 이용한 방식 -> GUI 상에서 드래그 & 드랍
-        _myAnimator.SetInteger(nameof(AnimatorParam.X), 
-            direction.x < 0 ? -1 : direction.x > 0 ? 1 : 0);
+        int paramValue = 0;
+        if (direction.x < 0)
+        {
+            paramValue = -1;
+        }
+        else if (direction.x == 0)
+        {
+            paramValue = 0;
+        }
+        else if (direction.x > 0)
+        {
+            paramValue = 1;
+        }
+        _myAnimator.SetInteger(nameof(AnimatorParam.X), paramValue);
     }
 }
