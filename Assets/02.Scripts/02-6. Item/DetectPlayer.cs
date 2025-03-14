@@ -6,15 +6,13 @@ public class DetectPlayer : MonoBehaviour
     private void Awake()
     {
         _baseItem = GetComponentInParent<BaseItem>();
-        if (ReferenceEquals(_baseItem, null))
-        {
-            Debug.Log("null 나오면 안되는데??ㅋㅋ");
-        }
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("자식 OnTriggerEnter2D");
-        StartCoroutine(_baseItem.GoToPlayer());
+        if (!ReferenceEquals(_baseItem, null))
+        {
+            StartCoroutine(_baseItem.GoToPlayer());
+        }
     }
 
     // 트리거에서 콜라이더 구별 방법
