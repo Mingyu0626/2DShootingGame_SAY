@@ -129,7 +129,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.54}
+    oldSize: {x: 1.3333334, y: 1.125}
     newSize: {x: 0.8828125, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -137,11 +137,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.32, y: -0.19}
-      - {x: 0.32, y: 0.26999998}
-      - {x: -0.32, y: 0.26999998}
-      - {x: -0.32, y: -0.26999998}
-      - {x: 0.29999998, y: -0.26999998}
+    - - {x: 0.6666667, y: -0.39583334}
+      - {x: 0.6666667, y: 0.5625}
+      - {x: -0.6666667, y: 0.5625}
+      - {x: -0.6666667, y: -0.5625}
+      - {x: 0.625, y: -0.5625}
   m_UseDelaunayMesh: 0
 --- !u!50 &-2994489336427408694
 Rigidbody2D:
