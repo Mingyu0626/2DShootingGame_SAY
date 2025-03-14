@@ -123,9 +123,7 @@ public class Enemy : MonoBehaviour
         float randomResult =  Random.Range(0.0f, 1.0f);
         if (randomResult <= _itemSpawnProbability)
         {
-            int itemListCount = _itemData.ItemList.Count;
-            int randomItemIndex = Random.Range(0, itemListCount);
-            Instantiate(_itemData.ItemList[randomItemIndex],
+            Instantiate(_itemData.ItemList[Random.Range(0, _itemData.ItemList.Count)],
                 transform.position, transform.rotation);
         }
     }
