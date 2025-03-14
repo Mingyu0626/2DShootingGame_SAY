@@ -40,6 +40,7 @@ public class PlayerManualState : IPlayerState, IMove, IFire
             Input.GetAxisRaw("Vertical")).normalized;
             _playerController.transform.Translate(direction * _playerData.Speed * Time.deltaTime);
             _playerMoveUtils.ClampPlayerHorizontalPosition();
+            _playerMoveUtils.PlayAnimation(direction);
         }
         else
         {

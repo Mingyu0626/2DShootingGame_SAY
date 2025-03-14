@@ -66,9 +66,7 @@ public class PlayerAutoState : IPlayerState, IMove, IFire
             direction.y = -1;
         }
         direction.Normalize();
-
-
-        direction.Normalize();
+        _playerMoveUtils.PlayAnimation(direction);
 
 
         // 1. 새로운 위치 = 현재 위치 + 방향 * 속력 * 시간
