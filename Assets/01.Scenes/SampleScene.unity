@@ -517,7 +517,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d67900f7a1020684bb61bfaa380b8fad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bgMaterial: {fileID: 2100000, guid: d8bbd74691e657c4d9fe0bd118a35aac, type: 2}
   _scrollSpeed: 0.3
 --- !u!1 &519420028
 GameObject:
@@ -840,7 +839,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d67900f7a1020684bb61bfaa380b8fad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bgMaterial: {fileID: 2100000, guid: d8bbd74691e657c4d9fe0bd118a35aac, type: 2}
   _scrollSpeed: 0.2
 --- !u!1001 &782672680
 PrefabInstance:
@@ -1028,7 +1026,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d67900f7a1020684bb61bfaa380b8fad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bgMaterial: {fileID: 2100000, guid: d8bbd74691e657c4d9fe0bd118a35aac, type: 2}
   _scrollSpeed: 0.1
 --- !u!1 &994940235
 GameObject:
@@ -1065,6 +1062,50 @@ Transform:
   - {fileID: 1086693299}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1014783233
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1014783234}
+  - component: {fileID: 1014783235}
+  m_Layer: 0
+  m_Name: ===== [ Managers ] =====
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1014783234
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014783233}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1014783235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014783233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b80aaf9fe1b2363429725091bbd38459, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1086693298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1683,7 +1724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8f9def4eadc81c4d8b7457c26460e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealthPoint: 3
+  _maxHealthPoint: 10
   _currentHealthPoint: 0
 --- !u!114 &2139168584
 MonoBehaviour:
@@ -1721,6 +1762,9 @@ MonoBehaviour:
   - {fileID: 1680273734}
   _coolTime: 0.5
   _coolTimeMin: 0.2
+  _boomPrefab: {fileID: 7156182388118862023, guid: 0800aaf0ce52c74419a0e2e58fae740b, type: 3}
+  _maxBoomCount: 3
+  _boomDuration: 2
 --- !u!95 &2139168586
 Animator:
   serializedVersion: 7
@@ -1892,3 +1936,4 @@ SceneRoots:
   - {fileID: 994940236}
   - {fileID: 350497751}
   - {fileID: 1931338635}
+  - {fileID: 1014783234}

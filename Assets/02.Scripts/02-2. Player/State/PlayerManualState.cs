@@ -23,6 +23,7 @@ public class PlayerManualState : IPlayerState, IMove, IFire
             _playerController.PlayerStateContext.ChangeState(_playerController.AutoState);
         }
 
+
         Move();
         Fire();
         _playerMoveUtils.SpeedCheck();

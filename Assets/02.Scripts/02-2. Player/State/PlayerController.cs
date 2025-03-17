@@ -4,8 +4,8 @@ using UnityEngine;
 
 public enum PlayMode
 {
+    Auto,
     Manual,
-    Auto
 }
 
 
@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        
+        _playerData = GetComponent<PlayerData>();
     }
 
     private void Start()
@@ -61,6 +61,13 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         _playerStateContext.CurrentState.Update();
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (0 < _playerData.CurrentBoomCount)
+            {
+                UseBoom();
+            }
+        }
     }
     public void StartStateCoroutine(IEnumerator coroutine)
     {
@@ -75,5 +82,12 @@ public class PlayerController : MonoBehaviour
     public void InstantiateBullet(GameObject bullet, Vector3 position, Quaternion rotation)
     {
         Instantiate(bullet, position, rotation);
+    }
+
+    public void UseBoom()
+    {
+        _playerData.CurrentBoomCount--;
+        Instantiate(_playerData.BoomPrefab, new Vector3(0, 0, 0),
+            Quaternion.Euler(new Vector3(0, 0, 0)));
     }
 }

@@ -73,9 +73,14 @@ public class Enemy : MonoBehaviour
             if (otherPlayer != null)
             {
                 otherPlayer.TakeDamage(Damage);
-                CurrentHealthPoint = 0;
             }
         }
+
+        if (other.CompareTag("Special Move"))
+        {
+            OnEnemyDestroyed();
+        }
+
     }
     private void OnDestroy()
     {
@@ -113,7 +118,8 @@ public class Enemy : MonoBehaviour
                 }
         }
         SpawnRandomItem();
-        GameObject vfx = Instantiate(_explosionVFXPrefab, transform.position, new Quaternion(0, 0, 0, 0));
+        InstantiateVFX();
+        GameManager.Instance.KilledEnemyCount++;
         Destroy(gameObject);
     }
     private void SplitEnemies()
@@ -133,6 +139,10 @@ public class Enemy : MonoBehaviour
             Instantiate(_itemData.ItemList[Random.Range(0, _itemData.ItemList.Count)],
                 transform.position, new Quaternion(0, 0, 0, 0));
         }
+    }
+    private void InstantiateVFX()
+    {
+        GameObject vfx = Instantiate(_explosionVFXPrefab, transform.position, new Quaternion(0, 0, 0, 0));
     }
     private void PlayHitAnimation()
     {

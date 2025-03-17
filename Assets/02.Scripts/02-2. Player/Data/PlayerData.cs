@@ -61,7 +61,6 @@ public class PlayerData : MonoBehaviour
     }
 
 
-    [Header("Fire")]
     [Header("Bullet")]
     [Tooltip("¸ÞÀÎ ÃÑ¾Ë Prefab")]
     [SerializeField] private GameObject _mainBulletPrefab;
@@ -100,4 +99,19 @@ public class PlayerData : MonoBehaviour
         get { return _isCoolDown; }
         set { _isCoolDown = value; }
     }
+
+
+    [Header("Special Move : Boom")]
+    [SerializeField] private GameObject _boomPrefab;
+    [SerializeField] private int _maxBoomCount;
+    private int _currentBoomCount;
+    [SerializeField] private float _boomDuration;
+    public GameObject BoomPrefab { get => _boomPrefab; private set => _boomPrefab = value; }
+    public int MaxBoomCount { get => _maxBoomCount; private set => _maxBoomCount = value; }
+    public int CurrentBoomCount 
+    { 
+        get => _currentBoomCount;
+        set => _currentBoomCount = Mathf.Clamp(value, 0, _maxBoomCount);
+    }
+    public float BoomDuration { get => _boomDuration; private set => _boomDuration = value; }
 }
