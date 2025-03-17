@@ -32,10 +32,6 @@ public class Enemy : MonoBehaviour
             {
                 OnEnemyDestroyed();
             }
-            else
-            {
-                PlayHitAnimation();
-            }
         }
     }
     public int Damage
@@ -86,6 +82,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         CurrentHealthPoint -= damage;
+        PlayHitAnimation();
     }
     private void OnEnemyDestroyed()
     {
