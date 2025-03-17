@@ -113,7 +113,8 @@ public class EnemyMove : MonoBehaviour
     private void Move(Direction dir)
     {
         Vector2 directionVector = _directionDictionary[dir];
-        transform.Translate(directionVector * Speed * Time.deltaTime);
+        // transform.Translate(directionVector * Speed * Time.deltaTime);
+        transform.position += (Vector3)(directionVector * Speed * Time.deltaTime);
     }
     private void Move()
     {
@@ -128,18 +129,22 @@ public class EnemyMove : MonoBehaviour
     }
     private void TargetPlayer()
     {
-        transform.Translate(_directionToPlayer.normalized * Speed * Time.deltaTime, Space.World);
+        // Translate는, 회전에 민감하기 때문에 잘 사용되지 않는다.
+        // Translate는, 조향이 필요할 때 쓰는게 좋다.
+        // transform.Translate(_directionToPlayer.normalized * Speed * Time.deltaTime, Space.World);
+        transform.position += (Vector3)(_directionToPlayer.normalized * Speed * Time.deltaTime);
     }
     private void TracePlayer()
     {
         Vector3 directionVector = (_playerTransform.position - transform.position).normalized;
-        transform.Translate(directionVector * Speed * Time.deltaTime, Space.World);
+        transform.position += (Vector3)(directionVector * Speed * Time.deltaTime);
         LookAtPlayer(_playerTransform.position - transform.position);
     }
 
     private void LookAtPlayer(Vector2 distance)
     {
-        float rotationZ = Mathf.Atan2(distance.y, distance.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, rotationZ + 90);
+        // 기본값이 오른쪽을 바라보고 있기 때문에 90도를 더해준다.
+        float angleZ = Mathf.Atan2(distance.y, distance.x) * Mathf.Rad2Deg + 90;
+        transform.rotation = Quaternion.Euler(0, 0, angleZ);
     }
 }
