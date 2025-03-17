@@ -10,7 +10,6 @@ public class BackGround : MonoBehaviour
     private Vector2 _offset;
     private void Awake()
     {
-        // 원본 Material의 복사본을 생성하여 반환, 원본을 참조하고 싶다면, sharedMaterial을 사용한다.
         _renderer = gameObject.GetComponent<Renderer>();
         _materialPropertyBlock = new MaterialPropertyBlock();
     }
@@ -32,8 +31,4 @@ public class BackGround : MonoBehaviour
             new Vector4(1, 1, _offset.x, _offset.y));
         _renderer.SetPropertyBlock(_materialPropertyBlock);
     }
-
-    // 패럴랙스 스크롤링 : 스크롤링엥 원근감을 주는 방식
-    // 여러개의 배경을 겹쳐두고, 먼 배경일수록 스크롤링 속도를 작게, 가까운 배경일수록
-    // 스크롤링 속도를 크게하여 구현
 }
