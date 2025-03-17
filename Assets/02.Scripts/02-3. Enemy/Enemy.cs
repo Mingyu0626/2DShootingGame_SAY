@@ -54,10 +54,13 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float _itemSpawnProbability = 0.3f;
     private ItemData _itemData;
+
+    private Animator _enemyAnimator;
     private void Awake()
     {
         CurrentHealthPoint = MaxHealthPoint;
         _itemData = GameObject.FindGameObjectWithTag("Item").GetComponent<ItemData>();
+        _enemyAnimator = GetComponent<Animator>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -79,6 +82,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         CurrentHealthPoint -= damage;
+        PlayHitAnimation();
     }
     private void OnEnemyDestroyed()
     {
@@ -124,7 +128,11 @@ public class Enemy : MonoBehaviour
         if (randomResult <= _itemSpawnProbability)
         {
             Instantiate(_itemData.ItemList[Random.Range(0, _itemData.ItemList.Count)],
-                transform.position, transform.rotation);
+                transform.position, new Quaternion(0, 0, 0, 0));
         }
+    }
+    private void PlayHitAnimation()
+    {
+        _enemyAnimator.SetTrigger("HitTrigger");
     }
 }
