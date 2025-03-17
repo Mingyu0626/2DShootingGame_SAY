@@ -24,9 +24,10 @@ public class EnemySpawner : MonoBehaviour
     // 추후 SortedDictionary로 리팩토링
     private List<SpawnedEnemyInfo> spawnedEnemyInfoList = new List<SpawnedEnemyInfo>()
         {
-            new SpawnedEnemyInfo(EnemyType.Normal, 50),
+            new SpawnedEnemyInfo(EnemyType.Normal, 40),
             new SpawnedEnemyInfo(EnemyType.Target, 30),
-            new SpawnedEnemyInfo(EnemyType.Trace, 20)
+            new SpawnedEnemyInfo(EnemyType.Trace, 20),
+            new SpawnedEnemyInfo(EnemyType.Split, 10)
         };
 
     [SerializeField]

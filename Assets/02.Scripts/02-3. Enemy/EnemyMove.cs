@@ -67,7 +67,12 @@ public class EnemyMove : MonoBehaviour
     private void Start()
     {
         _playerTransform = Player.Instance.transform;
-        _directionToPlayer = (_playerTransform.position - transform.position).normalized;
+        _directionToPlayer = _playerTransform.position - transform.position;
+
+        if (_enemy.CurrentEnemyType == EnemyType.Target)
+        {
+            LookAtPlayer(_directionToPlayer);
+        }
     }
     private void Update()
     {
@@ -123,11 +128,18 @@ public class EnemyMove : MonoBehaviour
     }
     private void TargetPlayer()
     {
-        transform.Translate(_directionToPlayer * Speed * Time.deltaTime, Space.World);
+        transform.Translate(_directionToPlayer.normalized * Speed * Time.deltaTime, Space.World);
     }
     private void TracePlayer()
     {
         Vector3 directionVector = (_playerTransform.position - transform.position).normalized;
         transform.Translate(directionVector * Speed * Time.deltaTime, Space.World);
+        LookAtPlayer(_playerTransform.position - transform.position);
+    }
+
+    private void LookAtPlayer(Vector2 distance)
+    {
+        float rotationZ = Mathf.Atan2(distance.y, distance.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, rotationZ + 90);
     }
 }
