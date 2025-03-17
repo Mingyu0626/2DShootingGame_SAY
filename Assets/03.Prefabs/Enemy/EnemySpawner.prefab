@@ -48,5 +48,7 @@ MonoBehaviour:
   - {fileID: 5654929124324883478, guid: 7c6e5c3422fbf084a84c45a661c0b309, type: 3}
   - {fileID: 5654929124324883478, guid: 0e113236f6556c64398f5417dfc59f6d, type: 3}
   - {fileID: 5654929124324883478, guid: bca377a4ce821e74ea123019d7169c0e, type: 3}
+  - {fileID: 5654929124324883478, guid: d823b079dec00074eb0ce3445efbf392, type: 3}
   _delayMin: 1
   _delayMax: 3
+  _spawnedEnemyDirection: 0

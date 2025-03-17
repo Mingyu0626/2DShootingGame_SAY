@@ -186,6 +186,7 @@ MonoBehaviour:
   _amount: 0.05
   _minDistanceToAbsorb: 1
   _moveSpeed: 1
+  _getItemVFXPrefab: {fileID: 4043825961744683401, guid: 990dee3c292878d4694514617504f1c3, type: 3}
 --- !u!1 &7658554802711844593
 GameObject:
   m_ObjectHideFlags: 0

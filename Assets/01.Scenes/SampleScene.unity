@@ -524,7 +524,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 4.61
+  orthographic size: 4.475
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1395,6 +1395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3
+  _speedMax: 5
   _mainBulletPrefab: {fileID: 2703014219239199431, guid: 2de41e9ceb1daef44b09154262ab7cce, type: 3}
   _subBulletPrefab: {fileID: 8738040555795338080, guid: e55cd175d5b759045b27b9afe8281c61, type: 3}
   _mainMuzzleTransformArray:
@@ -1404,6 +1405,7 @@ MonoBehaviour:
   - {fileID: 328510760}
   - {fileID: 1680273734}
   _coolTime: 0.5
+  _coolTimeMin: 0.2
 --- !u!95 &2139168586
 Animator:
   serializedVersion: 7

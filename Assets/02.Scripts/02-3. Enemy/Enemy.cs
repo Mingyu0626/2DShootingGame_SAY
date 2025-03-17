@@ -51,11 +51,13 @@ public class Enemy : MonoBehaviour
         set { _currentEnemyType = value; }
     }
 
-    [SerializeField]
-    private float _itemSpawnProbability = 0.3f;
+    [SerializeField] private float _itemSpawnProbability = 0.3f;
     private ItemData _itemData;
 
     private Animator _enemyAnimator;
+
+    [SerializeField] private GameObject _explosionVFXPrefab;
+
     private void Awake()
     {
         CurrentHealthPoint = MaxHealthPoint;
@@ -111,6 +113,7 @@ public class Enemy : MonoBehaviour
                 }
         }
         SpawnRandomItem();
+        GameObject vfx = Instantiate(_explosionVFXPrefab, transform.position, new Quaternion(0, 0, 0, 0));
         Destroy(gameObject);
     }
     private void SplitEnemies()

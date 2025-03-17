@@ -190,6 +190,7 @@ MonoBehaviour:
   _currentEnemyType: 3
   _enemyZombieGO: {fileID: 5654929124324883478, guid: 98eef69371c5bbc44b67329c2c18a07d, type: 3}
   _itemSpawnProbability: 0.3
+  _explosionVFXPrefab: {fileID: 4084661252556610420, guid: dfe3e891d97b3644a98b17fde815d0d7, type: 3}
 --- !u!114 &764125080736339464
 MonoBehaviour:
   m_ObjectHideFlags: 0

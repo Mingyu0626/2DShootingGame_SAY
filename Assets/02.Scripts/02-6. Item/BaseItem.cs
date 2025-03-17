@@ -26,6 +26,8 @@ public abstract class BaseItem : MonoBehaviour
     private PlayerData _playerData;
     protected PlayerData PlayerData { get => _playerData; }
 
+    [SerializeField] private GameObject _getItemVFXPrefab;
+
 
     private float _percent = 0f;
     private Vector2 _controlVector = Vector2.zero;
@@ -52,9 +54,15 @@ public abstract class BaseItem : MonoBehaviour
     }
     public abstract void ApplyItem();
 
+    public void PlayVFX()
+    {
+        Instantiate(_getItemVFXPrefab, transform.position, transform.rotation);
+    }
+
     private IEnumerator GetItemTimer()
     {
         yield return new WaitForSeconds(_collisionTimeToApply);
+        PlayVFX();
         ApplyItem();
         // 지금은 파생 클래스에서 Destroy 그냥 불렀는데,
         // 아이템 종류 많아지면 여기서 람다로 ApplyItem 종료 후 바로 파괴되도록 ㄱㄱ
