@@ -4,12 +4,15 @@ public class BackGround : MonoBehaviour
 {
     // 배경 스크롤링 : 배경 이미지를 일정한 속도로 움직여, 캐릭터나 몬스터 등의 움직임을 더 동적으로
     // 만들어주는 기술, 캐릭터는 그대로 두고 배경만 움직이는 '눈속임'
-
-    [SerializeField] private Material _bgMaterial;
-    [SerializeField] float _scrollSpeed = 0.1f;
+    [SerializeField] float _scrollSpeed;
+    private Material _bgMaterial;
     private void Awake()
     {
-        // _bgMaterial = GetComponent<Material>();
+        // 원본 Material의 복사본을 생성하여 반환
+        _bgMaterial = gameObject.GetComponent<Renderer>().material;
+
+        // 원본을 참조하고 싶다면, sharedMaterial을 사용한다.
+
     }
 
     private void Update()
@@ -27,5 +30,6 @@ public class BackGround : MonoBehaviour
     }
 
     // 패럴랙스 스크롤링 : 스크롤링엥 원근감을 주는 방식
-
+    // 여러개의 배경을 겹쳐두고, 먼 배경일수록 스크롤링 속도를 작게, 가까운 배경일수록
+    // 스크롤링 속도를 크게하여 구현
 }
