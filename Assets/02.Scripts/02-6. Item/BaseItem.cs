@@ -18,10 +18,10 @@ public abstract class BaseItem : MonoBehaviour
     private const float _collisionTimeToApply = 0.5f;
     public float CollisionTimeToApply { get => _collisionTimeToApply; }
 
-    [SerializeField]
-    private float _minDistanceToAbsorb = 1f;
-    [SerializeField]
-    private float _moveSpeed = 1f;
+    [SerializeField] private float _minDistanceToAbsorb = 1f;
+    [SerializeField] private float _moveSpeed = 1f;
+    [SerializeField] private float _disappearTime = 3f;
+
 
     private PlayerData _playerData;
     protected PlayerData PlayerData { get => _playerData; }
@@ -34,6 +34,7 @@ public abstract class BaseItem : MonoBehaviour
     private void Awake()
     {
         _playerData = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerData>();
+        Destroy(gameObject, _disappearTime);
     }
     private void Update()
     {
