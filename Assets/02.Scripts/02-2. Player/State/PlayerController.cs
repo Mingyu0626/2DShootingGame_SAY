@@ -61,12 +61,9 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         _playerStateContext.CurrentState.Update();
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.Alpha3) && 0 < _playerData.CurrentBoomCount)
         {
-            if (0 < _playerData.CurrentBoomCount)
-            {
-                UseBoom();
-            }
+            UseBoom();
         }
     }
     public void StartStateCoroutine(IEnumerator coroutine)
