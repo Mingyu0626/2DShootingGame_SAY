@@ -27,8 +27,8 @@ public class PlayerData : MonoBehaviour
 
     // 라벨링은 날 잡아서 하죠
     [Header("Move")]
-    [SerializeField]
-    private float _speed = 3f;
+    [SerializeField] private float _speed = 3f;
+    [SerializeField] private float _speedMax = 6f;
     private float _speedVariance = 1f;
     private float _horizontalLimit = 4.5f;
     private float _verticalLimit = 3.0f;
@@ -37,12 +37,12 @@ public class PlayerData : MonoBehaviour
         get { return _speed; }
         set
         {
-            if (0 <= value)
-            {
-                _speed = value;
-                Debug.Log(_speed);
-            }
+            _speed = Mathf.Clamp(value, 0, _speedMax);
         }
+    }
+    public float SpeedMax
+    {
+        get { return _speedMax; }
     }
     public float SpeedVariance
     {
@@ -81,11 +81,19 @@ public class PlayerData : MonoBehaviour
     [Header("CoolDown")]
     [Tooltip("총알의 발사 대기시간(쿨타임)")]
     [SerializeField] private float _coolTime;
+    [SerializeField] private float _coolTimeMin = 0.1f;
     private bool _isCoolDown = false;
     public float CoolTime
     {
         get { return _coolTime; }
-        set { _coolTime = value; }
+        set 
+        {
+            _coolTime = Mathf.Clamp(value, _coolTimeMin, 3f);
+        }
+    }
+    public float CollTimeMin
+    {
+        get { return _coolTimeMin; }
     }
     public bool IsCoolDown
     {
