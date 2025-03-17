@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerMoveUtils : MonoBehaviour
 {
     private PlayerData _playerData;
-    private Animator _myAnimator;
+    private Animator _playerAnimator;
 
     private enum AnimatorParam
     {
@@ -14,7 +14,7 @@ public class PlayerMoveUtils : MonoBehaviour
     private void Awake()
     {
         _playerData = transform.GetComponent<PlayerData>();
-        _myAnimator = transform.GetComponent<Animator>();
+        _playerAnimator = transform.GetComponent<Animator>();
     }
     public bool IsPlayerInView()
     {
@@ -64,6 +64,6 @@ public class PlayerMoveUtils : MonoBehaviour
         {
             paramValue = 1;
         }
-        _myAnimator.SetInteger(nameof(AnimatorParam.X), paramValue);
+        _playerAnimator.SetInteger(nameof(AnimatorParam.X), paramValue);
     }
 }
