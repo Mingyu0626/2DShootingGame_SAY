@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
     public void UseBoom()
     {
         _playerData.CurrentBoomCount--;
-        Instantiate(_playerData.BoomPrefab, new Vector3(0, 0, 0),
-            Quaternion.Euler(new Vector3(0, 0, 0)));
+        if (_playerData.BoomPrefab == null) return;
+        _playerData.BoomPrefab.SetActive(true);
     }
 }
