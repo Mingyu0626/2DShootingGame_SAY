@@ -1,0 +1,13 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Item_FireSpeedUp
+  m_Controller: {fileID: 9100000, guid: 90dc64a3f20183342a4293f99542ffd6, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: e1e474b33c1c27848994507dc639ed0e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 113b674d8560ee54c88d66ee6db19824, type: 2}

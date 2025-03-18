@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6496895697286422826}
   - component: {fileID: 239518010802625546}
   - component: {fileID: 1794750523935317573}
+  - component: {fileID: -5231835840252668326}
   - component: {fileID: 7901992690860129151}
   m_Layer: 7
   m_Name: Item_MovementSpeedUp
@@ -170,6 +171,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &-5231835840252668326
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4730805593870738346}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 57c28167c8119674b95f243228a163c5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &7901992690860129151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,6 +208,7 @@ MonoBehaviour:
   _amount: 0.5
   _minDistanceToAbsorb: 1
   _moveSpeed: 1
+  _disappearTime: 3
   _getItemVFXPrefab: {fileID: 4310475642985571097, guid: aadadc1286710d24b9166d56f68a616f, type: 3}
 --- !u!1 &6657118809984388014
 GameObject:
