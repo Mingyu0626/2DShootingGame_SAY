@@ -79,8 +79,8 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(Damage damage)
     {
         PlayHitAnimation();
-        _currentHealthPoint -= damage.Value;
-        if (_currentHealthPoint == 0)
+        CurrentHealthPoint -= damage.Value;
+        if (CurrentHealthPoint == 0)
         {
             OnEnemyDeath(damage);
         }

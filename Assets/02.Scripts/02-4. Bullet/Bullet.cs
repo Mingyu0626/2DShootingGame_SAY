@@ -105,7 +105,7 @@ public class Bullet : MonoBehaviour
             {
                 Damage damage = new Damage
                 {
-                    Value = _damage,
+                    Value = Damage,
                     Type = DamageType.Bullet,
                     From = gameObject
                 };
