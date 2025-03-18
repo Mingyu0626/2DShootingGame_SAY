@@ -9,6 +9,7 @@ TagManager:
   - Item
   - FxTemporaire
   - Special Move
+  - Pet
   layers:
   - Default
   - TransparentFX
