@@ -4,6 +4,9 @@ public class EnemySplitType : MonoBehaviour, IEnemy, IEnemyMove
 {
     [SerializeField] private EnemyType _enemyType;
     [SerializeField] private EnemyData _enemyData;
+
+    [Tooltip("스플릿 타입이 죽을 때 생성될 타입 적 GO")] // EnemySplit 클래스로 빼고
+    [SerializeField] private GameObject _enemyZombieGO;
     public EnemyType EnemyType
     {
         get { return _enemyType; }
@@ -19,7 +22,5 @@ public class EnemySplitType : MonoBehaviour, IEnemy, IEnemyMove
 
     public void Move()
     {
-        Vector2 directionVector = Vector2.down;
-        // transform.Translate(directionVector * Speed * Time.deltaTime);
     }
 }

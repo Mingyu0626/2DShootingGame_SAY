@@ -5,6 +5,8 @@ public class EnemyTargetType : MonoBehaviour, IEnemy, IEnemyMove
     [SerializeField] private EnemyType _enemyType;
     [SerializeField] private EnemyData _enemyData;
 
+    private Transform _playerTransform;
+    private Vector3 _directionToPlayer;
     public EnemyType EnemyType
     {
         get { return _enemyType; }
@@ -17,7 +19,9 @@ public class EnemyTargetType : MonoBehaviour, IEnemy, IEnemyMove
     }
     public void Move()
     {
-        Vector2 directionVector = Vector2.down;
-        // transform.Translate(directionVector * Speed * Time.deltaTime);
+        // Translate는, 회전에 민감하기 때문에 잘 사용되지 않는다.
+        // Translate는, 조향이 필요할 때 쓰는게 좋다.
+        // transform.Translate(_directionToPlayer.normalized * Speed * Time.deltaTime, Space.World);
+        transform.position += (Vector3)(_directionToPlayer.normalized * _enemyData.Speed * Time.deltaTime);
     }
 }

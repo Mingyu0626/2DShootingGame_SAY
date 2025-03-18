@@ -1,14 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
-
-public enum Direction
-{
-    Left,
-    Right,
-    Down
-}
-
 
 [RequireComponent(typeof(Enemy))]
 public class EnemyMove : MonoBehaviour

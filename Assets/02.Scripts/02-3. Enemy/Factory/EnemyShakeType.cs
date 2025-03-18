@@ -5,6 +5,21 @@ public class EnemyShakeType : MonoBehaviour, IEnemy, IEnemyMove
     [SerializeField] private EnemyType _enemyType;
     [SerializeField] private EnemyData _enemyData;
 
+    [Header("Snake")] // Shake Å¸ÀÔ
+    [Tooltip("ÃÑ¾Ë ±ËµµÀÇ ÁÖÆÄ¼ö")]
+    [SerializeField] private float _frequency;
+    [Tooltip("ÃÑ¾Ë ±ËµµÀÇ ÁøÆø")]
+    [SerializeField] private float _amplitude;
+    public float Frequency
+    {
+        get { return _frequency; }
+        private set { _frequency = value; }
+    }
+    public float Amplitude
+    {
+        get { return _amplitude; }
+        private set { _amplitude = value; }
+    }
     public EnemyType EnemyType
     {
         get { return _enemyType; }
@@ -18,7 +33,7 @@ public class EnemyShakeType : MonoBehaviour, IEnemy, IEnemyMove
 
     public void Move()
     {
-        Vector2 directionVector = Vector2.down;
-        // transform.Translate(directionVector * Speed * Time.deltaTime);
+        float offset = Mathf.Sin(Time.time * Frequency) * Amplitude;
+        transform.position += transform.right * offset * Time.deltaTime;
     }
 }
