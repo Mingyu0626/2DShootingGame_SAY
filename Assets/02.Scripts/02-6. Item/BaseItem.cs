@@ -57,7 +57,7 @@ public abstract class BaseItem : MonoBehaviour
 
     public void PlayVFX()
     {
-        Instantiate(_getItemVFXPrefab, transform.position, transform.rotation);
+        Instantiate(_getItemVFXPrefab, Player.Instance.transform);
     }
 
     private IEnumerator GetItemTimer()
