@@ -11,7 +11,7 @@ public class DetectPlayer : MonoBehaviour
     {
         if (!ReferenceEquals(_baseItem, null))
         {
-            StartCoroutine(_baseItem.GoToPlayer());
+            _baseItem.GoToPlayer();
         }
     }
 

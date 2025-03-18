@@ -68,8 +68,11 @@ public abstract class BaseItem : MonoBehaviour
         // 지금은 파생 클래스에서 Destroy 그냥 불렀는데,
         // 아이템 종류 많아지면 여기서 람다로 ApplyItem 종료 후 바로 파괴되도록 ㄱㄱ
     }
-
-    public IEnumerator GoToPlayer()
+    public void GoToPlayer()
+    {
+        StartCoroutine(GoToPlayerCoroutine());
+    }
+    public IEnumerator GoToPlayerCoroutine()
     {
         float distance, duration;
         while (true)
@@ -97,8 +100,6 @@ public abstract class BaseItem : MonoBehaviour
             yield return null;
         }
     }
-
-
     // 매개변수 : 시작점, 제어점, 목적점, 시간(0~1)
     private Vector2 Bazier(Vector2 start, Vector2 center, Vector2 end, float time)
     {
