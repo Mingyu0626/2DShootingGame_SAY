@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour
             Player otherPlayer = other.GetComponent<Player>();
             if (otherPlayer != null)
             {
-                otherPlayer.TakeDamage(Damage);
+                otherPlayer.TakeDamage(_damage);
             }
         }
     }

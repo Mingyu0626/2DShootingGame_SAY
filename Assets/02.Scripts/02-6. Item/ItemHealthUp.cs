@@ -4,7 +4,7 @@ public class ItemHealthUp : BaseItem
 {
     public override void ApplyItem()
     {
-        Player.Instance.CurrentHealthPoint += (int)Amount;
+        Player.Instance.PlayerData.CurrentHealthPoint += (int)Amount;
         Destroy(gameObject);
     }
 }

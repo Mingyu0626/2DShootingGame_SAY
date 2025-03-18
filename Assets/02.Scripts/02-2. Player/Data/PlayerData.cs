@@ -2,28 +2,28 @@ using UnityEngine;
 
 public class PlayerData : MonoBehaviour
 {
-    //[Header("HP")]
-    //[SerializeField]
-    //private int _maxHealthPoint = 3;
-    //[SerializeField]
-    //private int _currentHealthPoint;
-    //public int MaxHealthPoint
-    //{
-    //    get { return _maxHealthPoint; }
-    //    set { _maxHealthPoint = value; }
-    //}
-    //public int CurrentHealthPoint
-    //{
-    //    get { return _currentHealthPoint; }
-    //    set
-    //    {
-    //        _currentHealthPoint = Mathf.Clamp(value, 0, _maxHealthPoint);
-    //        if (_currentHealthPoint == 0)
-    //        {
-    //            Destroy(gameObject);
-    //        }
-    //    }
-    //}
+    [Header("HP")]
+    [SerializeField]
+    private int _maxHealthPoint = 3;
+    [SerializeField] 
+    private int _currentHealthPoint;
+    public int MaxHealthPoint
+    {
+        get { return _maxHealthPoint; }
+        set { _maxHealthPoint = value; }
+    }
+    public int CurrentHealthPoint
+    {
+        get { return _currentHealthPoint; }
+        set
+        {
+            _currentHealthPoint = Mathf.Clamp(value, 0, _maxHealthPoint);
+            if (_currentHealthPoint == 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
 
     // 라벨링은 날 잡아서 하죠
     [Header("Move")]
