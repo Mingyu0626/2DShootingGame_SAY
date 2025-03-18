@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
         _playerStateContext.CurrentState.Update();
         if (Input.GetKeyDown(KeyCode.Alpha3) && 0 < _playerData.CurrentBoomCount)
         {
-            UseBoom();
+            ActivateBoom();
         }
     }
     public void StartStateCoroutine(IEnumerator coroutine)
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
         Instantiate(bullet, position, rotation);
     }
 
-    public void UseBoom()
+    public void ActivateBoom()
     {
         _playerData.CurrentBoomCount--;
         if (_playerData.BoomPrefab == null) return;
