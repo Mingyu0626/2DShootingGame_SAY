@@ -266,4 +266,5 @@ MonoBehaviour:
   _amount: 1
   _minDistanceToAbsorb: 1
   _moveSpeed: 1
+  _disappearTime: 3
   _getItemVFXPrefab: {fileID: 3895483517965098031, guid: e31f5d2c1f06d4944b802e1885acdf6d, type: 3}
