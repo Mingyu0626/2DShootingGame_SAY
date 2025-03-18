@@ -14,6 +14,19 @@ public class Boom : MonoBehaviour
     {
         StartCoroutine(Timer());
     }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            Damage damage = new Damage
+            {
+                Value = 10,
+                Type = DamageType.Boom,
+                From = gameObject
+            };
+            other.GetComponent<Enemy>().TakeDamage(damage);
+        }
+    }
 
     private IEnumerator Timer()
     {

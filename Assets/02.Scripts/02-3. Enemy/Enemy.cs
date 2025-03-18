@@ -28,10 +28,6 @@ public class Enemy : MonoBehaviour
         private set 
         {
             _currentHealthPoint = Mathf.Clamp(value, 0, _maxHealthPoint);
-            if (_currentHealthPoint == 0)
-            {
-                OnEnemyDestroyed();
-            }
         }
     }
     public int Damage
@@ -75,24 +71,27 @@ public class Enemy : MonoBehaviour
                 otherPlayer.TakeDamage(Damage);
             }
         }
-
-        if (other.CompareTag("Special Move"))
-        {
-            OnEnemyDestroyed();
-        }
-
     }
     private void OnDestroy()
     {
         
     }
-    public void TakeDamage(int damage)
+    public void TakeDamage(Damage damage)
     {
-        CurrentHealthPoint -= damage;
         PlayHitAnimation();
+        _currentHealthPoint -= damage.Value;
+        if (_currentHealthPoint == 0)
+        {
+            OnEnemyDeath(damage);
+        }
     }
-    private void OnEnemyDestroyed()
+    private void OnEnemyDeath(Damage damage)
     {
+        if (damage.Type == DamageType.Bullet)
+        {
+            GameManager.Instance.KilledEnemyCount++;
+        }
+
         switch (CurrentEnemyType)
         {
             case EnemyType.Normal:
@@ -119,7 +118,6 @@ public class Enemy : MonoBehaviour
         }
         SpawnRandomItem();
         InstantiateVFX();
-        GameManager.Instance.KilledEnemyCount++;
         Destroy(gameObject);
     }
     private void SplitEnemies()

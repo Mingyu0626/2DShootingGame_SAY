@@ -103,7 +103,14 @@ public class Bullet : MonoBehaviour
             Enemy otherEnemy = other.GetComponent<Enemy>();
             if (otherEnemy != null)
             {
-                otherEnemy.TakeDamage(Damage);
+                Damage damage = new Damage
+                {
+                    Value = _damage,
+                    Type = DamageType.Bullet,
+                    From = gameObject
+                };
+
+                otherEnemy.TakeDamage(damage);
             }
             Destroy(gameObject);
         }
