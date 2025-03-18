@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealthPoint: 2
-  _currentHealthPoint: 0
+  _currentHealthPoint: 2
   _damage: 1
   _currentEnemyType: 4
   _enemyZombieGO: {fileID: 0}
