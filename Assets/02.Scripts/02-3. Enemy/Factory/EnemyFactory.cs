@@ -11,13 +11,6 @@ public enum EnemyType
     Target, // 생성 시점의 플레이어 위치로 움직이는 타입
 }
 
-public abstract class Factory<T> : MonoBehaviour where T : IProduct
-{
-    public abstract T GetProduct(GameObject productGO, Vector3 position);
-}
-
-
-
 public class EnemyFactory : Factory<IEnemy>
 {
     public override IEnemy GetProduct(GameObject enemyGO, Vector3 position)
