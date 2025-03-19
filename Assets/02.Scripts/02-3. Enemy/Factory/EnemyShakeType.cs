@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public class EnemyShakeType : MonoBehaviour, IEnemy, IEnemyMove
+public class EnemyShakeType : Enemy, IEnemy, IEnemyMove
 {
     [SerializeField] private EnemyType _enemyType;
-    [SerializeField] private EnemyData _enemyData;
 
     [Header("Snake")] // Shake Å¸ÀÔ
     [Tooltip("ÃÑ¾Ë ±ËµµÀÇ ÁÖÆÄ¼ö")]
@@ -33,20 +32,20 @@ public class EnemyShakeType : MonoBehaviour, IEnemy, IEnemyMove
     public void Init(Direction dir)
     {
         EnemyType = _enemyType;
-        _enemyData.DirectionEnum = dir;
+        EnemyData.DirectionEnum = dir;
     }
     private void Update()
     {
-        Move();
+        Move(EnemyData.DirectionEnum);
         SinCurve();
     }
-
-    public void Move()
+    public void Move(Direction dir)
     {
-        float offset = Mathf.Sin(Time.time * Frequency) * Amplitude;
-        transform.position += transform.right * offset * Time.deltaTime;
+        Vector2 directionVector = EnemyData.DirectionDictionary[dir];
+        // transform.Translate(directionVector * Speed * Time.deltaTime);
+        transform.position += (Vector3)(directionVector * EnemyData.Speed * Time.deltaTime);
     }
-    private void SinCurve()
+    public void SinCurve()
     {
         float offset = Mathf.Sin(Time.time * Frequency) * Amplitude;
         transform.position += transform.right * offset * Time.deltaTime;

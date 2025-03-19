@@ -43,20 +43,12 @@ public class EnemySpawner : MonoBehaviour
     {
         StartCoroutine(Spawn());
     }
-
-
-    private void Update()
-    {
-        
-    }
-
     private IEnumerator Spawn()
     {
         while (true)
         {
             IEnemy enemyInterface = _enemyFactory.GetProduct(GetNextSpawnEnemy(), transform.position);
-            enemyInterface.Init();
-
+            enemyInterface.Init(_spawnedEnemyDirection);
             yield return new WaitForSeconds(GetRandomSpawnIntervalTime());
         }
     }

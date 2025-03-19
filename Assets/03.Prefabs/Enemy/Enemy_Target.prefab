@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 7619143969821534143}
   - component: {fileID: 4949107763059750498}
   - component: {fileID: -2994489336427408694}
-  - component: {fileID: 2860592330399858626}
-  - component: {fileID: 7305198379615925797}
   - component: {fileID: 7242621613402068780}
+  - component: {fileID: -3668559888160148352}
+  - component: {fileID: -1545233077889661266}
   m_Layer: 3
   m_Name: Enemy_Target
   m_TagString: Enemy
@@ -172,41 +172,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2860592330399858626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5654929124324883478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb796720449399a4bb78108b7b9b8e42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealthPoint: 2
-  _currentHealthPoint: 2
-  _damage: 1
-  _currentEnemyType: 4
-  _enemyZombieGO: {fileID: 0}
-  _itemSpawnProbability: 0.3
-  _explosionVFXPrefab: {fileID: 4084661252556610420, guid: dfe3e891d97b3644a98b17fde815d0d7, type: 3}
---- !u!114 &7305198379615925797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5654929124324883478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e358ec3698357f4daaf2d7e4000eaad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 3
-  _directionEnum: 2
-  _frequency: 0
-  _amplitude: 0
 --- !u!95 &7242621613402068780
 Animator:
   serializedVersion: 7
@@ -229,3 +194,38 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-3668559888160148352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5654929124324883478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48330faa19ceca74a979333ccd66409d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealthPoint: 2
+  _currentHealthPoint: 2
+  _speed: 3
+  _directionEnum: 2
+  _damage: 1
+  _itemSpawnProbability: 0.3
+  _enemyAnimator: {fileID: 7242621613402068780}
+  _explosionVFXPrefab: {fileID: 4084661252556610420, guid: dfe3e891d97b3644a98b17fde815d0d7, type: 3}
+  _score: 20
+--- !u!114 &-1545233077889661266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5654929124324883478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a13f908492b36034b814d286b231b5fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyType: 4
+  _enemyData: {fileID: -3668559888160148352}

@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public class EnemyTargetType : MonoBehaviour, IEnemy, IEnemyMove
+public class EnemyTargetType : Enemy, IEnemy, IEnemyMove
 {
     [SerializeField] private EnemyType _enemyType;
-    [SerializeField] private EnemyData _enemyData;
 
     private Transform _playerTransform;
     private Vector3 _directionToPlayer;
@@ -16,25 +15,29 @@ public class EnemyTargetType : MonoBehaviour, IEnemy, IEnemyMove
     public void Init()
     {
         EnemyType = _enemyType;
-        _enemyData.DirectionEnum = Direction.Down;
-        LookAtPlayer(_directionToPlayer);
+        EnemyData.DirectionEnum = Direction.Down;
     }
     public void Init(Direction dir)
     {
         EnemyType = _enemyType;
-        _enemyData.DirectionEnum = dir;
+        EnemyData.DirectionEnum = dir;
+    }
+    private void Start()
+    {
+        _playerTransform = Player.Instance.transform;
+        _directionToPlayer = _playerTransform.position - transform.position;
         LookAtPlayer(_directionToPlayer);
     }
     private void Update()
     {
-        Move();
+        Move(EnemyData.DirectionEnum);
     }
-    public void Move()
+    public void Move(Direction dir)
     {
         // Translate는, 회전에 민감하기 때문에 잘 사용되지 않는다.
         // Translate는, 조향이 필요할 때 쓰는게 좋다.
         // transform.Translate(_directionToPlayer.normalized * Speed * Time.deltaTime, Space.World);
-        transform.position += (Vector3)(_directionToPlayer.normalized * _enemyData.Speed * Time.deltaTime);
+        transform.position += (Vector3)(_directionToPlayer.normalized * EnemyData.Speed * Time.deltaTime);
     }
     private void LookAtPlayer(Vector2 distance)
     {

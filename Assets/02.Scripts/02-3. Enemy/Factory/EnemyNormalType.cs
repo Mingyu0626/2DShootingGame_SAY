@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyNormalType: MonoBehaviour, IEnemy, IEnemyMove
+public class EnemyNormalType: Enemy, IEnemy, IEnemyMove
 {
     [SerializeField] private EnemyType _enemyType;
-    [SerializeField] private EnemyData _enemyData;
     public EnemyType EnemyType 
     { 
         get { return _enemyType; }
@@ -18,11 +17,11 @@ public class EnemyNormalType: MonoBehaviour, IEnemy, IEnemyMove
     public void Init(Direction dir)
     {
         EnemyType = _enemyType;
-        _enemyData.DirectionEnum = dir;
+        EnemyData.DirectionEnum = dir;
     }
     private void Update()
     {
-        Move(_enemyData.DirectionEnum);
+        Move(EnemyData.DirectionEnum);
     }
 
     public void Move()
@@ -32,9 +31,9 @@ public class EnemyNormalType: MonoBehaviour, IEnemy, IEnemyMove
     }
     public void Move(Direction dir)
     {
-        Vector2 directionVector = _enemyData.DirectionDictionary[dir];
+        Vector2 directionVector = EnemyData.DirectionDictionary[dir];
         // transform.Translate(directionVector * Speed * Time.deltaTime);
-        transform.position += (Vector3)(directionVector * _enemyData.Speed * Time.deltaTime);
+        transform.position += (Vector3)(directionVector * EnemyData.Speed * Time.deltaTime);
     }
 }
 

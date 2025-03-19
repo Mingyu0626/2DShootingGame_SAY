@@ -9,7 +9,7 @@ public enum Direction
 }
 
 
-public class EnemyData : ScriptableObject
+public class EnemyData : MonoBehaviour
 {
     [Header("HP")]
     [Tooltip("적의 최대 체력")]
@@ -24,7 +24,7 @@ public class EnemyData : ScriptableObject
     public int CurrentHealthPoint
     {
         get { return _currentHealthPoint; }
-        private set
+        set
         {
             _currentHealthPoint = Mathf.Clamp(value, 0, _maxHealthPoint);
         }
@@ -60,11 +60,31 @@ public class EnemyData : ScriptableObject
     [Header("ItemSpawn")]
     [Tooltip("아이템 드롭 확률")]
     [SerializeField] private float _itemSpawnProbability = 0.3f;
-    private ItemData _itemData;
+    public float ItemSpawnProbability 
+    { 
+        get => _itemSpawnProbability; 
+        private set => _itemSpawnProbability = value; 
+    }
 
-    [Header("Effects")]
+    [Header("Effects and Animation")]
+    [SerializeField] private Animator _enemyAnimator;
     [SerializeField] private GameObject _explosionVFXPrefab;
+    public Animator EnemyAnimator 
+    { 
+        get => _enemyAnimator; 
+        set => _enemyAnimator = value; 
+    }
+    public GameObject ExplosionVFXPrefab 
+    { 
+        get => _explosionVFXPrefab; 
+        private set => _explosionVFXPrefab = value; 
+    }
 
+
+    [Header("Score")]
+    [Tooltip("획득 점수")]
+    [SerializeField] private int _score;
+    public int Score { get => _score; private set => _score = value; }
 
     private Dictionary<Direction, Vector2> _directionDictionary = new Dictionary<Direction, Vector2>()
     {
@@ -76,4 +96,5 @@ public class EnemyData : ScriptableObject
     {
         get { return _directionDictionary; }
     }
+
 }

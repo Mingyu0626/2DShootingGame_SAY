@@ -25,7 +25,7 @@ public class EnemyFactory : Factory<IEnemy>
         GameObject instance = Instantiate(enemyGO, position,
             Quaternion.identity);
         IEnemy newEnemy = instance.GetComponent<IEnemy>();
-        newEnemy.Init();
+        // newEnemy.Init();
         return newEnemy;
     }
 

@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class EnemySplitType : MonoBehaviour, IEnemy, IEnemyMove
+public class EnemySplitType : Enemy, IEnemy, IEnemyMove
 {
     [SerializeField] private EnemyType _enemyType;
-    [SerializeField] private EnemyData _enemyData;
 
-    [Tooltip("스플릿 타입이 죽을 때 생성될 타입 적 GO")] // EnemySplit 클래스로 빼고
+    [Tooltip("스플릿 타입이 죽을 때 생성될 타입 적 GO")]
     [SerializeField] private GameObject _enemyZombieGO;
+    [SerializeField] private EnemyFactory _enemyFactory;
     public EnemyType EnemyType
     {
         get { return _enemyType; }
@@ -16,17 +16,31 @@ public class EnemySplitType : MonoBehaviour, IEnemy, IEnemyMove
     public void Init()
     {
         EnemyType = _enemyType;
+        EnemyData.DirectionEnum = Direction.Down;
     }
     public void Init(Direction dir)
     {
         EnemyType = _enemyType;
-        _enemyData.DirectionEnum = dir;
+        EnemyData.DirectionEnum = dir;
     }
     private void Update()
     {
-        Move();
+        Move(EnemyData.DirectionEnum);
     }
-    public void Move()
+    public void Move(Direction dir)
     {
+        Vector2 directionVector = EnemyData.DirectionDictionary[dir];
+        // transform.Translate(directionVector * Speed * Time.deltaTime);
+        transform.position += (Vector3)(directionVector * EnemyData.Speed * Time.deltaTime);
+    }
+    private void SplitEnemies()
+    {
+        foreach (Transform childSpawnPointTransform in transform)
+        {
+            IEnemy enemyInterface = _enemyFactory.GetProduct(_enemyZombieGO, childSpawnPointTransform.position);
+            enemyInterface.Init();
+            // Enemy_Split의 자식 GO로 spawnPoint 이외에 다른 GO가 추가된다면 개선이 필요하다.
+            // Instantiate(_enemyZombieGO, childSpawnPointTransform.position, childSpawnPointTransform.rotation);
+        }
     }
 }
