@@ -1,7 +1,7 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 
 public class UI_Game : MonoBehaviour
@@ -33,7 +33,13 @@ public class UI_Game : MonoBehaviour
 
     public void RefreshScore(int score)
     {
-        _scoreText.text = $"Score : {score}";
+        _scoreText.text = score.ToString("N0");
+        _scoreText.rectTransform.DOScale(new Vector3(1.4f, 1.4f, 1.4f), 0.08f)
+            .SetEase(Ease.OutBounce)
+            .OnComplete(() =>
+            {
+                _scoreText.rectTransform.localScale = Vector3.one;
+            });
     }
 
 }
