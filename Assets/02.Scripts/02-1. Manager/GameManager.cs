@@ -3,8 +3,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-
+    [SerializeField] private UI_Game _gameUI;
     private int _killedEnemyCount;
+    private int _score;
     public int KilledEnemyCount 
     { 
         get => _killedEnemyCount;
@@ -15,6 +16,16 @@ public class GameManager : MonoBehaviour
             {
                 Player.Instance.gameObject.GetComponent<PlayerData>().CurrentBoomCount++;
             }
+            _gameUI.RefreshKillCount(_killedEnemyCount);
+        }
+    }
+    public int Score 
+    { 
+        get => _score;
+        set
+        {
+            _score = value;
+            _gameUI.RefreshScore(_score);
         }
     }
 

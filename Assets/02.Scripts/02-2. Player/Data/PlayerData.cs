@@ -100,6 +100,7 @@ public class PlayerData : MonoBehaviour
 
 
     [Header("Special Move : Boom")]
+    [SerializeField] private UI_Game _gameUI;
     [SerializeField] private GameObject _boomPrefab;
     [SerializeField] private int _maxBoomCount;
     private int _currentBoomCount;
@@ -109,7 +110,11 @@ public class PlayerData : MonoBehaviour
     public int CurrentBoomCount 
     { 
         get => _currentBoomCount;
-        set => _currentBoomCount = Mathf.Clamp(value, 0, _maxBoomCount);
+        set
+        {
+            _currentBoomCount = Mathf.Clamp(value, 0, _maxBoomCount);
+            _gameUI.RefreshBoomCount(_currentBoomCount);
+        }
     }
     public float BoomDuration { get => _boomDuration; private set => _boomDuration = value; }
 }
