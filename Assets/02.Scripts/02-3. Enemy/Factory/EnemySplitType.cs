@@ -13,13 +13,19 @@ public class EnemySplitType : MonoBehaviour, IEnemy, IEnemyMove
         set { _enemyType = value; }
     }
 
-
-
     public void Init()
     {
         EnemyType = _enemyType;
     }
-
+    public void Init(Direction dir)
+    {
+        EnemyType = _enemyType;
+        _enemyData.DirectionEnum = dir;
+    }
+    private void Update()
+    {
+        Move();
+    }
     public void Move()
     {
     }

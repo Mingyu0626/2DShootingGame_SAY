@@ -30,8 +30,23 @@ public class EnemyShakeType : MonoBehaviour, IEnemy, IEnemyMove
     {
         EnemyType = _enemyType;
     }
+    public void Init(Direction dir)
+    {
+        EnemyType = _enemyType;
+        _enemyData.DirectionEnum = dir;
+    }
+    private void Update()
+    {
+        Move();
+        SinCurve();
+    }
 
     public void Move()
+    {
+        float offset = Mathf.Sin(Time.time * Frequency) * Amplitude;
+        transform.position += transform.right * offset * Time.deltaTime;
+    }
+    private void SinCurve()
     {
         float offset = Mathf.Sin(Time.time * Frequency) * Amplitude;
         transform.position += transform.right * offset * Time.deltaTime;

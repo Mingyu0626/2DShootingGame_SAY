@@ -14,15 +14,12 @@ public enum EnemyType
 public abstract class Factory<T> : MonoBehaviour where T : IProduct
 {
     public abstract T GetProduct(GameObject productGO, Vector3 position);
-
 }
 
 
 
 public class EnemyFactory : Factory<IEnemy>
 {
-    [SerializeField] private List<GameObject> _enemyPrefabList = new List<GameObject>();
-
     public override IEnemy GetProduct(GameObject enemyGO, Vector3 position)
     {
         GameObject instance = Instantiate(enemyGO, position,

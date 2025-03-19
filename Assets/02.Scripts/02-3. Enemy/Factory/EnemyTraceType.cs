@@ -12,10 +12,18 @@ public class EnemyTraceType : MonoBehaviour, IEnemy, IEnemyMove
         get { return _enemyType; }
         set { _enemyType = value; }
     }
-
     public void Init()
     {
         EnemyType = _enemyType;
+    }
+    public void Init(Direction dir)
+    {
+        EnemyType = _enemyType;
+        _enemyData.DirectionEnum = dir;
+    }
+    private void Update()
+    {
+        Move();
     }
 
     public void Move()

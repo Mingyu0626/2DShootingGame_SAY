@@ -15,13 +15,22 @@ public class EnemyNormalType: MonoBehaviour, IEnemy, IEnemyMove
     {
         EnemyType = _enemyType;
     }
+    public void Init(Direction dir)
+    {
+        EnemyType = _enemyType;
+        _enemyData.DirectionEnum = dir;
+    }
+    private void Update()
+    {
+        Move(_enemyData.DirectionEnum);
+    }
 
     public void Move()
     {
         Vector2 directionVector = Vector2.down;
         // transform.Translate(directionVector * Speed * Time.deltaTime);
     }
-    private void Move(Direction dir)
+    public void Move(Direction dir)
     {
         Vector2 directionVector = _enemyData.DirectionDictionary[dir];
         // transform.Translate(directionVector * Speed * Time.deltaTime);

@@ -30,14 +30,11 @@ public class EnemySpawner : MonoBehaviour
             new SpawnedEnemyInfo(EnemyType.Split, 10)
         };
 
-    [SerializeField]
-    private float _delayMin;
-    [SerializeField]
-    private float _delayMax;
+    [SerializeField] private float _delayMin;
+    [SerializeField] private float _delayMax;
 
-    [SerializeField]
-    private Direction _spawnedEnemyDirection;
-
+    [SerializeField] private Direction _spawnedEnemyDirection;
+    [SerializeField] private EnemyFactory _enemyFactory;
 
     private void Awake()
     {
@@ -57,8 +54,9 @@ public class EnemySpawner : MonoBehaviour
     {
         while (true)
         {
-            GameObject enemy = Instantiate(GetNextSpawnEnemy(), transform.position, transform.rotation);
-            enemy.GetComponent<EnemyMove>().DirectionEnum = _spawnedEnemyDirection;
+            IEnemy enemyInterface = _enemyFactory.GetProduct(GetNextSpawnEnemy(), transform.position);
+            enemyInterface.Init();
+
             yield return new WaitForSeconds(GetRandomSpawnIntervalTime());
         }
     }
