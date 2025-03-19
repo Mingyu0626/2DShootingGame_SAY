@@ -9,7 +9,7 @@ public class UI_Game : MonoBehaviour
     [SerializeField] private List<GameObject> _boomList;
     [SerializeField] private TextMeshProUGUI _killCountText;
     [SerializeField] private TextMeshProUGUI _scoreText;
-    private void Awake()
+    private void Start()
     {
         
     }
@@ -17,15 +17,12 @@ public class UI_Game : MonoBehaviour
     {
         
     }
-
-    public void RefreshBoomCount(int boomCount)
+    public void InitUI(int killCount, int score, int boomCount)
     {
-        for (int i = 0; i < _boomList.Count; i++)
-        {
-            _boomList[i].SetActive(i < boomCount);
-        }
+        RefreshKillCount(killCount);
+        RefreshScore(score);
+        RefreshBoomCount(boomCount);
     }
-
     public void RefreshKillCount(int killCount)
     {
         _killCountText.text = $"Kills : {killCount}";
@@ -40,6 +37,13 @@ public class UI_Game : MonoBehaviour
             {
                 _scoreText.rectTransform.localScale = Vector3.one;
             });
+    }
+    public void RefreshBoomCount(int boomCount)
+    {
+        for (int i = 0; i < _boomList.Count; i++)
+        {
+            _boomList[i].SetActive(i < boomCount);
+        }
     }
 
 }

@@ -37,8 +37,17 @@ public class Enemy : MonoBehaviour
     {
         if (damage.Type == DamageType.Bullet)
         {
-            GameManager.Instance.KilledEnemyCount++;
-            GameManager.Instance.Score += _enemyData.Score;
+            int killCount = GameManager.Instance.PlayData.KillCount += 1;
+            GameManager.Instance.GameUI.RefreshKillCount(killCount);
+            int score = GameManager.Instance.PlayData.Score += _enemyData.Score;
+            GameManager.Instance.GameUI.RefreshScore(score);
+
+            if (0 < killCount && killCount % 20 == 0)
+            {
+                int boomCount = GameManager.Instance.PlayData.BoomCount += 1;
+                GameManager.Instance.GameUI.RefreshBoomCount(boomCount);
+            }
+
         }
         SpawnRandomItem();
         InstantiateVFX();

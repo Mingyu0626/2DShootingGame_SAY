@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         _playerStateContext.CurrentState.Update();
-        if (Input.GetKeyDown(KeyCode.Alpha3) && 0 < _playerData.CurrentBoomCount)
+        if (Input.GetKeyDown(KeyCode.Alpha3) && 0 < GameManager.Instance.PlayData.BoomCount)
         {
             ActivateBoom();
         }
@@ -83,7 +83,8 @@ public class PlayerController : MonoBehaviour
 
     public void ActivateBoom()
     {
-        _playerData.CurrentBoomCount--;
+        int boomCount = GameManager.Instance.PlayData.BoomCount -= 1;
+        GameManager.Instance.GameUI.RefreshBoomCount(boomCount);
         if (_playerData.BoomPrefab == null) return;
         _playerData.BoomPrefab.SetActive(true);
     }
