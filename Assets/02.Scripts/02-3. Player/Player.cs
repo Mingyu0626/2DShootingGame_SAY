@@ -4,8 +4,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
-    [SerializeField] private int _maxHealthPoint = 3;
-    [SerializeField] private int _currentHealthPoint;
     [SerializeField] private ShakeCamera _shakeCamera;
 
     private PlayerData _playerData;
@@ -22,7 +20,6 @@ public class Player : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
         _playerData = GetComponent<PlayerData>();
         _playerData.CurrentHealthPoint = _playerData.MaxHealthPoint;
     }
