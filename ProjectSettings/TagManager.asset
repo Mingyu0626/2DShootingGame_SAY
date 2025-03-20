@@ -10,6 +10,7 @@ TagManager:
   - FxTemporaire
   - Special Move
   - Pet
+  - Manager
   layers:
   - Default
   - TransparentFX

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Security.Cryptography;
 using UnityEngine;
@@ -18,9 +19,8 @@ public class PlayData
 }
 
 
-public class GameManager : MonoBehaviour
-{
-    public static GameManager Instance { get; private set; }
+public class GameManager : Singleton<GameManager>
+{ 
     [SerializeField] private UI_Game _gameUI;
     private PlayData _playData;
     public UI_Game GameUI { get => _gameUI; private set => _gameUI = value; }
@@ -36,21 +36,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
+        base.Awake();
+
         _playData = new PlayData(0, 0, 0);
         LoadPlayData();
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         SavePlayData();
     }
 
