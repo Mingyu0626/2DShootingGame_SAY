@@ -1688,8 +1688,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1014783234}
   - component: {fileID: 1014783235}
+  - component: {fileID: 1014783236}
   m_Layer: 0
-  m_Name: ===== [ Managers ] =====
+  m_Name: ===== [ Singleton ] =====
   m_TagString: Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1722,7 +1723,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b80aaf9fe1b2363429725091bbd38459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameUI: {fileID: 1632353632}
+--- !u!114 &1014783236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014783233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bae7ae48af146b4a9570c3a5e2a7991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _boomList:
+  - {fileID: 966082868}
+  - {fileID: 1264722815}
+  - {fileID: 496409970}
+  _killCountText: {fileID: 526176821}
+  _scoreText: {fileID: 128622757}
 --- !u!1001 &1086693298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1975,7 +1993,6 @@ GameObject:
   - component: {fileID: 1632353630}
   - component: {fileID: 1632353629}
   - component: {fileID: 1632353628}
-  - component: {fileID: 1632353632}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2070,24 +2087,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1632353632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1632353627}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bae7ae48af146b4a9570c3a5e2a7991, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _boomList:
-  - {fileID: 966082868}
-  - {fileID: 1264722815}
-  - {fileID: 496409970}
-  _killCountText: {fileID: 526176821}
-  _scoreText: {fileID: 128622757}
 --- !u!1001 &1708119546
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2734,7 +2733,7 @@ PrefabInstance:
     - target: {fileID: 8552250553453216083, guid: 8cf1d0f2213b87947bdc1e554dd5554c, type: 3}
       propertyPath: _gameUI
       value: 
-      objectReference: {fileID: 1632353632}
+      objectReference: {fileID: 0}
     - target: {fileID: 8552250553453216083, guid: 8cf1d0f2213b87947bdc1e554dd5554c, type: 3}
       propertyPath: _boomPrefab
       value: 

@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 { 
-    [SerializeField] private UI_Game _gameUI;
     private PlayData _playData;
-    public UI_Game GameUI { get => _gameUI; private set => _gameUI = value; }
     public PlayData PlayData
     {
         get
@@ -23,7 +21,6 @@ public class GameManager : Singleton<GameManager>
     protected override void Awake()
     {
         base.Awake();
-
         _playData = new PlayData(0, 0, 0);
         LoadPlayData();
     }
@@ -52,6 +49,6 @@ public class GameManager : Singleton<GameManager>
                 _playData = JsonUtility.FromJson<PlayData>(jsonData);
             }
         }
-        _gameUI.InitUI(_playData.KillCount, _playData.Score, _playData.BoomCount);
+        UI_Game.Instance.InitUI(_playData.KillCount, _playData.Score, _playData.BoomCount);
     }
 }

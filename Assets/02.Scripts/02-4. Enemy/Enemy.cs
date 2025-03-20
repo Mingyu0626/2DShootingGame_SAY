@@ -38,14 +38,14 @@ public class Enemy : MonoBehaviour
         if (damage.Type == DamageType.Bullet)
         {
             int killCount = GameManager.Instance.PlayData.KillCount += 1;
-            GameManager.Instance.GameUI.RefreshKillCount(killCount);
+            UI_Game.Instance.RefreshKillCount(killCount);
             int score = GameManager.Instance.PlayData.Score += _enemyData.Score;
-            GameManager.Instance.GameUI.RefreshScore(score);
+            UI_Game.Instance.RefreshScore(score);
 
-            if (0 < killCount && killCount % 20 == 0)
+            if (0 < killCount && killCount % 20 == 0 && GameManager.Instance.PlayData.BoomCount < 3)
             {
                 int boomCount = GameManager.Instance.PlayData.BoomCount += 1;
-                GameManager.Instance.GameUI.RefreshBoomCount(boomCount);
+                UI_Game.Instance.RefreshBoomCount(boomCount);
             }
 
         }

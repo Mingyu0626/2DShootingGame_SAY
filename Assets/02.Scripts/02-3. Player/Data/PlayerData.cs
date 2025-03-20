@@ -100,7 +100,6 @@ public class PlayerData : MonoBehaviour
 
 
     [Header("Special Move : Boom")]
-    [SerializeField] private UI_Game _gameUI;
     [SerializeField] private GameObject _boomPrefab;
     [SerializeField] private int _maxBoomCount;
     private int _currentBoomCount;

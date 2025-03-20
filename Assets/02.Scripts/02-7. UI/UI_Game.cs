@@ -4,19 +4,12 @@ using TMPro;
 using UnityEngine;
 
 
-public class UI_Game : MonoBehaviour
+public class UI_Game : Singleton<UI_Game>
 {
     [SerializeField] private List<GameObject> _boomList;
     [SerializeField] private TextMeshProUGUI _killCountText;
     [SerializeField] private TextMeshProUGUI _scoreText;
-    private void Start()
-    {
-        
-    }
-    private void Update()
-    {
-        
-    }
+
     public void InitUI(int killCount, int score, int boomCount)
     {
         RefreshKillCount(killCount);

@@ -7,8 +7,6 @@ public enum PlayMode
     Auto,
     Manual,
 }
-
-
 public class PlayerController : MonoBehaviour
 {
     private IPlayerState _manualState, _autoState;
@@ -84,7 +82,7 @@ public class PlayerController : MonoBehaviour
     public void ActivateBoom()
     {
         int boomCount = GameManager.Instance.PlayData.BoomCount -= 1;
-        GameManager.Instance.GameUI.RefreshBoomCount(boomCount);
+        UI_Game.Instance.RefreshBoomCount(boomCount);
         if (_playerData.BoomPrefab == null) return;
         _playerData.BoomPrefab.SetActive(true);
     }
