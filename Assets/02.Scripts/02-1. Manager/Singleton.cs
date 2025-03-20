@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
@@ -19,7 +20,18 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
             if (_instance == null)
             {
-                _instance = FindFirstObjectByType(typeof(T)) as T;
+                T[] instances = FindObjectsByType<T>(FindObjectsSortMode.None);
+
+                if (1 < instances.Length)
+                {
+                    Debug.LogError($"중복된 Singleton {typeof(T)} 인스턴스가 감지되어, 중복 인스턴스 제거를 진행합니다.");
+                    for (int i = 1; i < instances.Length; i++)
+                    {
+                        Destroy(instances[i].gameObject);
+                    }
+                }
+
+                _instance = instances.Length > 0 ? instances[0] : null;
                 if (_instance == null)
                 {
                     GameObject go = new GameObject(typeof(T).Name, typeof(T));
