@@ -3,22 +3,6 @@ using System;
 using System.Security.Cryptography;
 using UnityEngine;
 
-[Serializable]
-public class PlayData
-{
-    public int Score;
-    public int KillCount;
-    public int BoomCount;
-
-    public PlayData(int score, int killCount, int boomCount)
-    {
-        Score = score;
-        KillCount = killCount;
-        BoomCount = boomCount;
-    }
-}
-
-
 public class GameManager : Singleton<GameManager>
 { 
     [SerializeField] private UI_Game _gameUI;

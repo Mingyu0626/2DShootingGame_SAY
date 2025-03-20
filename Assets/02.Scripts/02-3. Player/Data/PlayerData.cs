@@ -106,15 +106,5 @@ public class PlayerData : MonoBehaviour
     private int _currentBoomCount;
     [SerializeField] private float _boomDuration;
     public GameObject BoomPrefab { get => _boomPrefab; private set => _boomPrefab = value; }
-    public int MaxBoomCount { get => _maxBoomCount; private set => _maxBoomCount = value; }
-    public int CurrentBoomCount 
-    { 
-        get => _currentBoomCount;
-        set
-        {
-            _currentBoomCount = Mathf.Clamp(value, 0, _maxBoomCount);
-            _gameUI.RefreshBoomCount(_currentBoomCount);
-        }
-    }
     public float BoomDuration { get => _boomDuration; private set => _boomDuration = value; }
 }
