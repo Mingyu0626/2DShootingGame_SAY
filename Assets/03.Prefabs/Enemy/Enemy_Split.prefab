@@ -270,6 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48330faa19ceca74a979333ccd66409d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyType: 1
   _maxHealthPoint: 2
   _currentHealthPoint: 2
   _speed: 3
@@ -291,9 +292,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c345b95238344514996565694d0e80c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyType: 1
-  _enemyData: {fileID: -3115492895269253963}
   _enemyZombieGO: {fileID: 5654929124324883478, guid: 7c6e5c3422fbf084a84c45a661c0b309, type: 3}
+  _enemyFactory: {fileID: 0}
 --- !u!1 &6763219509255710490
 GameObject:
   m_ObjectHideFlags: 0

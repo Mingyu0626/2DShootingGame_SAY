@@ -206,6 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48330faa19ceca74a979333ccd66409d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyType: 4
   _maxHealthPoint: 2
   _currentHealthPoint: 2
   _speed: 3
@@ -227,5 +228,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a13f908492b36034b814d286b231b5fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyType: 4
-  _enemyData: {fileID: -3668559888160148352}
