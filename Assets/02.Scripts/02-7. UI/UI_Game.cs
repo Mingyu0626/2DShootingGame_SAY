@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.UI;
 using UnityEngine;
 
 
@@ -9,6 +10,7 @@ public class UI_Game : Singleton<UI_Game>
     [SerializeField] private List<GameObject> _boomList;
     [SerializeField] private TextMeshProUGUI _killCountText;
     [SerializeField] private TextMeshProUGUI _scoreText;
+    [SerializeField] private Slider _bossHealthSlider;
 
     public void InitUI(int killCount, int score, int boomCount)
     {
@@ -38,5 +40,18 @@ public class UI_Game : Singleton<UI_Game>
             _boomList[i].SetActive(i < boomCount);
         }
     }
-
+    public void RefreshBossHP(int hp)
+    {
+        _bossHealthSlider.value = hp;
+        
+    }
+    public void InitBossHPSlider(int bossMaxHp)
+    {
+        _bossHealthSlider.maxValue = bossMaxHp;
+        _bossHealthSlider.value = bossMaxHp;
+    }
+    public void SetBossHPSliderEnable(bool val)
+    {
+        _bossHealthSlider.gameObject.SetActive(val);
+    }
 }
