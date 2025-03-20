@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TagEnumGenerator : MonoBehaviour
 {
-    private const string enumFilePath = "Assets/02.Scripts/02-10. Util/Tags.cs"; // 생성할 파일 경로
+    private const string enumFilePath = "Assets/02.Scripts/02-10. Util/Tags.cs";
 
     [MenuItem("Tools/Generate Tag Enum")]
     public static void GenerateTagEnum()
@@ -13,7 +13,6 @@ public class TagEnumGenerator : MonoBehaviour
         {
             Directory.CreateDirectory("Assets/02.Scripts/02-10. Util");
         }
-
         string[] tags = UnityEditorInternal.InternalEditorUtility.tags;
         using (StreamWriter writer = new StreamWriter(enumFilePath))
         {
@@ -23,13 +22,11 @@ public class TagEnumGenerator : MonoBehaviour
 
             foreach (string tag in tags)
             {
-                writer.WriteLine($"    {tag.Replace(" ", "_")},");
+                writer.WriteLine($"{tag.Replace(" ", "_")},");
             }
 
             writer.WriteLine("}");
         }
-
         AssetDatabase.Refresh();
-        Debug.Log("Tag enum generated successfully!");
     }
 }

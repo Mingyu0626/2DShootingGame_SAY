@@ -4,17 +4,17 @@ public class Enemy : MonoBehaviour
 {
     private EnemyData _enemyData;
     private ItemData _itemData;
-    public EnemyData EnemyData { get => _enemyData; private set => _enemyData = value; }
-    public ItemData ItemData { get => _itemData; private set => _itemData = value; }
+    protected EnemyData EnemyData { get => _enemyData; private set => _enemyData = value; }
+    protected ItemData ItemData { get => _itemData; private set => _itemData = value; }
 
     public void Awake()
     {
         _enemyData = GetComponent<EnemyData>();
-        _itemData = GameObject.FindGameObjectWithTag("Item").GetComponent<ItemData>();
+        _itemData = GameObject.FindGameObjectWithTag(nameof(Tags.Item)).GetComponent<ItemData>();
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag(nameof(Tags.Player)))
         {
             Player otherPlayer = other.GetComponent<Player>();
             if (otherPlayer != null)

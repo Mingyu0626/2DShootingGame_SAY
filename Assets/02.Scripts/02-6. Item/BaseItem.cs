@@ -33,7 +33,8 @@ public abstract class BaseItem : MonoBehaviour
     private Vector2 _controlVector = Vector2.zero;
     private void Awake()
     {
-        _playerData = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerData>();
+        _playerData = GameObject.FindGameObjectWithTag(nameof(Tags.Player))
+            .GetComponent<PlayerData>();
         Destroy(gameObject, _disappearTime);
     }
     private void Update()
