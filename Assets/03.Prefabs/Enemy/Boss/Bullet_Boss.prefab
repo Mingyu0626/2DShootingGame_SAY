@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 2251998326677106608}
   - component: {fileID: 1645839763410583626}
   - component: {fileID: 8340235170556679425}
-  - component: {fileID: -8523829743180970866}
+  - component: {fileID: -5885846764315990527}
   m_Layer: 0
-  m_Name: Bullet_Main
+  m_Name: Bullet_Boss
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 874343242196921964, guid: 5547e92425a5b584ba72bba3566474f0, type: 3}
+  m_Sprite: {fileID: 6112890488319390909, guid: 5547e92425a5b584ba72bba3566474f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -121,7 +121,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -129,7 +129,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16666667, y: 0.29166666}
+    oldSize: {x: 0.41666666, y: 0.41666666}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -137,9 +137,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.5773587}
-      - {x: -0.5, y: -0.28866667}
-      - {x: 0.5, y: -0.28866667}
+    - - {x: -0.16666667, y: 0.20833334}
+      - {x: -0.20833334, y: 0.16666667}
+      - {x: -0.20833334, y: -0.16666667}
+      - {x: -0.16666667, y: -0.20833334}
+      - {x: 0.16666667, y: -0.20833334}
+      - {x: 0.20833334, y: -0.16666667}
+      - {x: 0.20833334, y: 0.16666667}
+      - {x: 0.16666667, y: 0.20833334}
   m_UseDelaunayMesh: 0
 --- !u!50 &1645839763410583626
 Rigidbody2D:
@@ -265,7 +270,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-8523829743180970866
+--- !u!114 &-5885846764315990527
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -274,13 +279,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2703014219239199431}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be17c5eb2f961f24dbb8dbafb483714a, type: 3}
+  m_Script: {fileID: 11500000, guid: 65dfd52531c512744af25b99623bd13a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 6
+  _speed: 3
   _speedVariance: 1
-  _damage: 2
+  _damage: 1
   _duration: 2
-  _currentBulletType: 0
+  _currentBulletType: 2
   _frequency: 0
   _amplitude: 0

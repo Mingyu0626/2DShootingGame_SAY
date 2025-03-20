@@ -3,7 +3,8 @@ using UnityEngine;
 public enum BulletType
 {
     Main,
-    Sub
+    Sub,
+    Boss
 }
 public class Bullet : MonoBehaviour
 {
@@ -96,27 +97,7 @@ public class Bullet : MonoBehaviour
         Move();
         Snake();
     }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag(nameof(Tags.Enemy)))
-        {
-            Enemy otherEnemy = other.GetComponent<Enemy>();
-            if (otherEnemy != null)
-            {
-                Damage damage = new Damage
-                {
-                    Value = Damage,
-                    Type = DamageType.Bullet,
-                    From = gameObject
-                };
-
-                otherEnemy.TakeDamage(damage);
-            }
-            Destroy(gameObject);
-        }
-
-
-    }
+    protected virtual void OnTriggerEnter2D(Collider2D other) {}
     private void Move()
     {
         Vector2 direction = Vector2.up;
