@@ -7,8 +7,8 @@ using UnityEngine.InputSystem;
 
 public static class CryptoUtility
 {
-    private static readonly string 
-        _encryptionKey = "2001062620010626"; 
+    private static readonly string _encryptionKey = "2001062620010626"; 
+    // 암호화 때 사용한 IV(초기화 벡터)와 동일한 IV를 복호화 때 사용해야 데이터에 접근 가능하다.
 
     public static string Encrypt(string text)
     {
