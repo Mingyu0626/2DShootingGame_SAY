@@ -1,6 +1,8 @@
 using DG.Tweening;
+using NUnit.Framework;
 using System;
 using System.Security.Cryptography;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -23,6 +25,7 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
         _playData = new PlayData(0, 0, 0);
         LoadPlayData();
+        _playData.KillCount = 95;
     }
 
     protected override void OnDestroy()
@@ -37,7 +40,6 @@ public class GameManager : Singleton<GameManager>
         string encryptedData = CryptoUtility.Encrypt(jsonData);
         PlayerPrefs.SetString("PlayerData", encryptedData);
     }
-
     private void LoadPlayData()
     {
         string encryptedData = PlayerPrefs.GetString("PlayerData", string.Empty);

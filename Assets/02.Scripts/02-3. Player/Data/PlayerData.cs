@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerData : MonoBehaviour
 {
     [Header("HP")]
-    [SerializeField] private int _maxHealthPoint = 3;
+    [SerializeField] private int _maxHealthPoint;
     [SerializeField] private int _currentHealthPoint;
     public int MaxHealthPoint
     {
