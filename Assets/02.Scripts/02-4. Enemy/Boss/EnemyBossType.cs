@@ -75,14 +75,13 @@ public class EnemyBossType: Enemy, IMove
     }
     public void AttackTypeA()
     {
-        float angle = 360 / _numOfBullet;
+        float angleStep = 360f / _numOfBullet;
         for (int i = 0; i < _numOfBullet; i++)
         {
-            Instantiate(_bulletPrefab,
-                _muzzleTransformAttackFaze1.position,
-                Quaternion.Euler(new Vector3(0, 0, angle * i)));
+            float angle = angleStep * i;
+            Instantiate(_bulletPrefab, _muzzleTransformAttackFaze1.position,
+                Quaternion.Euler(0, 0, angle));
         }
-
     }
     public IEnumerator AttackTypeB()
     {
