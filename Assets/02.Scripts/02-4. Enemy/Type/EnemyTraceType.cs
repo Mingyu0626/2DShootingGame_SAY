@@ -2,21 +2,13 @@ using UnityEngine;
 
 public class EnemyTraceType : Enemy, IEnemy, IEnemyMove
 {
-    [SerializeField] private EnemyType _enemyType;
     private Transform _playerTransform;
 
-    public EnemyType EnemyType
-    {
-        get { return _enemyType; }
-        set { _enemyType = value; }
-    }
     public void Init()
     {
-        EnemyType = _enemyType;
     }
     public void Init(Direction dir)
     {
-        EnemyType = _enemyType;
         EnemyData.DirectionEnum = dir;
     }
     private void Start()

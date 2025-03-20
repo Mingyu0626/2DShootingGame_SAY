@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class EnemyShakeType : Enemy, IEnemy, IEnemyMove
 {
-    [SerializeField] private EnemyType _enemyType;
 
     [Header("Snake")] // Shake Å¸ÀÔ
     [Tooltip("ÃÑ¾Ë ±ËµµÀÇ ÁÖÆÄ¼ö")]
@@ -19,19 +18,11 @@ public class EnemyShakeType : Enemy, IEnemy, IEnemyMove
         get { return _amplitude; }
         private set { _amplitude = value; }
     }
-    public EnemyType EnemyType
-    {
-        get { return _enemyType; }
-        set { _enemyType = value; }
-    }
-
     public void Init()
     {
-        EnemyType = _enemyType;
     }
     public void Init(Direction dir)
     {
-        EnemyType = _enemyType;
         EnemyData.DirectionEnum = dir;
     }
     private void Update()

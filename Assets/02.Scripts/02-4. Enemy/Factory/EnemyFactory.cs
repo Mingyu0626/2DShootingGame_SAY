@@ -9,6 +9,7 @@ public enum EnemyType
     Shake,  // 곡선 궤적(삼각? 베지어?)으로 움직이는 타입
     Trace,  // 플레이어를 계속 추격하는 타입
     Target, // 생성 시점의 플레이어 위치로 움직이는 타입
+    Boss // 100킬 시 소환되는 보스 타입
 }
 
 public class EnemyFactory : Factory<IEnemy>

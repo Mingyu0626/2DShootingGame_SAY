@@ -2,25 +2,16 @@ using UnityEngine;
 
 public class EnemySplitType : Enemy, IEnemy, IEnemyMove
 {
-    [SerializeField] private EnemyType _enemyType;
 
     [Tooltip("스플릿 타입이 죽을 때 생성될 타입 적 GO")]
     [SerializeField] private GameObject _enemyZombieGO;
     [SerializeField] private EnemyFactory _enemyFactory;
-    public EnemyType EnemyType
-    {
-        get { return _enemyType; }
-        set { _enemyType = value; }
-    }
-
     public void Init()
     {
-        EnemyType = _enemyType;
         EnemyData.DirectionEnum = Direction.Down;
     }
     public void Init(Direction dir)
     {
-        EnemyType = _enemyType;
         EnemyData.DirectionEnum = dir;
     }
     private void Update()

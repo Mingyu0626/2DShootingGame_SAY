@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     protected EnemyData EnemyData { get => _enemyData; private set => _enemyData = value; }
     protected ItemData ItemData { get => _itemData; private set => _itemData = value; }
 
-    public void Awake()
+    protected virtual void Awake()
     {
         _enemyData = GetComponent<EnemyData>();
         _itemData = GameObject.FindGameObjectWithTag(nameof(Tags.Item)).GetComponent<ItemData>();
@@ -28,6 +28,10 @@ public class Enemy : MonoBehaviour
     {
         PlayHitAnimation();
         _enemyData.CurrentHealthPoint -= damage.Value;
+        if (_enemyData.EnemyType == EnemyType.Boss)
+        {
+            UI_Game.Instance.RefreshBossHP(_enemyData.CurrentHealthPoint);
+        }
         if (_enemyData.CurrentHealthPoint == 0)
         {
             OnEnemyDeath(damage);
@@ -39,6 +43,11 @@ public class Enemy : MonoBehaviour
         {
             int killCount = GameManager.Instance.PlayData.KillCount += 1;
             UI_Game.Instance.RefreshKillCount(killCount);
+            if (BossManager.Instance.CanBossSpawn())
+            {
+                BossManager.Instance.SpawnBossCoroutine();
+            }
+
             int score = GameManager.Instance.PlayData.Score += _enemyData.Score;
             UI_Game.Instance.RefreshScore(score);
 

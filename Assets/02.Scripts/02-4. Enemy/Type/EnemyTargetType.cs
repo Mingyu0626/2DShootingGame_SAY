@@ -2,24 +2,15 @@ using UnityEngine;
 
 public class EnemyTargetType : Enemy, IEnemy, IEnemyMove
 {
-    [SerializeField] private EnemyType _enemyType;
-
     private Transform _playerTransform;
     private Vector3 _directionToPlayer;
-    public EnemyType EnemyType
-    {
-        get { return _enemyType; }
-        set { _enemyType = value; }
-    }
 
     public void Init()
     {
-        EnemyType = _enemyType;
         EnemyData.DirectionEnum = Direction.Down;
     }
     public void Init(Direction dir)
     {
-        EnemyType = _enemyType;
         EnemyData.DirectionEnum = dir;
     }
     private void Start()

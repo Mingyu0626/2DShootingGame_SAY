@@ -11,6 +11,11 @@ public enum Direction
 
 public class EnemyData : MonoBehaviour
 {
+    [Header("Type")]
+    [Tooltip("적의 타입")]
+    [SerializeField] private EnemyType _enemyType;
+    public EnemyType EnemyType { get => _enemyType; }
+
     [Header("HP")]
     [Tooltip("적의 최대 체력")]
     [SerializeField] private int _maxHealthPoint = 2;
@@ -96,5 +101,4 @@ public class EnemyData : MonoBehaviour
     {
         get { return _directionDictionary; }
     }
-
 }
