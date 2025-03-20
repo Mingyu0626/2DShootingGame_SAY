@@ -1,5 +1,5 @@
-using JetBrains.Annotations;
 using System;
+using System.Security.Cryptography;
 using UnityEngine;
 
 [Serializable]
@@ -56,21 +56,22 @@ public class GameManager : MonoBehaviour
 
     private void SavePlayData()
     {
-        // PlayerPrefs : 값을 Key, Value 형태로 저장하는 클래스
-        // 저장할 수 있는 자료형은 int, float, string
-        // 각각 쌍으로 저장(Set), 불러오기(Get) 메서드가 내장되어 있다.
-        Debug.Log("세이브 플레이데이터 호출");
         string jsonData = JsonUtility.ToJson(_playData);
-        PlayerPrefs.SetString("PlayerData", jsonData);
-        PlayerPrefs.Save();
+        string encryptedData = CryptoUtility.Encrypt(jsonData);
+        PlayerPrefs.SetString("PlayerData", encryptedData);
     }
 
     private void LoadPlayData()
     {
-        Debug.Log("로드 플레이데이터 호출");
-        string jsonString = PlayerPrefs.GetString("PlayerData", JsonUtility.ToJson(new PlayData(0, 0, 0)));
-        _playData = JsonUtility.FromJson<PlayData>(jsonString);
+        string encryptedData = PlayerPrefs.GetString("PlayerData", string.Empty);
+        if (!string.IsNullOrEmpty(encryptedData))
+        {
+            string jsonData = CryptoUtility.Decrypt(encryptedData);
+            if (!string.IsNullOrEmpty(jsonData))
+            {
+                _playData = JsonUtility.FromJson<PlayData>(jsonData);
+            }
+        }
         _gameUI.InitUI(_playData.KillCount, _playData.Score, _playData.BoomCount);
     }
-
 }
