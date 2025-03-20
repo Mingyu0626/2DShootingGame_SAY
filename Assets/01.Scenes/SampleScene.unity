@@ -1072,6 +1072,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7156182388118862023, guid: 0800aaf0ce52c74419a0e2e58fae740b, type: 3}
+      propertyPath: m_TagString
+      value: SpecialMove
+      objectReference: {fileID: 0}
     - target: {fileID: 7589330064427091590, guid: 0800aaf0ce52c74419a0e2e58fae740b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

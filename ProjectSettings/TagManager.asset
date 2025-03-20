@@ -8,9 +8,9 @@ TagManager:
   - Enemy
   - Item
   - FxTemporaire
-  - Special Move
   - Pet
   - Manager
+  - SpecialMove
   layers:
   - Default
   - TransparentFX
