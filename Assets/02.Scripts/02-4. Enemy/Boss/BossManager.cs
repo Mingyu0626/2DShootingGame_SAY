@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class BossManager : Singleton<BossManager>
 {
@@ -17,6 +19,11 @@ public class BossManager : Singleton<BossManager>
     [SerializeField] private GameObject _panelWarningBottom;
     private Vector3 _panelWarningBottomOriginalPosition;
     [SerializeField] private ShakeCamera _shakeCamera;
+    [SerializeField] private float _fadeTime = 0.5f;
+    [SerializeField] private float _panelMovingDistance = 1000f;
+
+
+    private UI_TweeningUtil _tweeningUtil;
 
 
     protected override void Awake()
@@ -26,6 +33,7 @@ public class BossManager : Singleton<BossManager>
             = _panelWarningTop.GetComponent<RectTransform>().anchoredPosition;
         _panelWarningBottomOriginalPosition 
             = _panelWarningBottom.GetComponent<RectTransform>().anchoredPosition;
+        _tweeningUtil = new UI_TweeningUtil();
     }
 
     protected override void OnDestroy()
@@ -55,31 +63,46 @@ public class BossManager : Singleton<BossManager>
     }
     public void PlayWarningAnimation()
     {
+        Image imageTop = _panelWarningTop.GetComponent<Image>();
+        TextMeshProUGUI tmpTop = _panelWarningTop.GetComponentInChildren<TextMeshProUGUI>();
+        Image imageBottom = _panelWarningBottom.GetComponent<Image>();
+        TextMeshProUGUI tmpBottom = _panelWarningBottom.GetComponentInChildren<TextMeshProUGUI>();
+
         _panelWarningTop.SetActive(true);
         _panelWarningBottom.SetActive(true);
 
-        _panelWarningTop.GetComponent<RectTransform>().DOAnchorPosX(1000f, _precursorTime)
+        imageTop.DOFade(1f, _fadeTime).SetEase(Ease.OutQuad);
+        tmpTop.DOFade(1f, _fadeTime).SetEase(Ease.OutQuad);
+        imageBottom.DOFade(1f, _fadeTime).SetEase(Ease.OutQuad);
+        tmpBottom.DOFade(1f, _fadeTime).SetEase(Ease.OutQuad);
+
+
+        _panelWarningTop.GetComponent<RectTransform>().DOAnchorPosX(_panelMovingDistance, _precursorTime)
             .OnComplete(() =>
             {
-                _panelWarningTop.SetActive(false);
-            }).
-            OnKill(() =>
-            {
-                _panelWarningTop.GetComponent<RectTransform>().anchoredPosition = 
+                imageTop.DOFade(0f, _fadeTime).SetEase(Ease.OutQuad);
+                tmpTop.DOFade(0f, _fadeTime).SetEase(Ease.OutQuad)
+                .OnComplete(() =>
+                {
+                    _panelWarningTop.GetComponent<RectTransform>().anchoredPosition =
                 _panelWarningTopOriginalPosition;
+                    _panelWarningTop.SetActive(false);
+                });
             });
 
-        _panelWarningBottom.GetComponent<RectTransform>().DOAnchorPosX(-1000f, _precursorTime)
+        _panelWarningBottom.GetComponent<RectTransform>().DOAnchorPosX(-_panelMovingDistance, _precursorTime)
             .OnComplete(() =>
             {
-                _panelWarningBottom.SetActive(false);
-            }).
-            OnKill(() =>
-            {
-                _panelWarningBottom.GetComponent<RectTransform>().anchoredPosition =
+                imageBottom.DOFade(0f, _fadeTime).SetEase(Ease.OutQuad);
+                tmpBottom.DOFade(0f, _fadeTime).SetEase(Ease.OutQuad)
+                .OnComplete(() =>
+                {
+                    _panelWarningBottom.GetComponent<RectTransform>().anchoredPosition =
                 _panelWarningBottomOriginalPosition;
-            });
+                    _panelWarningBottom.SetActive(false);
+                });
 
+            });
     }
 
     public void SetSpawnerEnable(bool val)
