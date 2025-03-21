@@ -29,6 +29,10 @@ public class PlayerAutoState : IPlayerState, IMove, IFire
         {
             _playerController.PlayerStateContext.ChangeState(_playerController.ManualState);
         }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            _playerController.PlayerStateContext.ChangeState(_playerController.InvincibleState);
+        }
 
         FindNearestEnemy();
         Move();

@@ -1,20 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManualState : IPlayerState, IMove, IFire
+public class PlayerInvincibleState : IPlayerState, IMove
 {
     private PlayerController _playerController;
     private PlayerData _playerData;
     private PlayerMoveUtils _playerMoveUtils;
     private PlayerFireUtils _playerFireUtils;
+    private BackGround _backGround;
     public void Enter(PlayerController playerController)
     {
         _playerController = playerController;
-        _playerController.CurrentPlayMode = PlayMode.Manual;
+        _playerController.CurrentPlayMode = PlayMode.Invincible;
         _playerData = _playerController.GetComponent<PlayerData>();
         _playerMoveUtils = _playerController.GetComponent<PlayerMoveUtils>();
         _playerFireUtils = _playerController.GetComponent<PlayerFireUtils>();
+
+        _backGround = GameObject.FindAnyObjectByType<BackGround>();
+        if (!ReferenceEquals(_backGround, null))
+        {
+            _backGround.ScrollSpeedUp();
+        }
+        Invincible();
     }
     public void Update()
     {
@@ -22,20 +28,17 @@ public class PlayerManualState : IPlayerState, IMove, IFire
         {
             _playerController.PlayerStateContext.ChangeState(_playerController.AutoState);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            _playerController.PlayerStateContext.ChangeState(_playerController.InvincibleState);
+            _playerController.PlayerStateContext.ChangeState(_playerController.ManualState);
         }
-
-
+        Invincible();
         Move();
-        Fire();
-        _playerMoveUtils.SpeedCheck();
     }
-
     public void Exit()
     {
-
+        _backGround.ScrollSpeedDown();
+        SetActiveInvincibleVFX(false);
     }
     public void Move()
     {
@@ -52,26 +55,13 @@ public class PlayerManualState : IPlayerState, IMove, IFire
             _playerMoveUtils.ReversePlayerVerticalPosition();
         }
     }
-    public void Fire()
+    private void Invincible()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl) && !_playerData.IsCoolDown)
-        {
-            for (int i = 0; i < _playerData.MainMuzzleTransformArray.Length; i++)
-            {
-                _playerController.InstantiateBullet
-                    (_playerData.MainBulletPrefab, 
-                    _playerData.MainMuzzleTransformArray[i].position,
-                    _playerData.MainMuzzleTransformArray[i].rotation);
-            }
-
-            for (int i = 0; i < _playerData.SubMuzzleTransformArray.Length; i++)
-            {
-                _playerController.InstantiateBullet
-                    (_playerData.SubBulletPrefab,
-                    _playerData.SubMuzzleTransformArray[i].position,
-                    _playerData.SubMuzzleTransformArray[i].rotation);
-            }
-            _playerController.StartStateCoroutine(_playerFireUtils.CoolDown());
-        }
+        SetActiveInvincibleVFX(true);
     }
+    private void SetActiveInvincibleVFX(bool val)
+    {
+        _playerData.VfxInvincibleModePrefab.SetActive(val);
+    }
+    
 }

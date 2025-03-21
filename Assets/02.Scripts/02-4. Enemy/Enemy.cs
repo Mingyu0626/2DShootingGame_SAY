@@ -17,10 +17,21 @@ public class Enemy : MonoBehaviour
         if (other.CompareTag(nameof(Tags.Player)))
         {
             Player otherPlayer = other.GetComponent<Player>();
-            if (otherPlayer != null)
+            PlayerController playerController
+                = other.GetComponent<PlayerController>();
+            if (!ReferenceEquals(otherPlayer, null) && !ReferenceEquals(playerController, null))
             {
-                otherPlayer.TakeDamage(_enemyData.Damage);
-                Destroy(gameObject);
+                if (playerController.CurrentPlayMode == PlayMode.Invincible)
+                {
+                    OnEnemyDeath
+                    (new Damage(_enemyData.CurrentHealthPoint,
+                        DamageType.InvincibleHeadBut,otherPlayer.gameObject));
+                }
+                else
+                {
+                    otherPlayer.TakeDamage(_enemyData.Damage);
+                    Destroy(gameObject);
+                }
             }
         }
     }
@@ -39,30 +50,32 @@ public class Enemy : MonoBehaviour
     }
     public void OnEnemyDeath(Damage damage)
     {
-        if (damage.Type == DamageType.Bullet)
-        {
-            int killCount = GameManager.Instance.PlayData.KillCount += 1;
-            UI_Game.Instance.RefreshKillCount(killCount);
-            if (BossManager.Instance.CanBossSpawn())
-            {
-                BossManager.Instance.SpawnBossCoroutine();
-            }
+        int killCount = GameManager.Instance.PlayData.KillCount += 1;
+        UI_Game.Instance.RefreshKillCount(killCount);
+        int score = GameManager.Instance.PlayData.Score += _enemyData.Score;
+        UI_Game.Instance.RefreshScore(score);
 
-            int score = GameManager.Instance.PlayData.Score += _enemyData.Score;
-            UI_Game.Instance.RefreshScore(score);
-
-            if (0 < killCount && killCount % 20 == 0 && GameManager.Instance.PlayData.BoomCount < 3)
-            {
-                int boomCount = GameManager.Instance.PlayData.BoomCount += 1;
-                UI_Game.Instance.RefreshBoomCount(boomCount);
-            }
-
-        }
+        CheckBoomCountGetable(killCount);
+        CheckCanBossSpawn();
         SpawnRandomItem();
         InstantiateVFX();
         Destroy(gameObject);
     }
-
+    private void CheckCanBossSpawn()
+    {
+        if (BossManager.Instance.CanBossSpawn())
+        {
+            BossManager.Instance.SpawnBossCoroutine();
+        }
+    }
+    private void CheckBoomCountGetable(int killCount)
+    {
+        if (0 < killCount && killCount % 20 == 0 && GameManager.Instance.PlayData.BoomCount < 3)
+        {
+            int boomCount = GameManager.Instance.PlayData.BoomCount += 1;
+            UI_Game.Instance.RefreshBoomCount(boomCount);
+        }
+    }
     private void SpawnRandomItem()
     {
         float randomResult = Random.Range(0.0f, 1.0f);

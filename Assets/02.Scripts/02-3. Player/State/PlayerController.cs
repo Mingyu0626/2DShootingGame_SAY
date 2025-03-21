@@ -6,10 +6,11 @@ public enum PlayMode
 {
     Auto,
     Manual,
+    Invincible
 }
 public class PlayerController : MonoBehaviour
 {
-    private IPlayerState _manualState, _autoState;
+    private IPlayerState _manualState, _autoState, _invincibleState;
     public IPlayerState ManualState
     {
         get { return _manualState; }
@@ -19,6 +20,11 @@ public class PlayerController : MonoBehaviour
     {
         get { return _autoState; }
         set { _autoState = value; }
+    }
+    public IPlayerState InvincibleState
+    {
+        get { return _invincibleState; }
+        set { _invincibleState = value; }
     }
 
     private PlayerStateContext _playerStateContext;
@@ -54,6 +60,7 @@ public class PlayerController : MonoBehaviour
         _playerStateContext = new PlayerStateContext(this);
         _manualState = new PlayerManualState();
         _autoState = new PlayerAutoState();
+        _invincibleState = new PlayerInvincibleState();
         _playerStateContext.ChangeState(_manualState);
     }
     private void Update()
