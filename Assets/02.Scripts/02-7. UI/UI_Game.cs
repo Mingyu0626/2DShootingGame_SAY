@@ -10,8 +10,21 @@ public class UI_Game : Singleton<UI_Game>
     [SerializeField] private List<GameObject> _boomList;
     [SerializeField] private TextMeshProUGUI _killCountText;
     [SerializeField] private TextMeshProUGUI _scoreText;
-    [SerializeField] private Slider _bossHealthSlider;
-
+    [SerializeField] private GameObject _bossHealthGameObject;
+    private Slider _bossHealthSlider;
+    private Image _bossHealthImage;
+    private TextMeshProUGUI _bossHealthText;
+    [SerializeField] private float _refreshDelay;
+    protected override void Awake()
+    {
+        base.Awake();
+        if (!ReferenceEquals(_bossHealthGameObject, null))
+        {
+            _bossHealthSlider = _bossHealthGameObject.GetComponent<Slider>();
+            _bossHealthImage = _bossHealthSlider.fillRect.GetComponent<Image>();
+            _bossHealthText = _bossHealthGameObject.GetComponentInChildren<TextMeshProUGUI>();
+        }
+    }
     public void InitUI(int killCount, int score, int boomCount)
     {
         RefreshKillCount(killCount);
@@ -40,10 +53,38 @@ public class UI_Game : Singleton<UI_Game>
             _boomList[i].SetActive(i < boomCount);
         }
     }
-    public void RefreshBossHP(int hp)
+
+    public void RefreshBossUI(int hp)
     {
-        _bossHealthSlider.value = hp;
-        
+        RefreshBossHPValue(hp);
+        RefreshBossHPColor(hp);
+        RefreshBossHPText(hp);
+    }
+    private void RefreshBossHPValue(int hp)
+    {
+        _bossHealthGameObject.GetComponent<Slider>().
+            DOValue(hp, _refreshDelay).SetEase(Ease.Linear);
+    }
+    private void RefreshBossHPColor(int hp)
+    {
+        Color currentColor = _bossHealthImage.color;
+        Color targetColor;
+        if (50 <= hp)
+        {
+            float rValue = Mathf.Lerp(0f, 1f, (100f - hp) / 50f);
+            targetColor = new Color(rValue, currentColor.g, currentColor.b, currentColor.a);
+        }
+        else
+        {
+            float gValue = Mathf.Lerp(0f, 1f, hp / 50f);
+            targetColor = new Color(currentColor.r, gValue, currentColor.b, currentColor.a);
+        }
+        _bossHealthImage.DOColor(targetColor, _refreshDelay).SetEase(Ease.Linear);
+        _bossHealthText.DOColor(targetColor, _refreshDelay).SetEase(Ease.Linear);
+    }
+    private void RefreshBossHPText(int hp)
+    {
+        _bossHealthText.text = $"Boss HP : {hp}/100";
     }
     public void InitBossHPSlider(int bossMaxHp)
     {
@@ -52,6 +93,6 @@ public class UI_Game : Singleton<UI_Game>
     }
     public void SetBossHPSliderEnable(bool val)
     {
-        _bossHealthSlider.gameObject.SetActive(val);
+        _bossHealthGameObject.gameObject.SetActive(val);
     }
 }

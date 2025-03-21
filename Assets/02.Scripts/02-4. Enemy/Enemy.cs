@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
         _enemyData.CurrentHealthPoint -= damage.Value;
         if (_enemyData.EnemyType == EnemyType.Boss)
         {
-            UI_Game.Instance.RefreshBossHP(_enemyData.CurrentHealthPoint);
+            UI_Game.Instance.RefreshBossUI(_enemyData.CurrentHealthPoint);
         }
         if (_enemyData.CurrentHealthPoint == 0)
         {
