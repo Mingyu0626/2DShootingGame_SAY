@@ -7,6 +7,7 @@ public class PlayerInvincibleState : IPlayerState, IMove
     private PlayerMoveUtils _playerMoveUtils;
     private PlayerFireUtils _playerFireUtils;
     private BackGround _backGround;
+    private BlurCamera _blurCamera;
     public void Enter(PlayerController playerController)
     {
         _playerController = playerController;
@@ -16,6 +17,7 @@ public class PlayerInvincibleState : IPlayerState, IMove
         _playerFireUtils = _playerController.GetComponent<PlayerFireUtils>();
 
         _backGround = GameObject.FindAnyObjectByType<BackGround>();
+        _blurCamera = GameObject.FindAnyObjectByType<BlurCamera>();
         if (!ReferenceEquals(_backGround, null))
         {
             _backGround.ScrollSpeedUp();
@@ -32,13 +34,14 @@ public class PlayerInvincibleState : IPlayerState, IMove
         {
             _playerController.PlayerStateContext.ChangeState(_playerController.ManualState);
         }
-        Invincible();
         Move();
     }
     public void Exit()
     {
         _backGround.ScrollSpeedDown();
         SetActiveInvincibleVFX(false);
+        _blurCamera.SetMotionBlur(false);
+        _blurCamera.SetDepthOfField(false);
     }
     public void Move()
     {
@@ -58,10 +61,11 @@ public class PlayerInvincibleState : IPlayerState, IMove
     private void Invincible()
     {
         SetActiveInvincibleVFX(true);
+        _blurCamera.SetMotionBlur(true);
+        _blurCamera.SetDepthOfField(true);
     }
     private void SetActiveInvincibleVFX(bool val)
     {
         _playerData.VfxInvincibleModePrefab.SetActive(val);
     }
-    
 }
