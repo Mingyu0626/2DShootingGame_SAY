@@ -121,7 +121,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -285,7 +285,7 @@ MonoBehaviour:
   _speed: 3
   _speedVariance: 1
   _damage: 1
-  _duration: 2
+  _duration: 3
   _currentBulletType: 2
   _frequency: 0
   _amplitude: 0

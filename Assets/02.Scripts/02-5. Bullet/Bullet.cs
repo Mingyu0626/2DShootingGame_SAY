@@ -6,7 +6,7 @@ public enum BulletType
     Sub,
     Boss
 }
-public class Bullet : MonoBehaviour
+public abstract class Bullet : MonoBehaviour
 {
     [Header("Basic")]
     [Tooltip("총알의 발사 속도")]
@@ -91,18 +91,18 @@ public class Bullet : MonoBehaviour
     {
         Invoke(nameof(DestroyBullet), Duration);
     }
+    private void Start()
+    {
+    }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Move();
         Snake();
     }
     protected virtual void OnTriggerEnter2D(Collider2D other) {}
-    private void Move()
-    {
-        Vector2 direction = Vector2.up;
-        transform.Translate(direction * Speed * Time.deltaTime);
-    }
+    public abstract void Move();
+
     private void Snake()
     {
         float offset = Mathf.Sin(Time.time * Frequency) * Amplitude;
