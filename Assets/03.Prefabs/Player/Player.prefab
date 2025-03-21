@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2701726718516328515}
   - component: {fileID: 3348311823291522112}
-  - component: {fileID: 3319621410482406772}
   - component: {fileID: 2472033973155139544}
   - component: {fileID: 4178865036340401074}
+  - component: {fileID: 9003099626635670733}
   - component: {fileID: 8552250553453216083}
   - component: {fileID: 5187775093202122168}
   - component: {fileID: 2260374416038019375}
@@ -100,52 +100,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &3319621410482406772
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1170070144115941221}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!50 &2472033973155139544
 Rigidbody2D:
   serializedVersion: 5
@@ -195,6 +149,71 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!68 &9003099626635670733
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170070144115941221}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.13474047, y: 0.51318955}
+  - {x: -0.060295045, y: 0.5130038}
+  - {x: 0.12472384, y: 0.51254225}
+  - {x: 0.21639575, y: 0.4207456}
+  - {x: 0.21888748, y: 0.2819376}
+  - {x: 0.30324146, y: 0.20647979}
+  - {x: 0.30654424, y: 0.017338037}
+  - {x: 0.50777984, y: -0.16270185}
+  - {x: 0.50683635, y: -0.29669476}
+  - {x: 0.46633232, y: -0.3420291}
+  - {x: 0.22204827, y: -0.33776164}
+  - {x: 0.22127202, y: -0.41714025}
+  - {x: 0.09500249, y: -0.5147579}
+  - {x: -0.08462438, y: -0.51317763}
+  - {x: -0.21330309, y: -0.42375493}
+  - {x: -0.21163595, y: -0.34314632}
+  - {x: -0.44876418, y: -0.3453796}
+  - {x: -0.5109719, y: -0.30134535}
+  - {x: -0.50291747, y: -0.16023445}
+  - {x: -0.3076415, y: 0.023893833}
+  - {x: -0.30582634, y: 0.2134428}
+  - {x: -0.21969393, y: 0.28124094}
+  - {x: -0.21717328, y: 0.42070127}
+  - {x: -0.13189888, y: 0.511363}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!114 &8552250553453216083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,8 +255,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8f9def4eadc81c4d8b7457c26460e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealthPoint: 10
-  _currentHealthPoint: 0
   _shakeCamera: {fileID: 0}
 --- !u!114 &2260374416038019375
 MonoBehaviour:
