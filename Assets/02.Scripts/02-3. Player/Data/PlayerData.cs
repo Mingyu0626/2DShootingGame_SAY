@@ -106,4 +106,8 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private float _boomDuration;
     public GameObject BoomPrefab { get => _boomPrefab; private set => _boomPrefab = value; }
     public float BoomDuration { get => _boomDuration; private set => _boomDuration = value; }
+
+    [Header("VFX")]
+    [SerializeField] private GameObject _vfxInvincibleModePrefab;
+    public GameObject VfxInvincibleModePrefab { get => _vfxInvincibleModePrefab; set => _vfxInvincibleModePrefab = value; }
 }
