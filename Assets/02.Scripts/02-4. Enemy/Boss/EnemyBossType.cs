@@ -13,8 +13,6 @@ public class EnemyBossType: Enemy, IMove
     [Header("CoolDown")]
     [Tooltip("페이즈별 공격 대기시간(쿨타임)")]
     [SerializeField] private List<float> _coolTime;
-    private bool _isCoolDown = false;
-    [SerializeField] private int _damage = 1;
 
     [Header("AttackFaze1")]
     [SerializeField] private Transform _muzzleTransformAttackFaze1;
@@ -23,10 +21,14 @@ public class EnemyBossType: Enemy, IMove
 
     [Header("AttackFaze2")]
     [SerializeField] private List<Transform> _muzzleTransformAttackFaze2;
+    private int _attackCount;
 
     [Header("AttackFaze3")]
     [SerializeField] private List<Transform> _muzzleTransformAttackFaze3;
-
+    [Tooltip("이동량")]
+    [SerializeField] private float _moveArea = 3f;
+    [Tooltip("변경에 걸리는 이동시간")]
+    [SerializeField] private float _moveDuration = 1f;
 
 
     protected override void Awake()
@@ -35,11 +37,13 @@ public class EnemyBossType: Enemy, IMove
         UI_Game.Instance.SetBossHPSliderEnable(true);
         UI_Game.Instance.InitBossHPSlider(EnemyData.MaxHealthPoint);
         Move();
+        MoveMuzzleFaze3();
+        StartCoroutine(Attack());
     }
 
     private void Update()
     {
-        Attack();
+        
     }
     private void OnDestroy()
     {
@@ -51,65 +55,71 @@ public class EnemyBossType: Enemy, IMove
         transform.DOShakePosition(1f, 0.01f)
             .SetLoops(-1, LoopType.Yoyo);
     }
-    public void Attack()
+    public IEnumerator Attack()
     {
-        if (!_isCoolDown)
+        while (true)
         {
             if (EnemyData.MaxHealthPoint * 0.7 <= EnemyData.CurrentHealthPoint)
             {
-                _currentFaze = 2;
-                AttackTypeA();
+                AttackFaze1();
             }
             else if (EnemyData.MaxHealthPoint * 0.3 <= EnemyData.CurrentHealthPoint)
             {
-                _currentFaze = 3;
-                StartCoroutine(AttackTypeB());
+                _currentFaze = 2;
+                AttackFaze2();
             }
             else
             {
-                AttackTypeC();
+                _currentFaze = 3;
+                AttackFaze3();
             }
-
-            StartCoroutine(CoolDown(_coolTime[_currentFaze - 1]));
+            yield return new WaitForSeconds(_coolTime[_currentFaze - 1]);
         }
     }
-    public void AttackTypeA()
+    public void AttackFaze1()
     {
         float angleStep = 360f / _numOfBullet;
         for (int i = 0; i < _numOfBullet; i++)
         {
             float angle = angleStep * i;
+
             Instantiate(_bulletPrefab, _muzzleTransformAttackFaze1.position,
                 Quaternion.Euler(0, 0, angle));
         }
     }
-    public IEnumerator AttackTypeB()
+    public void AttackFaze2()
     {
-        int faze2MuzzleCount = _muzzleTransformAttackFaze2.Count;
-        for (int i = 0; i < faze2MuzzleCount; i += 2)
+        int idx = _attackCount % 2;
+        for (int i = idx; i < _muzzleTransformAttackFaze2.Count; i += 2)
         {
             Instantiate(_bulletPrefab, _muzzleTransformAttackFaze2[i]);
         }
-        yield return new WaitForSeconds(_coolTime[1] / 2.0f);
-
-        for (int i = 1; i < faze2MuzzleCount; i += 2)
-        {
-            Instantiate(_bulletPrefab, _muzzleTransformAttackFaze2[i]);
-        }
-    }
-    public void AttackTypeC()
-    {
-        int faze3MuzzleCount = _muzzleTransformAttackFaze3.Count;
-        for (int i = 0; i < faze3MuzzleCount; i++)
-        {
-
-        }
+        _attackCount++;
     }
 
-    private IEnumerator CoolDown(float coolTime)
+    public void MoveMuzzleFaze3()
     {
-        _isCoolDown = true;
-        yield return new WaitForSeconds(coolTime);
-        _isCoolDown = false;
+        float dir = -1f;
+        Transform currentMuzzleTransform;
+        for (int i = 0; i < _muzzleTransformAttackFaze3.Count; i++)
+        {
+            currentMuzzleTransform = _muzzleTransformAttackFaze3[i].transform;
+            Vector3 targetPosition = new Vector3
+                (_moveArea * dir, 
+                currentMuzzleTransform.position.y,
+                currentMuzzleTransform.position.z);
+            currentMuzzleTransform.DOMove(targetPosition, _moveDuration)
+                .SetLoops(-1, LoopType.Yoyo);
+            dir *= -1f;
+        }
+
+    }
+
+    public void AttackFaze3()
+    {
+        for (int i = 0; i < _muzzleTransformAttackFaze3.Count; i++)
+        {
+            Instantiate(_bulletPrefab, _muzzleTransformAttackFaze3[i].transform.position, Quaternion.identity);
+        }
     }
 }
