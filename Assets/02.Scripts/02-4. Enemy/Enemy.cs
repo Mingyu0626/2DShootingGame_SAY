@@ -103,7 +103,8 @@ public class Enemy : MonoBehaviour, IProduct
     }
     private void InstantiateVFX()
     {
-        GameObject vfx = Instantiate(_enemyData.ExplosionVFXPrefab, transform.position, new Quaternion(0, 0, 0, 0));
+        VFXType vfxType = _enemyData.ExplosionVFXPrefab.GetComponent<VFX>().VfxType;
+        VFXPool.Instance.GetObject(vfxType, transform.position);
     }
     private void PlayHitAnimation()
     {

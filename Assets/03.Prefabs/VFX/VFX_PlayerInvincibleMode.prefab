@@ -19615,6 +19615,7 @@ GameObject:
   - component: {fileID: 3650638188812647480}
   - component: {fileID: 797784518864179116}
   - component: {fileID: 5796355061092580784}
+  - component: {fileID: 623378186151674352}
   m_Layer: 0
   m_Name: VFX_PlayerInvincibleMode
   m_TagString: Untagged
@@ -19652,7 +19653,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 4
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 3
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -24500,6 +24501,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &623378186151674352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3744133877081091469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef82fc05bab321d428ece7acc2021ae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _vfxType: 7
 --- !u!1 &7673830656541891808
 GameObject:
   m_ObjectHideFlags: 0

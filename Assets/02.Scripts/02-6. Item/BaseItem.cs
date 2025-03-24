@@ -58,7 +58,8 @@ public abstract class BaseItem : MonoBehaviour
 
     public void PlayVFX()
     {
-        Instantiate(_getItemVFXPrefab, Player.Instance.transform);
+        VFXType vfxType = _getItemVFXPrefab.GetComponent<VFX>().VfxType;
+        VFXPool.Instance.GetObject(vfxType, Player.Instance.transform.position);
     }
 
     private IEnumerator GetItemTimer()
