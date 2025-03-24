@@ -45,7 +45,7 @@ public class PlayerAutoState : IPlayerState, IMove, IFire
     }
     public void Move()
     {
-        if (_target == null) return;
+        if (_target == null || !_target.activeSelf) return;
 
         Vector2 direction = 
             _target.transform.position - _playerController.transform.position;
@@ -83,7 +83,7 @@ public class PlayerAutoState : IPlayerState, IMove, IFire
     }
     private void FindNearestEnemy()
     {
-        if (_target != null) return;
+        if (_target != null && _target.activeSelf) return;
 
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         float targetDistance = Mathf.Infinity;
