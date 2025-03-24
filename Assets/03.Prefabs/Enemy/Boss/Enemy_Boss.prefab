@@ -428,7 +428,6 @@ GameObject:
   - component: {fileID: 910005511540583072}
   - component: {fileID: 3959524722341707048}
   - component: {fileID: 7013199922831018845}
-  - component: {fileID: 7830118311169684959}
   - component: {fileID: 4035238076895479512}
   m_Layer: 3
   m_Name: Enemy_Boss
@@ -627,28 +626,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7830118311169684959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8284796074872804112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48330faa19ceca74a979333ccd66409d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyType: 5
-  _maxHealthPoint: 100
-  _currentHealthPoint: 100
-  _speed: 3
-  _directionEnum: 2
-  _damage: 5
-  _itemSpawnProbability: 1
-  _enemyAnimator: {fileID: 7013199922831018845}
-  _explosionVFXPrefab: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
-  _score: 10000
 --- !u!114 &4035238076895479512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -661,6 +638,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46bd35ea4ffa6a74f95d8240d0554c74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyData: {fileID: 11400000, guid: 6d7475b4b5590cb49b48e3a6ec1f3a9a, type: 2}
+  _currentHealthPoint: 0
   _bulletPrefab: {fileID: 2703014219239199431, guid: b422b79f24c5ce9419230d51cf5191d4, type: 3}
   _coolTime:
   - 2

@@ -2,14 +2,23 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IProduct
 {
-    private EnemyData _enemyData;
-    private ItemData _itemData;
+    [SerializeField] private EnemyData _enemyData;
     protected EnemyData EnemyData { get => _enemyData; private set => _enemyData = value; }
+    private ItemData _itemData;
     protected ItemData ItemData { get => _itemData; private set => _itemData = value; }
-
+    [Header("HP")]
+    [Tooltip("적의 현재 체력")]
+    [SerializeField] private int _currentHealthPoint;
+    public int CurrentHealthPoint
+    {
+        get { return _currentHealthPoint; }
+        set
+        {
+            _currentHealthPoint = Mathf.Clamp(value, 0, _enemyData.MaxHealthPoint);
+        }
+    }
     protected virtual void Awake()
     {
-        _enemyData = GetComponent<EnemyData>();
         _itemData = GameObject.FindGameObjectWithTag(nameof(Tags.Item)).GetComponent<ItemData>();
     }
     public void OnTriggerEnter2D(Collider2D other)
@@ -24,7 +33,7 @@ public class Enemy : MonoBehaviour, IProduct
                 if (playerController.CurrentPlayMode == PlayMode.Invincible)
                 {
                     OnEnemyDeath
-                    (new Damage(_enemyData.CurrentHealthPoint,
+                    (new Damage(_currentHealthPoint,
                         DamageType.InvincibleHeadBut,otherPlayer.gameObject));
                 }
                 else
@@ -38,7 +47,7 @@ public class Enemy : MonoBehaviour, IProduct
     }
     public void Init()
     {
-        _enemyData.CurrentHealthPoint = _enemyData.MaxHealthPoint;
+        _currentHealthPoint = _enemyData.MaxHealthPoint;
     }
     public void InitDirection(Direction dir)
     {
@@ -47,12 +56,12 @@ public class Enemy : MonoBehaviour, IProduct
     public void TakeDamage(Damage damage)
     {
         PlayHitAnimation();
-        _enemyData.CurrentHealthPoint -= damage.Value;
+        _currentHealthPoint -= damage.Value;
         if (_enemyData.EnemyType == EnemyType.Boss)
         {
-            UI_Game.Instance.RefreshBossUI(_enemyData.CurrentHealthPoint);
+            UI_Game.Instance.RefreshBossUI(_currentHealthPoint);
         }
-        if (_enemyData.CurrentHealthPoint == 0)
+        if (_currentHealthPoint == 0)
         {
             OnEnemyDeath(damage);
         }

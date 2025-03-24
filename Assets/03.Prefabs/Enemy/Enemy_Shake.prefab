@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4949107763059750498}
   - component: {fileID: -2994489336427408694}
   - component: {fileID: 31938615236007364}
-  - component: {fileID: 2169041160823738338}
   - component: {fileID: 2195812186472025585}
   m_Layer: 3
   m_Name: Enemy_Shake
@@ -193,28 +192,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2169041160823738338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5654929124324883478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48330faa19ceca74a979333ccd66409d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyType: 2
-  _maxHealthPoint: 2
-  _currentHealthPoint: 2
-  _speed: 3
-  _directionEnum: 2
-  _damage: 1
-  _itemSpawnProbability: 0.3
-  _enemyAnimator: {fileID: 31938615236007364}
-  _explosionVFXPrefab: {fileID: 4084661252556610420, guid: dfe3e891d97b3644a98b17fde815d0d7, type: 3}
-  _score: 20
 --- !u!114 &2195812186472025585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,5 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6abd231210c6be143a486cd03b77c383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyData: {fileID: 11400000, guid: e6ab6501eae87564999efcfca26d0291, type: 2}
+  _currentHealthPoint: 0
   _frequency: 0.5
   _amplitude: 1

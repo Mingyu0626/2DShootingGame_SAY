@@ -59,11 +59,11 @@ public class EnemyBossType: Enemy, IMove
     {
         while (true)
         {
-            if (EnemyData.MaxHealthPoint * 0.7 <= EnemyData.CurrentHealthPoint)
+            if (EnemyData.MaxHealthPoint * 0.7 <= CurrentHealthPoint)
             {
                 AttackFaze1();
             }
-            else if (EnemyData.MaxHealthPoint * 0.3 <= EnemyData.CurrentHealthPoint)
+            else if (EnemyData.MaxHealthPoint * 0.3 <= CurrentHealthPoint)
             {
                 _currentFaze = 2;
                 AttackFaze2();

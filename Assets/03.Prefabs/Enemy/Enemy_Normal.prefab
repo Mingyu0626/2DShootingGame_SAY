@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4949107763059750498}
   - component: {fileID: -2994489336427408694}
   - component: {fileID: -7867908994352776237}
-  - component: {fileID: 194112175957559200}
   - component: {fileID: 3986593358636994663}
   m_Layer: 3
   m_Name: Enemy_Normal
@@ -193,27 +192,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &194112175957559200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5654929124324883478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48330faa19ceca74a979333ccd66409d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealthPoint: 2
-  _currentHealthPoint: 2
-  _speed: 3
-  _directionEnum: 2
-  _damage: 1
-  _itemSpawnProbability: 0.3
-  _enemyAnimator: {fileID: -7867908994352776237}
-  _explosionVFXPrefab: {fileID: 4084661252556610420, guid: dfe3e891d97b3644a98b17fde815d0d7, type: 3}
-  _score: 10
 --- !u!114 &3986593358636994663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,6 +204,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5078473f55776a7459456f43482e8b4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemData: {fileID: 0}
-  _enemyType: 0
-  _enemyData: {fileID: 194112175957559200}
+  _enemyData: {fileID: 11400000, guid: 4a77f3fe53db18b4a8bd68c0a8179792, type: 2}
+  _currentHealthPoint: 0

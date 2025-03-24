@@ -1,15 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Direction
-{
-    Left,
-    Right,
-    Down
-}
 
-
-public class EnemyData : MonoBehaviour
+// 스크립터블 오브젝트는 데이터를 저장할 수 있는 '데이터 컨테이너'다.
+// 게임 오브젝트의 기능이나 트랜스폼 없이 단순히 데이터만 저장 가능하다.
+// 메모리 소모를 줄일 수 있다.
+// 공유된 데이터 개념이므로, 이 방식은 '플라이웨이트' 패턴이라고 할 수 있다.
+// 데이터를 모듈화 함으로써 테스트와 관리가 편리해진다.
+[CreateAssetMenu(fileName = "EnemyDataSO", menuName = "Scriptable Objects/EnemyDataSO")]
+public class EnemyData : ScriptableObject
 {
     [Header("Type")]
     [Tooltip("적의 타입")]
@@ -19,21 +18,12 @@ public class EnemyData : MonoBehaviour
     [Header("HP")]
     [Tooltip("적의 최대 체력")]
     [SerializeField] private int _maxHealthPoint = 2;
-    [Tooltip("적의 현재 체력")]
-    [SerializeField] private int _currentHealthPoint;
     public int MaxHealthPoint
     {
         get { return _maxHealthPoint; }
         private set { _maxHealthPoint = value; }
     }
-    public int CurrentHealthPoint
-    {
-        get { return _currentHealthPoint; }
-        set
-        {
-            _currentHealthPoint = Mathf.Clamp(value, 0, _maxHealthPoint);
-        }
-    }
+
 
     [Header("Movement")]
     [Tooltip("적의 이동속도")]
@@ -65,24 +55,24 @@ public class EnemyData : MonoBehaviour
     [Header("ItemSpawn")]
     [Tooltip("아이템 드롭 확률")]
     [SerializeField] private float _itemSpawnProbability = 0.3f;
-    public float ItemSpawnProbability 
-    { 
-        get => _itemSpawnProbability; 
-        private set => _itemSpawnProbability = value; 
+    public float ItemSpawnProbability
+    {
+        get => _itemSpawnProbability;
+        private set => _itemSpawnProbability = value;
     }
 
     [Header("Effects and Animation")]
     [SerializeField] private Animator _enemyAnimator;
     [SerializeField] private GameObject _explosionVFXPrefab;
-    public Animator EnemyAnimator 
-    { 
-        get => _enemyAnimator; 
-        set => _enemyAnimator = value; 
+    public Animator EnemyAnimator
+    {
+        get => _enemyAnimator;
+        set => _enemyAnimator = value;
     }
-    public GameObject ExplosionVFXPrefab 
-    { 
-        get => _explosionVFXPrefab; 
-        private set => _explosionVFXPrefab = value; 
+    public GameObject ExplosionVFXPrefab
+    {
+        get => _explosionVFXPrefab;
+        private set => _explosionVFXPrefab = value;
     }
 
 
@@ -101,4 +91,10 @@ public class EnemyData : MonoBehaviour
     {
         get { return _directionDictionary; }
     }
+}
+public enum Direction
+{
+    Left,
+    Right,
+    Down
 }
