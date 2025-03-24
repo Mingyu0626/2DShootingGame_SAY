@@ -74,9 +74,9 @@ public class ObjectPool<EnumType, ScriptType> : Singleton<ObjectPool<EnumType, S
         {
             if (!obj.gameObject.activeInHierarchy)
             {
-                obj.gameObject.SetActive(true);
                 obj.transform.position = position;
                 obj.Init();
+                obj.gameObject.SetActive(true);
                 return obj;
             }
         }
@@ -84,9 +84,9 @@ public class ObjectPool<EnumType, ScriptType> : Singleton<ObjectPool<EnumType, S
         // 모든 오브젝트가 사용 중이라면, 객체 하나 생성 후 리스트에 추가.
         ScriptType newObj = _factory.GetProduct(_objectPoolDic[enumType][0].gameObject, transform.position);
         newObj.transform.SetParent(this.transform);
-        newObj.gameObject.SetActive(true);
         newObj.transform.position = position;
         newObj.Init();
+        newObj.gameObject.SetActive(true);
         objectList.Add(newObj);  
         return newObj;
     }
