@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyTraceType : Enemy, IEnemyMove
 {
     private Transform _playerTransform;
-    private void Start()
+    private void OnEnable()
     {
         _playerTransform = Player.Instance.transform;
     }

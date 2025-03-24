@@ -4,8 +4,7 @@ public class EnemyTargetType : Enemy, IEnemyMove
 {
     private Transform _playerTransform;
     private Vector3 _directionToPlayer;
-
-    private void Start()
+    private void OnEnable()
     {
         _playerTransform = Player.Instance.transform;
         _directionToPlayer = _playerTransform.position - transform.position;
