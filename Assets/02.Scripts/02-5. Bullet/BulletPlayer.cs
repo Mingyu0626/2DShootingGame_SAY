@@ -5,7 +5,7 @@ public class BulletPlayer : Bullet
     public override void Move()
     {
         Vector2 direction = Vector2.up;
-        transform.Translate(direction * Speed * Time.deltaTime);
+        transform.Translate(direction * BulletData.Speed * Time.deltaTime);
     }
 
     protected override void OnTriggerEnter2D(Collider2D other)
@@ -17,7 +17,7 @@ public class BulletPlayer : Bullet
             {
                 Damage damage = new Damage
                 {
-                    Value = Damage,
+                    Value = BulletData.Damage,
                     Type = DamageType.Bullet,
                     From = gameObject
                 };

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faa93afa77bbe26499bbd45001db6cd7, type: 3}
+  m_Name: BulletData_Pet
+  m_EditorClassIdentifier: 
+  _speed: 5
+  _speedVariance: 1
+  _damage: 2
+  _duration: 1
+  _currentBulletType: 2
+  _frequency: 0
+  _amplitude: 0
