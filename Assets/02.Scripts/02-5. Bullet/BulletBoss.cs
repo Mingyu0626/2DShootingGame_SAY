@@ -18,7 +18,7 @@ public class BulletBoss: Bullet
                 // 플레이어에게 주는 데미지는 아직 데미지 구조체로 안 묶은 상태
                 player.TakeDamage(Damage);
             }
-            Destroy(gameObject);
+            BulletPool.Instance.ReturnObject(this);
         }
     }
 }

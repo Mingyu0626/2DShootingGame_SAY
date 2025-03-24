@@ -58,18 +58,15 @@ public class PlayerManualState : IPlayerState, IMove, IFire
         {
             for (int i = 0; i < _playerData.MainMuzzleTransformArray.Length; i++)
             {
-                _playerController.InstantiateBullet
-                    (_playerData.MainBulletPrefab, 
-                    _playerData.MainMuzzleTransformArray[i].position,
-                    _playerData.MainMuzzleTransformArray[i].rotation);
+                BulletPool.Instance.GetObject(BulletType.Main,
+                    _playerData.MainMuzzleTransformArray[i].position);
+
             }
 
             for (int i = 0; i < _playerData.SubMuzzleTransformArray.Length; i++)
             {
-                _playerController.InstantiateBullet
-                    (_playerData.SubBulletPrefab,
-                    _playerData.SubMuzzleTransformArray[i].position,
-                    _playerData.SubMuzzleTransformArray[i].rotation);
+                BulletPool.Instance.GetObject(BulletType.Sub,
+                    _playerData.SubMuzzleTransformArray[i].position);
             }
             _playerController.StartStateCoroutine(_playerFireUtils.CoolDown());
         }

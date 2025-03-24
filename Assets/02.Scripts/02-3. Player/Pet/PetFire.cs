@@ -31,9 +31,7 @@ public class PetFire : MonoBehaviour
         {
             foreach (Transform muzzleTransform in _muzzleTransformArray)
             {
-                Instantiate(_bulletPrefab,
-                    muzzleTransform.position,
-                    muzzleTransform.rotation);
+                BulletPool.Instance.GetObject(BulletType.Main, transform.position);
             }
             StartCoroutine(CoolDown(_coolTime));
         }

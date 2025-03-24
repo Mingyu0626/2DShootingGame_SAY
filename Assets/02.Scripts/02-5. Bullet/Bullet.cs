@@ -1,12 +1,6 @@
+using System.Collections;
 using UnityEngine;
-
-public enum BulletType
-{
-    Main,
-    Sub,
-    Boss
-}
-public abstract class Bullet : MonoBehaviour
+public abstract class Bullet : MonoBehaviour, IProduct
 {
     [Header("Basic")]
     [Tooltip("총알의 발사 속도")]
@@ -86,21 +80,26 @@ public abstract class Bullet : MonoBehaviour
         get { return _amplitude; }
         private set { _amplitude = value; }
     }
-
-    private void Awake()
+    private void OnEnable()
     {
-        Invoke(nameof(DestroyBullet), Duration);
+        StartCoroutine(BulletDuration());
     }
-    private void Start()
-    {
-    }
-
     private void FixedUpdate()
     {
         Move();
         Snake();
     }
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
     protected virtual void OnTriggerEnter2D(Collider2D other) {}
+
+    public void Init()
+    {
+        
+    }
+
     public abstract void Move();
 
     private void Snake()
@@ -109,8 +108,11 @@ public abstract class Bullet : MonoBehaviour
         transform.position += transform.right * offset * Time.deltaTime;
     }
 
-    private void DestroyBullet()
+    private IEnumerator BulletDuration()
     {
-        Destroy(gameObject);
+
+        yield return new WaitForSeconds(_duration);
+        BulletPool.Instance.ReturnObject(this);
+        gameObject.SetActive(false);
     }
 }

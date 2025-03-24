@@ -281,6 +281,6 @@ MonoBehaviour:
   _speedVariance: 1
   _damage: 2
   _duration: 2
-  _currentBulletType: 0
+  _currentBulletType: 2
   _frequency: 0
   _amplitude: 0

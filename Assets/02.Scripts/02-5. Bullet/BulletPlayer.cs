@@ -24,7 +24,7 @@ public class BulletPlayer : Bullet
 
                 otherEnemy.TakeDamage(damage);
             }
-            Destroy(gameObject);
+            BulletPool.Instance.ReturnObject(this);
         }
     }
 
