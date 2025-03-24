@@ -34,15 +34,13 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Direction _spawnedEnemyDirection;
     [SerializeField] private EnemyFactory _enemyFactory;
 
-    private void Awake()
-    {
-    }
     private void OnEnable()
     {
         StartCoroutine(Spawn());
     }
     private IEnumerator Spawn()
     {
+        yield return new WaitForSeconds(0.1f);
         while (true)
         {
             Enemy enemy = EnemyPool.Instance.GetObject(GetNextSpawnEnemy(), transform.position);
