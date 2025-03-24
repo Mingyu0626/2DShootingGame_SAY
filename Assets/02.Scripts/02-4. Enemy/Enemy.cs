@@ -17,9 +17,17 @@ public class Enemy : MonoBehaviour, IProduct
             _currentHealthPoint = Mathf.Clamp(value, 0, _enemyData.MaxHealthPoint);
         }
     }
+    [Header("Effects and Animation")]
+    private Animator _enemyAnimator;
+    public Animator EnemyAnimator
+    {
+        get => _enemyAnimator;
+        set => _enemyAnimator = value;
+    }
     protected virtual void Awake()
     {
         _itemData = GameObject.FindGameObjectWithTag(nameof(Tags.Item)).GetComponent<ItemData>();
+        _enemyAnimator = GetComponent<Animator>();
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
@@ -33,7 +41,7 @@ public class Enemy : MonoBehaviour, IProduct
                 if (playerController.CurrentPlayMode == PlayMode.Invincible)
                 {
                     OnEnemyDeath
-                    (new Damage(_currentHealthPoint,
+                    (new Damage(CurrentHealthPoint,
                         DamageType.InvincibleHeadBut,otherPlayer.gameObject));
                 }
                 else
@@ -47,7 +55,11 @@ public class Enemy : MonoBehaviour, IProduct
     }
     public void Init()
     {
-        _currentHealthPoint = _enemyData.MaxHealthPoint;
+        CurrentHealthPoint = _enemyData.MaxHealthPoint;
+        //LevelDataSO levelData = LevelManager.Instance.GetLevelData();
+        //_enemyData.Damage *= (int)levelData.DamageFactor;
+        //_enemyData.Speed *= (int)levelData.SpeedFactor;
+        //_enemyData.MaxHealthPoint *= (int)levelData.HealthFactor;
     }
     public void InitDirection(Direction dir)
     {
@@ -56,12 +68,12 @@ public class Enemy : MonoBehaviour, IProduct
     public void TakeDamage(Damage damage)
     {
         PlayHitAnimation();
-        _currentHealthPoint -= damage.Value;
+        CurrentHealthPoint -= damage.Value;
         if (_enemyData.EnemyType == EnemyType.Boss)
         {
-            UI_Game.Instance.RefreshBossUI(_currentHealthPoint);
+            UI_Game.Instance.RefreshBossUI(CurrentHealthPoint);
         }
-        if (_currentHealthPoint == 0)
+        if (CurrentHealthPoint == 0)
         {
             OnEnemyDeath(damage);
         }
@@ -117,6 +129,6 @@ public class Enemy : MonoBehaviour, IProduct
     }
     private void PlayHitAnimation()
     {
-        _enemyData.EnemyAnimator.SetTrigger("HitTrigger");
+        _enemyAnimator.SetTrigger("HitTrigger");
     }
 }

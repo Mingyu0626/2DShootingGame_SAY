@@ -7,7 +7,7 @@ using UnityEngine;
 // 메모리 소모를 줄일 수 있다.
 // 공유된 데이터 개념이므로, 이 방식은 '플라이웨이트' 패턴이라고 할 수 있다.
 // 데이터를 모듈화 함으로써 테스트와 관리가 편리해진다.
-[CreateAssetMenu(fileName = "EnemyDataSO", menuName = "Scriptable Objects/EnemyDataSO")]
+[CreateAssetMenu(fileName = "EnemyData", menuName = "Scriptable Objects/EnemyData")]
 public class EnemyData : ScriptableObject
 {
     [Header("Type")]
@@ -21,7 +21,7 @@ public class EnemyData : ScriptableObject
     public int MaxHealthPoint
     {
         get { return _maxHealthPoint; }
-        private set { _maxHealthPoint = value; }
+        set { _maxHealthPoint = value; }
     }
 
 
@@ -34,7 +34,7 @@ public class EnemyData : ScriptableObject
     public float Speed
     {
         get { return _speed; }
-        private set { _speed = value; }
+        set { _speed = value; }
     }
     public Direction DirectionEnum
     {
@@ -48,7 +48,7 @@ public class EnemyData : ScriptableObject
     public int Damage
     {
         get { return _damage; }
-        private set { _damage = value; }
+        set { _damage = value; }
     }
 
 
@@ -62,13 +62,7 @@ public class EnemyData : ScriptableObject
     }
 
     [Header("Effects and Animation")]
-    [SerializeField] private Animator _enemyAnimator;
     [SerializeField] private GameObject _explosionVFXPrefab;
-    public Animator EnemyAnimator
-    {
-        get => _enemyAnimator;
-        set => _enemyAnimator = value;
-    }
     public GameObject ExplosionVFXPrefab
     {
         get => _explosionVFXPrefab;
@@ -91,6 +85,15 @@ public class EnemyData : ScriptableObject
     {
         get { return _directionDictionary; }
     }
+
+    [Header("레벨에 영향을 받는 데이터")]
+    [SerializeField] private int _damageStart;
+    [SerializeField] private int _speedStart;
+    [SerializeField] private int _maxHealthPointStart;
+    public int DamageStart { get => _damageStart; set => _damageStart = value; }
+    public int SpeedStart { get => _speedStart; set => _speedStart = value; }
+    public int MaxHealthPointStart { get => _maxHealthPointStart; set => _maxHealthPointStart = value; }
+
 }
 public enum Direction
 {
