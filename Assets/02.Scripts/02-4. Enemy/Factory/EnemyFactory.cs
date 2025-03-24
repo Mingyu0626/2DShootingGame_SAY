@@ -12,15 +12,12 @@ public enum EnemyType
     Boss // 100킬 시 소환되는 보스 타입
 }
 
-public class EnemyFactory : Factory<IEnemy>
+public class EnemyFactory : Factory<Enemy>
 {
-    public override IEnemy GetProduct(GameObject enemyGO, Vector3 position)
+    public override Enemy GetProduct(GameObject enemyGO, Vector3 position)
     {
-        GameObject instance = Instantiate(enemyGO, position,
-            Quaternion.identity);
-        IEnemy newEnemy = instance.GetComponent<IEnemy>();
-        // newEnemy.Init();
-        return newEnemy;
+        return Instantiate(enemyGO, position,Quaternion.identity)
+            .GetComponent<Enemy>();
     }
 
 }

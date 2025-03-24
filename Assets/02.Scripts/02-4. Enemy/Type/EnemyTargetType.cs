@@ -1,18 +1,10 @@
 using UnityEngine;
 
-public class EnemyTargetType : Enemy, IEnemy, IEnemyMove
+public class EnemyTargetType : Enemy, IEnemyMove
 {
     private Transform _playerTransform;
     private Vector3 _directionToPlayer;
 
-    public void Init()
-    {
-        EnemyData.DirectionEnum = Direction.Down;
-    }
-    public void Init(Direction dir)
-    {
-        EnemyData.DirectionEnum = dir;
-    }
     private void Start()
     {
         _playerTransform = Player.Instance.transform;

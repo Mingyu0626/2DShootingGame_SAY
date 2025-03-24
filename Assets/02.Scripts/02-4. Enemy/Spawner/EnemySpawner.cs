@@ -19,8 +19,6 @@ public struct SpawnedEnemyInfo
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject[] _enemyPrefabArray;
     // 추후 SortedDictionary로 리팩토링
     private List<SpawnedEnemyInfo> spawnedEnemyInfoList = new List<SpawnedEnemyInfo>()
         {
@@ -47,8 +45,8 @@ public class EnemySpawner : MonoBehaviour
     {
         while (true)
         {
-            IEnemy enemyInterface = _enemyFactory.GetProduct(GetNextSpawnEnemy(), transform.position);
-            enemyInterface.Init(_spawnedEnemyDirection);
+            Enemy enemy = EnemyPool.Instance.GetObject(GetNextSpawnEnemy(), transform.position);
+            enemy.InitDirection(_spawnedEnemyDirection);
             yield return new WaitForSeconds(GetRandomSpawnIntervalTime());
         }
     }
@@ -57,7 +55,7 @@ public class EnemySpawner : MonoBehaviour
         return Random.Range(_delayMin, _delayMax);
     }
 
-    private GameObject GetNextSpawnEnemy()
+    private EnemyType GetNextSpawnEnemy()
     {
         int randNum = Random.Range(0, 100);
         int probabilityPrefixSum = 0, enemyIndex = 0;
@@ -66,11 +64,11 @@ public class EnemySpawner : MonoBehaviour
             probabilityPrefixSum += info.Probability;
             if (randNum < probabilityPrefixSum)
             {
-                return _enemyPrefabArray[enemyIndex];
+                return info.EnemyType;
             }
             enemyIndex++;
         }
-        return _enemyPrefabArray[0];
+        return EnemyType.Normal;
     }
 
 }

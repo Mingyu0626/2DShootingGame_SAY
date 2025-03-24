@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyShakeType : Enemy, IEnemy, IEnemyMove
+public class EnemyShakeType : Enemy, IEnemyMove
 {
 
     [Header("Snake")] // Shake е╦ют
@@ -17,13 +17,6 @@ public class EnemyShakeType : Enemy, IEnemy, IEnemyMove
     {
         get { return _amplitude; }
         private set { _amplitude = value; }
-    }
-    public void Init()
-    {
-    }
-    public void Init(Direction dir)
-    {
-        EnemyData.DirectionEnum = dir;
     }
     private void Update()
     {

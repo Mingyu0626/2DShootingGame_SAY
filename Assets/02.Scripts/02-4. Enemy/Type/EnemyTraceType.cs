@@ -1,16 +1,8 @@
 using UnityEngine;
 
-public class EnemyTraceType : Enemy, IEnemy, IEnemyMove
+public class EnemyTraceType : Enemy, IEnemyMove
 {
     private Transform _playerTransform;
-
-    public void Init()
-    {
-    }
-    public void Init(Direction dir)
-    {
-        EnemyData.DirectionEnum = dir;
-    }
     private void Start()
     {
         _playerTransform = Player.Instance.transform;

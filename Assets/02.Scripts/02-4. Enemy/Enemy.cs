@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IProduct
 {
     private EnemyData _enemyData;
     private ItemData _itemData;
@@ -30,10 +30,19 @@ public class Enemy : MonoBehaviour
                 else
                 {
                     otherPlayer.TakeDamage(_enemyData.Damage);
-                    Destroy(gameObject);
+                    EnemyPool.Instance.ReturnObject(this);
+                    // Destroy(gameObject);
                 }
             }
         }
+    }
+    public void Init()
+    {
+        _enemyData.CurrentHealthPoint = _enemyData.MaxHealthPoint;
+    }
+    public void InitDirection(Direction dir)
+    {
+        _enemyData.DirectionEnum = dir;
     }
     public void TakeDamage(Damage damage)
     {
@@ -59,7 +68,8 @@ public class Enemy : MonoBehaviour
         CheckCanBossSpawn();
         SpawnRandomItem();
         InstantiateVFX();
-        Destroy(gameObject);
+        EnemyPool.Instance.ReturnObject(this);
+        // Destroy(gameObject);
     }
     private void CheckCanBossSpawn()
     {
