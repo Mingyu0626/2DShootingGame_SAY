@@ -68,8 +68,14 @@ public class Enemy : MonoBehaviour, IProduct
         CheckCanBossSpawn();
         SpawnRandomItem();
         InstantiateVFX();
-        EnemyPool.Instance.ReturnObject(this);
-        // Destroy(gameObject);
+        if (EnemyPool.Instance.CheckTypeInPool(_enemyData.EnemyType))
+        {
+            EnemyPool.Instance.ReturnObject(this);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     private void CheckCanBossSpawn()
     {

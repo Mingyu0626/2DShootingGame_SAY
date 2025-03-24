@@ -25,7 +25,7 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
         _playData = new PlayData(0, 0, 0);
         LoadPlayData();
-        _playData.KillCount = 0;
+        _playData.KillCount = 99;
     }
 
     protected override void OnDestroy()

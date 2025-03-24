@@ -107,6 +107,7 @@ public class BossManager : Singleton<BossManager>
 
     public void SetSpawnerEnable(bool val)
     {
+        Debug.Log("SetSpawnerEnable »£√‚");
         _isBossSpawned = !val;
         foreach (GameObject go in _enemySpawners)
         {

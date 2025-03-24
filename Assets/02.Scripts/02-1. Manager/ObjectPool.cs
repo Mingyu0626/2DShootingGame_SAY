@@ -22,7 +22,7 @@ public class ObjectPool<EnumType, ObjectType> : Singleton<ObjectPool<EnumType, O
     public ObjectInfo[] ObjectInfos { get => _objectInfos; set => _objectInfos = value; }
 
     // 오브젝트 리스트 풀링을 위한 Dictionary
-    protected Dictionary<EnumType, List<ObjectType>> _objectPoolDic = new Dictionary<EnumType, List<ObjectType>>();
+    private Dictionary<EnumType, List<ObjectType>> _objectPoolDic = new Dictionary<EnumType, List<ObjectType>>();
 
     // ObjectType의 GO를 생성하는 팩토리
     [SerializeField] protected Factory<ObjectType> _factory;
@@ -114,5 +114,9 @@ public class ObjectPool<EnumType, ObjectType> : Singleton<ObjectPool<EnumType, O
         }
 
         _objectPoolDic.Clear();
+    }
+    public bool CheckTypeInPool(EnumType enumType)
+    {
+        return _objectPoolDic.ContainsKey(enumType);
     }
 }
