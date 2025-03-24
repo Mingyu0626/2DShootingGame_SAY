@@ -2,84 +2,9 @@ using System.Collections;
 using UnityEngine;
 public abstract class Bullet : MonoBehaviour, IProduct
 {
-    [Header("Basic")]
-    [Tooltip("ÃÑ¾ËÀÇ ¹ß»ç ¼Óµµ")]
-    [SerializeField] private float _speed;
-    [Tooltip("ÃÑ¾ËÀÇ ¼Óµµ º¯·®")]
-    [SerializeField] private float _speedVariance = 1f;
-    [Tooltip("ÃÑ¾ËÀÇ °ø°Ý·Â")]
-    [SerializeField] private int _damage;
-    [Tooltip("ÃÑ¾ËÀÇ Áö¼Ó½Ã°£")]
-    [SerializeField] private float _duration = 1f;
-    public float Speed
-    {
-        get
-        {
-            return _speed;
-        }
-        private set
-        {
-            if (0 <= value)
-            {
-                _speed = value;
-                Debug.Log(_speed);
-            }
-        }
-    }
-    public float SpeedVariance
-    {
-        get
-        {
-            return _speedVariance;
-        }
-        private set
-        {
-            _speedVariance = value;
-        }
-    }
-    public float Duration
-    {
-        get { return _duration; }
-        private set { }
-    }
-    public int Damage
-    {
-        get { return _damage; }
-        private set { _damage = value; }
-    }
+    [SerializeField] private BulletData _bulletData;
+    public BulletData BulletData { get => _bulletData; private set => _bulletData = value; }
 
-    [Header("Type")]
-    [Tooltip("ÃÑ¾ËÀÇ Å¸ÀÔ")]
-    [SerializeField] 
-    BulletType _currentBulletType;
-    public BulletType CurrentBulletType
-    {
-        get { return _currentBulletType; }
-        private set
-        {
-            _currentBulletType = value;
-        }
-    }
-
-
-    [Header("Snake")]
-    [Tooltip("ÃÑ¾Ë ±ËµµÀÇ ÁÖÆÄ¼ö")]
-    [SerializeField] 
-    private float _frequency;
-    [Tooltip("ÃÑ¾Ë ±ËµµÀÇ ÁøÆø")]
-    [SerializeField] 
-    private float _amplitude;
-
-    public float Frequency
-    {
-        get { return _frequency; }
-        private set { _frequency = value;  }
-    }
-    public float Amplitude
-    {
-        get { return _amplitude; }
-        private set { _amplitude = value; }
-    }
     private void OnEnable()
     {
         StartCoroutine(BulletDuration());
@@ -104,14 +29,14 @@ public abstract class Bullet : MonoBehaviour, IProduct
 
     private void Snake()
     {
-        float offset = Mathf.Sin(Time.time * Frequency) * Amplitude;
+        float offset = Mathf.Sin(Time.time * _bulletData.Frequency) * _bulletData.Amplitude;
         transform.position += transform.right * offset * Time.deltaTime;
     }
 
     private IEnumerator BulletDuration()
     {
 
-        yield return new WaitForSeconds(_duration);
+        yield return new WaitForSeconds(_bulletData.Duration);
         BulletPool.Instance.ReturnObject(this);
         gameObject.SetActive(false);
     }
