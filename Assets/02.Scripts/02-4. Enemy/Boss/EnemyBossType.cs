@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBossType: Enemy, IMove
+public class EnemyBossType: Enemy, IEnemyMove
 {
     private int _currentFaze = 1;
     [Header("Bullet")]
@@ -25,35 +25,53 @@ public class EnemyBossType: Enemy, IMove
 
     [Header("AttackFaze3")]
     [SerializeField] private List<Transform> _muzzleTransformAttackFaze3;
+    private List<Tween> _muzzleShakeTweens = new List<Tween>();
     [Tooltip("이동량")]
     [SerializeField] private float _moveArea = 3f;
     [Tooltip("변경에 걸리는 이동시간")]
     [SerializeField] private float _moveDuration = 1f;
 
+    private Tween _shakeTweenBoss;
+
 
     protected override void Awake()
     {
         base.Awake();
-        UI_Game.Instance.SetBossHPSliderEnable(true);
-        UI_Game.Instance.InitBossHPSlider(EnemyData.MaxHealthPoint);
-        Move();
-        MoveMuzzleFaze3();
-        StartCoroutine(Attack());
     }
-
-    private void Update()
+    private void OnEnable()
     {
-        
+        if (BossManager.Instance.IsBossSpawned)
+        {
+            UI_Game.Instance.SetBossHPSliderEnable(true);
+            UI_Game.Instance.InitBossHPSlider(EnemyData.MaxHealthPoint);
+            UI_Game.Instance.RefreshBossUI(CurrentHealthPoint);
+            Move();
+            MoveMuzzleFaze3();
+            StartCoroutine(Attack());
+        }
     }
-    private void OnDestroy()
+    private void OnDisable()
     {
         BossManager.Instance.SetSpawnerEnable(true);
         UI_Game.Instance.SetBossHPSliderEnable(false);
+        _shakeTweenBoss.Kill();
+        for (int i = 0; i < _muzzleShakeTweens.Count; i++)
+        {
+            _muzzleShakeTweens[i].Kill();
+        }
+        _muzzleShakeTweens.Clear();
+        StopAllCoroutines();
+        
     }
+
     public void Move()
     {
-        transform.DOShakePosition(1f, 0.01f)
+        _shakeTweenBoss = transform.DOShakePosition(1f, 0.01f)
             .SetLoops(-1, LoopType.Yoyo);
+    }
+    public void Move(Direction dir = Direction.Down)
+    {
+        throw new System.NotImplementedException();
     }
     public IEnumerator Attack()
     {
@@ -108,8 +126,10 @@ public class EnemyBossType: Enemy, IMove
                 (_moveArea * dir, 
                 currentMuzzleTransform.position.y,
                 currentMuzzleTransform.position.z);
-            currentMuzzleTransform.DOMove(targetPosition, _moveDuration)
+
+            Tween curMuzzleShakeTween = currentMuzzleTransform.DOMove(targetPosition, _moveDuration)
                 .SetLoops(-1, LoopType.Yoyo);
+            _muzzleShakeTweens.Add(curMuzzleShakeTween);
             dir *= -1f;
         }
 

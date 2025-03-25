@@ -9,9 +9,10 @@ public class BossManager : Singleton<BossManager>
 {
     [Header("Boss")]
     [SerializeField] private List<GameObject> _enemySpawners;
-    [SerializeField] private GameObject _bossPrefab;
+    [SerializeField] private Transform _bossSpawnTransform;
     [SerializeField] private float _precursorTime;
     private bool _isBossSpawned = false;
+    public bool IsBossSpawned { get => _isBossSpawned; private set => _isBossSpawned = value; }
 
     [Header("Warning Animation")]
     [SerializeField] private GameObject _panelWarningTop;
@@ -24,7 +25,6 @@ public class BossManager : Singleton<BossManager>
 
 
     private UI_TweeningUtil _tweeningUtil;
-
 
     protected override void Awake()
     {
@@ -43,7 +43,7 @@ public class BossManager : Singleton<BossManager>
     public bool CanBossSpawn()
     {
         return 0 < GameManager.Instance.PlayData.KillCount
-            && GameManager.Instance.PlayData.KillCount % 100 == 0 && !_isBossSpawned;
+            && GameManager.Instance.PlayData.KillCount % 100 == 0 && !IsBossSpawned;
     }
     public void SpawnBossCoroutine()
     {
@@ -58,8 +58,8 @@ public class BossManager : Singleton<BossManager>
 
         yield return new WaitForSeconds(_precursorTime);
 
-        Instantiate(_bossPrefab);
-        _isBossSpawned = true;
+        EnemyPool.Instance.GetObject(EnemyType.Boss, _bossSpawnTransform.position);
+        IsBossSpawned = true;
     }
     public void PlayWarningAnimation()
     {
@@ -107,7 +107,7 @@ public class BossManager : Singleton<BossManager>
 
     public void SetSpawnerEnable(bool val)
     {
-        _isBossSpawned = !val;
+        IsBossSpawned = !val;
         foreach (GameObject go in _enemySpawners)
         {
             go.SetActive(val);

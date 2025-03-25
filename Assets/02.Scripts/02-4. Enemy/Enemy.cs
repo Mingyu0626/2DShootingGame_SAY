@@ -48,7 +48,6 @@ public class Enemy : MonoBehaviour, IProduct
                 {
                     otherPlayer.TakeDamage(_enemyData.Damage);
                     EnemyPool.Instance.ReturnObject(this);
-                    // Destroy(gameObject);
                 }
             }
         }
@@ -73,6 +72,7 @@ public class Enemy : MonoBehaviour, IProduct
         {
             UI_Game.Instance.RefreshBossUI(CurrentHealthPoint);
         }
+        Debug.Log(CurrentHealthPoint);
         if (CurrentHealthPoint == 0)
         {
             OnEnemyDeath(damage);
@@ -80,15 +80,19 @@ public class Enemy : MonoBehaviour, IProduct
     }
     public void OnEnemyDeath(Damage damage)
     {
-        int killCount = GameManager.Instance.PlayData.KillCount += 1;
-        UI_Game.Instance.RefreshKillCount(killCount);
-        int score = GameManager.Instance.PlayData.Score += _enemyData.Score;
-        UI_Game.Instance.RefreshScore(score);
 
+        int killCount = GameManager.Instance.PlayData.KillCount += 1;
+        int score = GameManager.Instance.PlayData.Score += _enemyData.Score;
         CheckBoomCountGetable(killCount);
+        int boomCount = GameManager.Instance.PlayData.BoomCount;
+        int gold = GameManager.Instance.PlayData.Gold += _enemyData.EarnableGold;
         CheckCanBossSpawn();
         SpawnRandomItem();
         InstantiateVFX();
+
+        UI_Game.Instance.OnEnemyKilled?.Invoke(killCount, score, boomCount, gold);
+
+
         if (EnemyPool.Instance.CheckTypeInPool(_enemyData.EnemyType))
         {
             EnemyPool.Instance.ReturnObject(this);
