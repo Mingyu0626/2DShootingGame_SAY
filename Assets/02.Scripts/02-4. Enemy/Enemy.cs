@@ -1,3 +1,4 @@
+using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour, IProduct
@@ -81,15 +82,27 @@ public class Enemy : MonoBehaviour, IProduct
     {
 
         int killCount = GameManager.Instance.PlayData.KillCount += 1;
+
         int score = GameManager.Instance.PlayData.Score += _enemyData.Score;
+
         CheckBoomCountGetable(killCount);
         int boomCount = GameManager.Instance.PlayData.BoomCount;
-        int gold = GameManager.Instance.PlayData.Gold += _enemyData.EarnableGold;
+
+        if (UnityEngine.Random.Range(0, 5) == 0)
+        {
+            CurrencyManager.Instance.Add(CurrencyType.Diamond, 10);
+        }
+        else
+        {
+            CurrencyManager.Instance.Add(CurrencyType.Gold, _enemyData.EarnableGold);
+        }
+
+        int gold = CurrencyManager.Instance.Gold;
+        UI_Game.Instance.OnEnemyKilled?.Invoke(killCount, score, boomCount, gold);
+
         CheckCanBossSpawn();
         SpawnRandomItem();
         InstantiateVFX();
-
-        UI_Game.Instance.OnEnemyKilled?.Invoke(killCount, score, boomCount, gold);
 
 
         if (EnemyPool.Instance.CheckTypeInPool(_enemyData.EnemyType))
