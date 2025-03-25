@@ -32,7 +32,7 @@ public class EnemyBossType: Enemy, IEnemyMove
     [SerializeField] private float _moveDuration = 1f;
 
     private Tween _shakeTweenBoss;
-
+    private Coroutine _attackCoroutine;
 
     protected override void Awake()
     {
@@ -47,7 +47,10 @@ public class EnemyBossType: Enemy, IEnemyMove
             UI_Game.Instance.RefreshBossUI(CurrentHealthPoint);
             Move();
             MoveMuzzleFaze3();
-            StartCoroutine(Attack());
+            if (ReferenceEquals(_attackCoroutine, null))
+            {
+                _attackCoroutine = StartCoroutine(Attack());
+            }
         }
     }
     private void OnDisable()
@@ -60,8 +63,11 @@ public class EnemyBossType: Enemy, IEnemyMove
             _muzzleShakeTweens[i].Kill();
         }
         _muzzleShakeTweens.Clear();
-        StopAllCoroutines();
-        
+        if (!ReferenceEquals(_attackCoroutine, null))
+        {
+            StopCoroutine(_attackCoroutine);
+            _attackCoroutine = null;
+        }
     }
 
     public void Move()

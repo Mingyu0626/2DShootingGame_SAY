@@ -72,7 +72,6 @@ public class Enemy : MonoBehaviour, IProduct
         {
             UI_Game.Instance.RefreshBossUI(CurrentHealthPoint);
         }
-        Debug.Log(CurrentHealthPoint);
         if (CurrentHealthPoint == 0)
         {
             OnEnemyDeath(damage);
