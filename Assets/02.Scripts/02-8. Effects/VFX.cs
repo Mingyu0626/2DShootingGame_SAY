@@ -10,9 +10,18 @@ public class VFX : MonoBehaviour, IProduct
     {
         _particleSystem = GetComponent<ParticleSystem>();
     }
+    private void Update()
+    {
+        if (_vfxType == VFXType.GetItemMoveSpeedUp || 
+            _vfxType == VFXType.GetItemFireSpeedUp ||
+            _vfxType == VFXType.GetItemHealthUp ||
+            _vfxType == VFXType.GetItemMagnet)
+        {
+            transform.position = Player.Instance.transform.position;
+        }
+    }
     private void OnParticleSystemStopped()
     {
-        Debug.Log("OnParticleSystemStopped");
         VFXPool.Instance.ReturnObject(this);
     }
     public void Init()
