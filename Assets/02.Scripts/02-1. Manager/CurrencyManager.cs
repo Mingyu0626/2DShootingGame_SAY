@@ -49,6 +49,7 @@ public class CurrencyManager : Singleton<CurrencyManager>
             return false;
         }
         _values[(int)currencyType] -= amount;
+        // ToDo : UI에 드러나는 골드의 경우, Refresh해줘야 한다.
         Save();
         return true;
     }
