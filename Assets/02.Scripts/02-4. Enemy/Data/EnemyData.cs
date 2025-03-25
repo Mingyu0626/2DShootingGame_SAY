@@ -52,7 +52,7 @@ public class EnemyData : ScriptableObject
     }
 
 
-    [Header("ItemSpawn")]
+    [Header("DropTable")]
     [Tooltip("¾ÆÀÌÅÛ µå·Ó È®·ü")]
     [SerializeField] private float _itemSpawnProbability = 0.3f;
     public float ItemSpawnProbability
@@ -60,6 +60,9 @@ public class EnemyData : ScriptableObject
         get => _itemSpawnProbability;
         private set => _itemSpawnProbability = value;
     }
+    [Tooltip("È¹µæ °¡´É °ñµå")]
+    [SerializeField] private int _earnableGold = 100;
+    public int EarnableGold { get => _earnableGold; set => _earnableGold = value; }
 
     [Header("Effects and Animation")]
     [SerializeField] private GameObject _explosionVFXPrefab;
@@ -93,7 +96,6 @@ public class EnemyData : ScriptableObject
     public int DamageStart { get => _damageStart; set => _damageStart = value; }
     public int SpeedStart { get => _speedStart; set => _speedStart = value; }
     public int MaxHealthPointStart { get => _maxHealthPointStart; set => _maxHealthPointStart = value; }
-
 }
 public enum Direction
 {

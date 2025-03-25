@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
+using System;
 
 
 public class UI_Game : Singleton<UI_Game>
@@ -10,11 +12,14 @@ public class UI_Game : Singleton<UI_Game>
     [SerializeField] private List<GameObject> _boomList;
     [SerializeField] private TextMeshProUGUI _killCountText;
     [SerializeField] private TextMeshProUGUI _scoreText;
+    [SerializeField] private TextMeshProUGUI _goldText;
     [SerializeField] private GameObject _bossHealthGameObject;
     private Slider _bossHealthSlider;
     private Image _bossHealthImage;
     private TextMeshProUGUI _bossHealthText;
     [SerializeField] private float _refreshDelay;
+
+    public Action<int, int, int, int> OnEnemyKilled;
     protected override void Awake()
     {
         base.Awake();
@@ -24,12 +29,20 @@ public class UI_Game : Singleton<UI_Game>
             _bossHealthImage = _bossHealthSlider.fillRect.GetComponent<Image>();
             _bossHealthText = _bossHealthGameObject.GetComponentInChildren<TextMeshProUGUI>();
         }
+        OnEnemyKilled += (killCount, score, boomCount, gold) =>
+        {
+            RefreshKillCount(killCount);
+            RefreshScore(score);
+            RefreshBoomCount(boomCount);
+            RefreshGold(gold);
+        }; 
     }
-    public void InitUI(int killCount, int score, int boomCount)
+    public void RefreshUI(int killCount, int score, int boomCount, int gold)
     {
         RefreshKillCount(killCount);
         RefreshScore(score);
         RefreshBoomCount(boomCount);
+        RefreshGold(gold);
     }
     public void RefreshKillCount(int killCount)
     {
@@ -52,6 +65,17 @@ public class UI_Game : Singleton<UI_Game>
         {
             _boomList[i].SetActive(i < boomCount);
         }
+    }
+
+    public void RefreshGold(int gold)
+    {
+        _goldText.text = gold.ToString("N0");
+        _goldText.rectTransform.DOScale(new Vector3(1f, 1f, 1f), 0.05f)
+            .SetEase(Ease.OutBounce)
+            .OnComplete(() =>
+            {
+                _scoreText.rectTransform.localScale = Vector3.one;
+            });
     }
 
     public void RefreshBossUI(int hp)

@@ -16,8 +16,11 @@ MonoBehaviour:
   _maxHealthPoint: 100
   _speed: 0
   _directionEnum: 2
-  _damage: 0
+  _damage: 1
   _itemSpawnProbability: 0.3
-  _enemyAnimator: {fileID: 7013199922831018845, guid: 3b3d45288227b51479bccd9b5849caab, type: 3}
+  _earnableGold: 10000
   _explosionVFXPrefab: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
   _score: 10000
+  _damageStart: 0
+  _speedStart: 0
+  _maxHealthPointStart: 0

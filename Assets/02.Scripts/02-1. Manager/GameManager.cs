@@ -23,9 +23,13 @@ public class GameManager : Singleton<GameManager>
     protected override void Awake()
     {
         base.Awake();
-        _playData = new PlayData(0, 0, 0);
+        _playData = new PlayData(0, 0, 0, 0);
         LoadPlayData();
-        _playData.KillCount = 99;
+        _playData.KillCount = 95;
+    }
+    private void Start()
+    {
+        UI_Game.Instance.RefreshUI(_playData.KillCount, _playData.Score, _playData.BoomCount, _playData.Gold);
     }
 
     protected override void OnDestroy()
@@ -51,6 +55,5 @@ public class GameManager : Singleton<GameManager>
                 _playData = JsonUtility.FromJson<PlayData>(jsonData);
             }
         }
-        UI_Game.Instance.InitUI(_playData.KillCount, _playData.Score, _playData.BoomCount);
     }
 }

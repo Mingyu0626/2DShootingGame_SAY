@@ -18,6 +18,9 @@ MonoBehaviour:
   _directionEnum: 2
   _damage: 1
   _itemSpawnProbability: 0.3
-  _enemyAnimator: {fileID: -7867908994352776237, guid: 7c6e5c3422fbf084a84c45a661c0b309, type: 3}
+  _earnableGold: 50
   _explosionVFXPrefab: {fileID: 4084661252556610420, guid: dfe3e891d97b3644a98b17fde815d0d7, type: 3}
   _score: 10
+  _damageStart: 0
+  _speedStart: 0
+  _maxHealthPointStart: 0
