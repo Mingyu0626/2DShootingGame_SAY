@@ -28,18 +28,10 @@ public class EnemyData : ScriptableObject
     [Header("Movement")]
     [Tooltip("적의 이동속도")]
     [SerializeField] private float _speed;
-    [Tooltip("이동 방향")]
-    [SerializeField]
-    private Direction _directionEnum;
     public float Speed
     {
         get { return _speed; }
         set { _speed = value; }
-    }
-    public Direction DirectionEnum
-    {
-        get { return _directionEnum; }
-        set { _directionEnum = value; }
     }
 
     [Header("Damage")]

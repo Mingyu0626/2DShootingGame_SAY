@@ -18,6 +18,17 @@ public class Enemy : MonoBehaviour, IProduct
             _currentHealthPoint = Mathf.Clamp(value, 0, _enemyData.MaxHealthPoint);
         }
     }
+
+
+    [Header("Direction")]
+    [Tooltip("이동 방향")]
+    [SerializeField] private Direction _directionEnum;
+    public Direction DirectionEnum
+    {
+        get { return _directionEnum; }
+        set { _directionEnum = value; }
+    }
+
     [Header("Effects and Animation")]
     private Animator _enemyAnimator;
     public Animator EnemyAnimator
@@ -63,7 +74,7 @@ public class Enemy : MonoBehaviour, IProduct
     }
     public void InitDirection(Direction dir)
     {
-        _enemyData.DirectionEnum = dir;
+        _directionEnum = dir;
     }
     public void TakeDamage(Damage damage)
     {

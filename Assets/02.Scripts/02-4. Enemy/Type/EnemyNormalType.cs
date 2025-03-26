@@ -5,13 +5,7 @@ public class EnemyNormalType: Enemy, IEnemyMove
 {
     private void Update()
     {
-        Move(EnemyData.DirectionEnum);
-    }
-
-    public void Move()
-    {
-        Vector2 directionVector = Vector2.down;
-        // transform.Translate(directionVector * Speed * Time.deltaTime);
+        Move(DirectionEnum);
     }
     public void Move(Direction dir)
     {

@@ -12,7 +12,7 @@ public class EnemyTargetType : Enemy, IEnemyMove
     }
     private void Update()
     {
-        Move(EnemyData.DirectionEnum);
+        Move(DirectionEnum);
     }
     public void Move(Direction dir)
     {

@@ -7,7 +7,7 @@ public class EnemySplitType : Enemy, IEnemyMove
     [SerializeField] private EnemyType _splitedEnemyType;
     private void Update()
     {
-        Move(EnemyData.DirectionEnum);
+        Move(DirectionEnum);
     }
     public void Move(Direction dir)
     {

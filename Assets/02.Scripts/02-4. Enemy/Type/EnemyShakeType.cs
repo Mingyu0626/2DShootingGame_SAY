@@ -20,7 +20,7 @@ public class EnemyShakeType : Enemy, IEnemyMove
     }
     private void Update()
     {
-        Move(EnemyData.DirectionEnum);
+        Move(DirectionEnum);
         SinCurve();
     }
     public void Move(Direction dir)
