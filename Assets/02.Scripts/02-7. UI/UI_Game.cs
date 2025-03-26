@@ -70,7 +70,7 @@ public class UI_Game : Singleton<UI_Game>
     public void RefreshGold(int gold)
     {
         _goldText.text = gold.ToString("N0");
-        _goldText.rectTransform.DOScale(new Vector3(1f, 1f, 1f), 0.05f)
+        _goldText.rectTransform.DOScale(new Vector3(1.4f, 1.4f, 1.4f), 0.08f)
             .SetEase(Ease.OutBounce)
             .OnComplete(() =>
             {

@@ -25,7 +25,7 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
         _playData = new PlayData(0, 0, 0, 0);
         LoadPlayData();
-        _playData.KillCount = 95;
+        _playData.KillCount = 0;
     }
     private void Start()
     {

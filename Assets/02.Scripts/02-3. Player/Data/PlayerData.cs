@@ -32,10 +32,11 @@ public class PlayerData : MonoBehaviour
     private float _verticalLimit = 3.0f;
     public float Speed
     {
-        get { return _speed; }
+        get { return StatManager.Instance.Stats[(int)StatType.MoveSpeed].Value; }
         set
         {
-            _speed = Mathf.Clamp(value, 0, _speedMax);
+            StatManager.Instance.Stats[(int)StatType.MoveSpeed].Value 
+                = Mathf.Clamp(value, 0, _speedMax);
         }
     }
     public float SpeedMax

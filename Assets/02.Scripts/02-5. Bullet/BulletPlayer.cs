@@ -17,7 +17,7 @@ public class BulletPlayer : Bullet
             {
                 Damage damage = new Damage
                 {
-                    Value = BulletData.Damage,
+                    Value = BulletData.Damage + (int)StatManager.Instance.Stats[(int)StatType.Damage].Value,
                     Type = DamageType.Bullet,
                     From = gameObject
                 };
