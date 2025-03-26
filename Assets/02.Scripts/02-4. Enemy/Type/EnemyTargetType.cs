@@ -6,9 +6,12 @@ public class EnemyTargetType : Enemy, IEnemyMove
     private Vector3 _directionToPlayer;
     private void OnEnable()
     {
-        _playerTransform = Player.Instance.transform;
-        _directionToPlayer = _playerTransform.position - transform.position;
-        LookAtPlayer(_directionToPlayer);
+        _playerTransform = Player.Instance?.transform;
+        if (!ReferenceEquals(_playerTransform, null))
+        {
+            _directionToPlayer = _playerTransform.position - transform.position;
+            LookAtPlayer(_directionToPlayer);
+        }
     }
     private void Update()
     {

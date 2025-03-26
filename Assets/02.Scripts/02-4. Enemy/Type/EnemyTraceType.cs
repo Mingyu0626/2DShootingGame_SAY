@@ -5,7 +5,7 @@ public class EnemyTraceType : Enemy, IEnemyMove
     private Transform _playerTransform;
     private void OnEnable()
     {
-        _playerTransform = Player.Instance.transform;
+        _playerTransform = Player.Instance?.transform;
     }
     private void Update()
     {

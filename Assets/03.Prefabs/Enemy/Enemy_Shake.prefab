@@ -206,5 +206,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyData: {fileID: 11400000, guid: e6ab6501eae87564999efcfca26d0291, type: 2}
   _currentHealthPoint: 0
+  _directionEnum: 2
   _frequency: 0.5
   _amplitude: 1

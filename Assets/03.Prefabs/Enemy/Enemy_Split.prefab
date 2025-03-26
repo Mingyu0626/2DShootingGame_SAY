@@ -271,6 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyData: {fileID: 11400000, guid: 78012e508cbfaa94e9641975306fbf69, type: 2}
   _currentHealthPoint: 0
+  _directionEnum: 2
   _splitedEnemyType: 0
 --- !u!1 &6763219509255710490
 GameObject:
