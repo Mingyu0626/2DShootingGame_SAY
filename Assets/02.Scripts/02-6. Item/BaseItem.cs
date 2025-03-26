@@ -18,7 +18,6 @@ public abstract class BaseItem : MonoBehaviour
     private const float _collisionTimeToApply = 0.5f;
     public float CollisionTimeToApply { get => _collisionTimeToApply; }
 
-    [SerializeField] private float _minDistanceToAbsorb = 1f;
     [SerializeField] private float _moveSpeed = 1f;
     [SerializeField] private float _disappearTime = 3f;
 

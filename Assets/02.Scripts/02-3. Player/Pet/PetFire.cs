@@ -15,7 +15,6 @@ public class PetFire : MonoBehaviour
     [Tooltip("총알의 발사 대기시간(쿨타임)")]
     [SerializeField] private float _coolTime = 3F;
     private bool _isCoolDown = false;
-    [SerializeField] private int _damage = 1;
     
     private void Awake()
     {
