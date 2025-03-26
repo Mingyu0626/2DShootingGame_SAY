@@ -43,6 +43,12 @@ public class PlayerManualState : IPlayerState, IMove, IFire
         {
             Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"),
             Input.GetAxisRaw("Vertical")).normalized;
+
+#if UNITY_ANDROID
+            direction = new Vector2
+                (_playerController.DynamicJoystick.Horizontal,
+                _playerController.DynamicJoystick.Vertical).normalized;
+#endif
             _playerController.transform.Translate(direction * _playerData.Speed * Time.deltaTime);
             _playerMoveUtils.ClampPlayerHorizontalPosition();
             _playerMoveUtils.PlayAnimation(direction);
@@ -54,7 +60,8 @@ public class PlayerManualState : IPlayerState, IMove, IFire
     }
     public void Fire()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl) && !_playerData.IsCoolDown)
+        // Input.GetKeyDown(KeyCode.LeftControl)
+        if (!_playerData.IsCoolDown)
         {
             for (int i = 0; i < _playerData.MainMuzzleTransformArray.Length; i++)
             {

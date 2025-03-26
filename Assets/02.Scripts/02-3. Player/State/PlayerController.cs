@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
         set { _currentPlayMode = value; }
     }
 
+    [SerializeField] private DynamicJoystick _dynamicJoystick;
+    public DynamicJoystick DynamicJoystick { get => _dynamicJoystick;}
 
     // 데이터 클래스로 따로 빼니까 훨 보기좋네
     private PlayerData _playerData;
@@ -53,6 +55,9 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _playerData = GetComponent<PlayerData>();
+#if !UNITY_ANDROID
+        Destroy(_dynamicJoystick.gameObject);
+#endif
     }
 
     private void Start()
