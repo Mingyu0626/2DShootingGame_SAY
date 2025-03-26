@@ -27,6 +27,8 @@ public class CurrencyManager : Singleton<CurrencyManager>
     public int Diamond => _values[(int)CurrencyType.Diamond];
 
     private const string SAVE_KEY = "Currency";
+    public delegate void OnDataChanged();
+    public OnDataChanged OnDataChangedCallback = null;
 
     protected override void Awake()
     {
@@ -41,7 +43,7 @@ public class CurrencyManager : Singleton<CurrencyManager>
     {
         _values[(int)currencyType] += amount;
         Save();
-        StatManager.Instance.OnDataChangedCallback?.Invoke();
+        OnDataChangedCallback?.Invoke();
     }
     public bool TryConsume(CurrencyType currencyType, int amount)
     {
@@ -50,9 +52,8 @@ public class CurrencyManager : Singleton<CurrencyManager>
             return false;
         }
         _values[(int)currencyType] -= amount;
-        // ToDo : UI에 드러나는 골드의 경우, Refresh해줘야 한다.
         Save();
-        StatManager.Instance.OnDataChangedCallback?.Invoke();
+        OnDataChangedCallback?.Invoke();
         return true;
     }
     public bool Have(CurrencyType currencyType, int amount)

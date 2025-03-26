@@ -13,9 +13,6 @@ public class StatManager : Singleton<StatManager>
     private List<Stat> _stats = new List<Stat>();
     public List<Stat> Stats => _stats;
 
-    public delegate void OnDataChanged();
-    public OnDataChanged OnDataChangedCallback = null;
-
     protected override void Awake()
     {
         base.Awake();
