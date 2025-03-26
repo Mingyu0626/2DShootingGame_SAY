@@ -13,13 +13,14 @@ public class UI_Game : Singleton<UI_Game>
     [SerializeField] private TextMeshProUGUI _killCountText;
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private TextMeshProUGUI _goldText;
+    [SerializeField] private TextMeshProUGUI _diamondText;
     [SerializeField] private GameObject _bossHealthGameObject;
     private Slider _bossHealthSlider;
     private Image _bossHealthImage;
     private TextMeshProUGUI _bossHealthText;
     [SerializeField] private float _refreshDelay;
 
-    public Action<int, int, int, int> OnEnemyKilled;
+    public Action<int, int, int, int, int> OnEnemyKilled;
     protected override void Awake()
     {
         base.Awake();
@@ -29,24 +30,29 @@ public class UI_Game : Singleton<UI_Game>
             _bossHealthImage = _bossHealthSlider.fillRect.GetComponent<Image>();
             _bossHealthText = _bossHealthGameObject.GetComponentInChildren<TextMeshProUGUI>();
         }
-        OnEnemyKilled += (killCount, score, boomCount, gold) =>
-        {
-            RefreshKillCount(killCount);
-            RefreshScore(score);
-            RefreshBoomCount(boomCount);
-            RefreshGold(gold);
-        }; 
+        //OnEnemyKilled += (killCount, score, boomCount, gold, diamond) =>
+        //{
+        //    RefreshUI(killCount, score, boomCount, gold, diamond);
+        //};
+        OnEnemyKilled += RefreshUI;
     }
-    public void RefreshUI(int killCount, int score, int boomCount, int gold)
+    public void RefreshUI(int killCount, int score, int boomCount, int gold, int diamond)
     {
         RefreshKillCount(killCount);
         RefreshScore(score);
         RefreshBoomCount(boomCount);
         RefreshGold(gold);
+        RefreshDiamond(diamond);
     }
     public void RefreshKillCount(int killCount)
     {
-        _killCountText.text = $"Kills : {killCount}";
+        _killCountText.text = $"{killCount}";
+        _killCountText.rectTransform.DOScale(new Vector3(1.4f, 1.4f, 1.4f), 0.08f)
+            .SetEase(Ease.OutBounce)
+            .OnComplete(() =>
+            {
+                _killCountText.rectTransform.localScale = Vector3.one;
+            });
     }
 
     public void RefreshScore(int score)
@@ -66,7 +72,6 @@ public class UI_Game : Singleton<UI_Game>
             _boomList[i].SetActive(i < boomCount);
         }
     }
-
     public void RefreshGold(int gold)
     {
         _goldText.text = gold.ToString("N0");
@@ -74,9 +79,23 @@ public class UI_Game : Singleton<UI_Game>
             .SetEase(Ease.OutBounce)
             .OnComplete(() =>
             {
-                _scoreText.rectTransform.localScale = Vector3.one;
+                _goldText.rectTransform.localScale = Vector3.one;
             });
     }
+    public void RefreshDiamond(int diamond)
+    {
+        _diamondText.text = diamond.ToString("N0");
+        _diamondText.rectTransform.DOScale(new Vector3(1.4f, 1.4f, 1.4f), 0.08f)
+            .SetEase(Ease.OutBounce)
+            .OnComplete(() =>
+            {
+                _diamondText.rectTransform.localScale = Vector3.one;
+            });
+    }
+
+
+
+
 
     public void RefreshBossUI(int hp)
     {

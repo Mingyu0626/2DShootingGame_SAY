@@ -1,5 +1,7 @@
 using TMPro;
+using UnityEngine.UI;
 using UnityEngine;
+using DG.Tweening;
 
 public class UI_StatButton : MonoBehaviour
 {
@@ -8,6 +10,15 @@ public class UI_StatButton : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _nameTextUI;
     [SerializeField] private TextMeshProUGUI _valueTextUI;
     [SerializeField] private TextMeshProUGUI _costTextUI;
+    [SerializeField] private Sprite _canUpgradeSprite;
+    [SerializeField] private Sprite _canNotUpgradeSprite;
+    private Image _image;
+    private RectTransform _rectTransform;
+    private void Awake()
+    {
+        _rectTransform = GetComponent<RectTransform>();
+        _image = GetComponent<Image>();
+    }
     public void Refresh()
     {
         _nameTextUI.text = _stat.StatType.ToString();
@@ -15,11 +26,11 @@ public class UI_StatButton : MonoBehaviour
         _costTextUI.text = $"{_stat.Cost:N0}";
         if (CurrencyManager.Instance.Have(CurrencyType.Gold, _stat.Cost))
         {
-            _costTextUI.color = Color.black;
+            _image.sprite = _canUpgradeSprite;
         }
         else
         {
-            _costTextUI.color = Color.red;
+            _image.sprite = _canNotUpgradeSprite;
         }
     }
 
@@ -35,5 +46,14 @@ public class UI_StatButton : MonoBehaviour
             Debug.Log($"돈이 부족합니다!");
             // 돈이 부족합니다 토스팝업 Show
         }
+    }
+    public void Scaling()
+    {
+        _rectTransform.DOScale(new Vector3(1.4f, 1.4f, 1.4f), 0.08f)
+            .SetEase(Ease.OutBounce)
+            .OnComplete(() =>
+            {
+                _rectTransform.localScale = Vector3.one;
+            });
     }
 }

@@ -24,7 +24,7 @@ public class CurrencyManager : Singleton<CurrencyManager>
     private CurrencySaveData _saveData;
     private List<int> _values => _saveData.Values;
     public int Gold => _values[(int)CurrencyType.Gold];
-    public int Ruby => _values[(int)CurrencyType.Gold];
+    public int Diamond => _values[(int)CurrencyType.Diamond];
 
     private const string SAVE_KEY = "Currency";
 

@@ -97,7 +97,8 @@ public class Enemy : MonoBehaviour, IProduct
             CurrencyManager.Instance.Add(CurrencyType.Gold, _enemyData.EarnableGold);
         }
         int gold = CurrencyManager.Instance.Gold;
-        UI_Game.Instance.OnEnemyKilled?.Invoke(killCount, score, boomCount, gold);
+        int diamond = CurrencyManager.Instance.Diamond;
+        UI_Game.Instance.OnEnemyKilled?.Invoke(killCount, score, boomCount, gold, diamond);
 
         CheckCanBossSpawn();
         SpawnRandomItem();

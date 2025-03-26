@@ -30,7 +30,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         UI_Game.Instance.RefreshUI(_playData.KillCount, _playData.Score, _playData.BoomCount,
-            CurrencyManager.Instance.Gold);
+            CurrencyManager.Instance.Gold, CurrencyManager.Instance.Diamond);
     }
 
     protected override void OnDestroy()
