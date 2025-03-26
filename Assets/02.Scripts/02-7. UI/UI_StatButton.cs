@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
 using DG.Tweening;
+using Coffee.UIExtensions;
 
 public class UI_StatButton : MonoBehaviour
 {
@@ -14,10 +15,13 @@ public class UI_StatButton : MonoBehaviour
     [SerializeField] private Sprite _canNotUpgradeSprite;
     private Image _image;
     private RectTransform _rectTransform;
+    private ShinyEffectForUGUI _particleEffect;
+    private float _effectDuration = 1f;
     private void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();
         _image = GetComponent<Image>();
+        _particleEffect = GetComponent<ShinyEffectForUGUI>();
     }
     public void Refresh()
     {
@@ -40,6 +44,9 @@ public class UI_StatButton : MonoBehaviour
         {
             Debug.Log($"{_stat.StatType} 레벨업!");
             // 업그레이드 성공 이펙트 실행            
+            _particleEffect.Play(_effectDuration);
+            UI_Game.Instance.RefreshGold(CurrencyManager.Instance.Gold);
+            Scaling();
         }
         else
         {
@@ -49,7 +56,7 @@ public class UI_StatButton : MonoBehaviour
     }
     public void Scaling()
     {
-        _rectTransform.DOScale(new Vector3(1.4f, 1.4f, 1.4f), 0.08f)
+        _rectTransform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.1f)
             .SetEase(Ease.OutBounce)
             .OnComplete(() =>
             {

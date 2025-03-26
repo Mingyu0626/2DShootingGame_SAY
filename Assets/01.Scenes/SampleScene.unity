@@ -1967,8 +1967,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StatDataList:
-  - {fileID: 11400000, guid: 7dbf732b448e64e4985dc19ee6796942, type: 2}
   - {fileID: 11400000, guid: 06914c43fb00e8643a25c0a342845c6a, type: 2}
+  - {fileID: 11400000, guid: 7dbf732b448e64e4985dc19ee6796942, type: 2}
   - {fileID: 11400000, guid: 0c584e14e9cd62b428e57304954c3253, type: 2}
 --- !u!1001 &1086693298
 PrefabInstance:
@@ -3636,8 +3636,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI_StatButtons:
-  - {fileID: 82634780}
   - {fileID: 1736488653}
+  - {fileID: 82634780}
   - {fileID: 1855022368}
 --- !u!1 &2066081178 stripped
 GameObject:
