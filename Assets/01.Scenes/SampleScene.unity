@@ -3384,6 +3384,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1966145271}
     m_Modifications:
+    - target: {fileID: 1335559045855742558, guid: 90d7ec14f5d83374a977ef4b4c803dcf, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2394532586928559974, guid: 90d7ec14f5d83374a977ef4b4c803dcf, type: 3}
       propertyPath: m_Name
       value: UI_Button_Stat_MoveSpeed
@@ -3476,6 +3480,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4465732934699361144, guid: 90d7ec14f5d83374a977ef4b4c803dcf, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4465732934699361144, guid: 90d7ec14f5d83374a977ef4b4c803dcf, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4955939236443981685, guid: 90d7ec14f5d83374a977ef4b4c803dcf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -3507,6 +3519,14 @@ PrefabInstance:
     - target: {fileID: 5998448464400626532, guid: 90d7ec14f5d83374a977ef4b4c803dcf, type: 3}
       propertyPath: m_text
       value: 17000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8292744969760841508, guid: 90d7ec14f5d83374a977ef4b4c803dcf, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8292744969760841508, guid: 90d7ec14f5d83374a977ef4b4c803dcf, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
