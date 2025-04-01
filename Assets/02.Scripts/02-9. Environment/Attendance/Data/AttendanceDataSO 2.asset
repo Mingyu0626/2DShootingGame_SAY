@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Day: 2
   RewardCurrencyType: 0
-  RewardAmount: 40000
+  RewardAmount: 20000

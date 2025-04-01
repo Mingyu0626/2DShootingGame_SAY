@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: AttendanceDataSO 5
   m_EditorClassIdentifier: 
   Day: 5
-  RewardCurrencyType: 0
-  RewardAmount: 200000
+  RewardCurrencyType: 1
+  RewardAmount: 50
