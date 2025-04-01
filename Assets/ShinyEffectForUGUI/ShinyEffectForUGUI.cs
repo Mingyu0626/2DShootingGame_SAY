@@ -203,7 +203,7 @@ namespace Coffee.UIExtensions
 		public void Play(float duration)
 		{
 			StopAllCoroutines();
-			StartCoroutine(CoPlay(duration, AnimatorUpdateMode.Normal));
+			StartCoroutine(CoPlay(duration, AnimatorUpdateMode.UnscaledTime));
 		}
 
 		/// <summary>
