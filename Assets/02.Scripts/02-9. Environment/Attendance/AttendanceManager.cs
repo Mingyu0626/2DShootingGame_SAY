@@ -91,7 +91,6 @@ public class AttendanceManager : Singleton<AttendanceManager>
     }
     private void Load()
     {
-        // PlayerPrefs.DeleteKey(SAVE_KEY);
         if (PlayerPrefs.HasKey(SAVE_KEY))
         {
             string jsonData = PlayerPrefs.GetString(SAVE_KEY);

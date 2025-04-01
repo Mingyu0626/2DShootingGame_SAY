@@ -2563,10 +2563,6 @@ MonoBehaviour:
   _diamondText: {fileID: 1390076753}
   _bossHealthGameObject: {fileID: 257220579}
   _refreshDelay: 0.5
-  _attendancePopupOnRectTransform: {fileID: 150257411}
-  _attendancePopupOnButton: {fileID: 150257412}
-  _attendancePopupOffButton: {fileID: 1664663486}
-  _attendancePopup: {fileID: 1573681951}
 --- !u!114 &1014783237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3668,7 +3664,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1573681952
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3747,6 +3743,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6c87ba3b1b89f449a5249ad2e60cf35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attendancePopupOnButton: {fileID: 150257412}
+  _attendancePopupOffButton: {fileID: 1664663486}
 --- !u!1001 &1587885090
 PrefabInstance:
   m_ObjectHideFlags: 0
