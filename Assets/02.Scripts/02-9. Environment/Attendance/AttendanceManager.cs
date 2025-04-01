@@ -1,6 +1,21 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor.Overlays;
 using UnityEngine;
+
+[Serializable]
+public class AttendanceSaveData
+{
+    public int AttendanceCount;
+    public string LastLoginDateTimeString;
+    public List<bool> IsRewarded = new List<bool>();
+    public AttendanceSaveData(int attendanceCount, string lastLoginDateTimeString)
+    {
+        AttendanceCount = attendanceCount;
+        LastLoginDateTimeString = lastLoginDateTimeString;
+    }
+}
 
 public class AttendanceManager : Singleton<AttendanceManager>
 {
@@ -12,8 +27,14 @@ public class AttendanceManager : Singleton<AttendanceManager>
     public List<Attendance> Attendances { get => _attendances; }
 
     // 출석 검증 데이터
+    private AttendanceSaveData _saveData;
     private DateTime _lastLoginDateTime = new DateTime(); // 마지막으로 로그인한 날짜 및 시간
-    private int _attendanceCount = 0; // 현재까지의 출석 횟수
+    private int _attendanceCount
+    {
+        get => _saveData.AttendanceCount;
+        set => _saveData.AttendanceCount = value;
+    }
+    private const string SAVE_KEY = "Attendance";
 
     // 데이터 변경시 호출되는 콜백
     public Action OnDataChanged;
@@ -21,12 +42,18 @@ public class AttendanceManager : Singleton<AttendanceManager>
     protected override void Awake()
     {
         base.Awake();
-        _attendances = new List<Attendance>(_soDatas.Count); 
+        _attendances = new List<Attendance>(_soDatas.Count);
+        Load();
         for (int i = 0; i < _soDatas.Count; i++)
         {
-            _attendances[i] = new Attendance(_soDatas[i], false);
+            _attendances.Add(new Attendance
+                (_soDatas[i], _saveData.IsRewarded[i]));
         }
         AttendanceCheck();
+    }
+    private void Start()
+    {
+        
     }
     private void AttendanceCheck()
     {
@@ -37,6 +64,7 @@ public class AttendanceManager : Singleton<AttendanceManager>
             _lastLoginDateTime = today;
             _attendanceCount += 1;
         }
+        Save();
     }
 
     public bool TryGetReward(Attendance attendance)
@@ -45,20 +73,40 @@ public class AttendanceManager : Singleton<AttendanceManager>
         {
             return false;
         }
-
-        // 실제 출석을 그만큼 했는가?
-        if (attendance.Data.Day < _attendanceCount)
+        if (_attendanceCount < attendance.Data.Day)
         {
             return false;
         }
-
-
-        CurrencyManager.Instance.Add
-            (attendance.Data.RewardCurrencyType, attendance.Data.RewardAmount);
-        attendance.IsRewarded = true;
-
-
-        OnDataChanged?.Invoke();
         return true;
+    }
+    public void Save()
+    {
+        for (int i = 0; i < _attendances.Count; i++)
+        {
+            _saveData.IsRewarded[i] = _attendances[i].IsRewarded;
+        }
+        _saveData.LastLoginDateTimeString = _lastLoginDateTime.ToString("o");
+        string jsonData = JsonUtility.ToJson(_saveData);
+        PlayerPrefs.SetString(SAVE_KEY, jsonData);
+    }
+    private void Load()
+    {
+        // PlayerPrefs.DeleteKey(SAVE_KEY);
+        if (PlayerPrefs.HasKey(SAVE_KEY))
+        {
+            Debug.Log("출석 데이터 로드 성공");
+            string jsonData = PlayerPrefs.GetString(SAVE_KEY);
+            _saveData = JsonUtility.FromJson<AttendanceSaveData>(jsonData);
+            if (!DateTime.TryParse(_saveData.LastLoginDateTimeString, out _lastLoginDateTime))
+            {
+                Debug.Log("변환 실패");
+            }
+        }
+        else
+        {
+            Debug.Log("출석 데이터 로드 실패");
+            _saveData = new AttendanceSaveData(0, DateTime.Now.ToString("o"));
+            _saveData.IsRewarded = new List<bool>(Enumerable.Repeat(false, _soDatas.Count));
+        }
     }
 }
