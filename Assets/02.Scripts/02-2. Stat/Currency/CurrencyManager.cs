@@ -27,13 +27,19 @@ public class CurrencyManager : Singleton<CurrencyManager>
     public int Diamond => _values[(int)CurrencyType.Diamond];
 
     private const string SAVE_KEY = "Currency";
-    public delegate void OnDataChanged();
-    public OnDataChanged OnDataChangedCallback = null;
+
+    // 데이터 변경시 호출되는 콜백
+    public Action OnDataChanged;
 
     protected override void Awake()
     {
         base.Awake();
         Load();
+    }
+    private void Start()
+    {
+        OnDataChanged += () => UI_Game.Instance.RefreshGold(Gold);
+        OnDataChanged += () => UI_Game.Instance.RefreshDiamond(Diamond);
     }
     public int Get(CurrencyType currencyType)
     {
@@ -43,7 +49,7 @@ public class CurrencyManager : Singleton<CurrencyManager>
     {
         _values[(int)currencyType] += amount;
         Save();
-        OnDataChangedCallback?.Invoke();
+        OnDataChanged?.Invoke();
     }
     public bool TryConsume(CurrencyType currencyType, int amount)
     {
@@ -53,7 +59,7 @@ public class CurrencyManager : Singleton<CurrencyManager>
         }
         _values[(int)currencyType] -= amount;
         Save();
-        OnDataChangedCallback?.Invoke();
+        OnDataChanged?.Invoke();
         return true;
     }
     public bool Have(CurrencyType currencyType, int amount)
@@ -62,12 +68,12 @@ public class CurrencyManager : Singleton<CurrencyManager>
     }
     private void Save()
     {
-        string jsonData = JsonUtility.ToJson(_values);
+        string jsonData = JsonUtility.ToJson(_saveData);
         PlayerPrefs.SetString(SAVE_KEY, jsonData);
     }
     private void Load()
     {
-        PlayerPrefs.DeleteKey(SAVE_KEY);
+        // PlayerPrefs.DeleteKey(SAVE_KEY);
         if (PlayerPrefs.HasKey(SAVE_KEY))
         {
             string jsonData = PlayerPrefs.GetString(SAVE_KEY);
