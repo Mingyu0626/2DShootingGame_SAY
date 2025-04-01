@@ -12,7 +12,7 @@ public class UI_Stat : MonoBehaviour
         {
             UI_StatButtons[i]._stat = StatManager.Instance.Stats[i];
         }
-        CurrencyManager.Instance.OnDataChangedCallback += Refresh;
+        CurrencyManager.Instance.OnDataChanged += Refresh;
 
         Refresh();
     }

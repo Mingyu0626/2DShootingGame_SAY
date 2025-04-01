@@ -42,7 +42,6 @@ public class UI_StatButton : MonoBehaviour
     {
         if (StatManager.Instance.TryLevelUp(_stat.StatType))
         {
-            Debug.Log($"{_stat.StatType} 레벨업!");
             // 업그레이드 성공 이펙트 실행            
             _particleEffect.Play(_effectDuration);
             UI_Game.Instance.RefreshGold(CurrencyManager.Instance.Gold);

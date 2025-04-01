@@ -21,6 +21,12 @@ public class UI_Game : Singleton<UI_Game>
     [SerializeField] private float _refreshDelay;
 
     public Action<int, int, int, int, int> OnEnemyKilled;
+
+    [SerializeField] private RectTransform _attendancePopupOnRectTransform;
+    [SerializeField] private Button _attendancePopupOnButton;
+    [SerializeField] private Button _attendancePopupOffButton;
+    [SerializeField] private GameObject _attendancePopup;
+
     protected override void Awake()
     {
         base.Awake();
@@ -35,6 +41,9 @@ public class UI_Game : Singleton<UI_Game>
         //    RefreshUI(killCount, score, boomCount, gold, diamond);
         //};
         OnEnemyKilled += RefreshUI;
+        _attendancePopupOnButton.onClick.AddListener(SetAttenDancePopupEnable);
+        _attendancePopupOnButton.onClick.AddListener(() => ButtonScaleTweening(_attendancePopupOnRectTransform));
+        _attendancePopupOffButton.onClick.AddListener(SetAttenDancePopupDisable);
     }
     public void RefreshUI(int killCount, int score, int boomCount, int gold, int diamond)
     {
@@ -93,10 +102,6 @@ public class UI_Game : Singleton<UI_Game>
             });
     }
 
-
-
-
-
     public void RefreshBossUI(int hp)
     {
         RefreshBossHPValue(hp);
@@ -137,5 +142,26 @@ public class UI_Game : Singleton<UI_Game>
     public void SetBossHPSliderEnable(bool val)
     {
         _bossHealthGameObject.gameObject.SetActive(val);
+    }
+
+    private void ButtonScaleTweening(RectTransform rectTransform)
+    {
+        rectTransform.DOScale(new Vector3(1.4f, 1.4f, 1.4f), 0.08f)
+            .SetUpdate(true)
+            .SetEase(Ease.OutBounce)
+            .OnComplete(() =>
+            {
+                rectTransform.localScale = Vector3.one;
+            });
+    }
+    private void SetAttenDancePopupEnable()
+    {
+        _attendancePopup.SetActive(true);
+        Time.timeScale = 0f;
+    }
+    private void SetAttenDancePopupDisable()
+    {
+        _attendancePopup.SetActive(false);
+        Time.timeScale = 1f;
     }
 }
