@@ -9,7 +9,7 @@ public class AttendanceSaveData
 {
     public int AttendanceCount;
     public string LastLoginDateTimeString;
-    public List<bool> IsRewarded = new List<bool>();
+    public List<bool> IsRewardedList = new List<bool>();
     public AttendanceSaveData(int attendanceCount, string lastLoginDateTimeString)
     {
         AttendanceCount = attendanceCount;
@@ -47,7 +47,7 @@ public class AttendanceManager : Singleton<AttendanceManager>
         for (int i = 0; i < _soDatas.Count; i++)
         {
             _attendances.Add(new Attendance
-                (_soDatas[i], _saveData.IsRewarded[i]));
+                (_soDatas[i], _saveData.IsRewardedList[i]));
         }
         AttendanceCheck();
     }
@@ -83,7 +83,7 @@ public class AttendanceManager : Singleton<AttendanceManager>
     {
         for (int i = 0; i < _attendances.Count; i++)
         {
-            _saveData.IsRewarded[i] = _attendances[i].IsRewarded;
+            _saveData.IsRewardedList[i] = _attendances[i].IsRewarded;
         }
         _saveData.LastLoginDateTimeString = _lastLoginDateTime.ToString("o");
         string jsonData = JsonUtility.ToJson(_saveData);
@@ -94,7 +94,6 @@ public class AttendanceManager : Singleton<AttendanceManager>
         // PlayerPrefs.DeleteKey(SAVE_KEY);
         if (PlayerPrefs.HasKey(SAVE_KEY))
         {
-            Debug.Log("출석 데이터 로드 성공");
             string jsonData = PlayerPrefs.GetString(SAVE_KEY);
             _saveData = JsonUtility.FromJson<AttendanceSaveData>(jsonData);
             if (!DateTime.TryParse(_saveData.LastLoginDateTimeString, out _lastLoginDateTime))
@@ -104,9 +103,8 @@ public class AttendanceManager : Singleton<AttendanceManager>
         }
         else
         {
-            Debug.Log("출석 데이터 로드 실패");
             _saveData = new AttendanceSaveData(0, DateTime.Now.ToString("o"));
-            _saveData.IsRewarded = new List<bool>(Enumerable.Repeat(false, _soDatas.Count));
+            _saveData.IsRewardedList = new List<bool>(Enumerable.Repeat(false, _soDatas.Count));
         }
     }
 }
