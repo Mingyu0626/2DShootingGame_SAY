@@ -13,14 +13,16 @@ public class UI_StatButton : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _costTextUI;
     [SerializeField] private Sprite _canUpgradeSprite;
     [SerializeField] private Sprite _canNotUpgradeSprite;
-    private Image _image;
     private RectTransform _rectTransform;
+    private Image _image;
+    private Button _button;
     private ShinyEffectForUGUI _particleEffect;
     private float _effectDuration = 1f;
     private void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();
         _image = GetComponent<Image>();
+        _button = GetComponent<Button>();
         _particleEffect = GetComponent<ShinyEffectForUGUI>();
     }
     public void Refresh()
@@ -31,10 +33,12 @@ public class UI_StatButton : MonoBehaviour
         if (CurrencyManager.Instance.Have(CurrencyType.Gold, _stat.Cost))
         {
             _image.sprite = _canUpgradeSprite;
+            _button.interactable = true;
         }
         else
         {
             _image.sprite = _canNotUpgradeSprite;
+            _button.interactable = false;
         }
     }
 
